@@ -14,7 +14,7 @@
       <aside class="menu">
         {% for main_category in main_categories %}
           {% if main_category.sub_categories.count %}
-            <p class="menu-label" data-target="category{{ main_category.id }}">
+            <p class="menu-label hand" data-target="category{{ main_category.id }}">
               <span class="icon-text">
                 <span class="icon">
                   <i class="fas fa-chevron-right {% if main_category.id == current_main_category.id %}fa-rotate-90{% endif %}"></i>
@@ -64,7 +64,12 @@
         </ul>
       </nav>
 
-      <h1 class="title is-2">{{ article.title }}</h1>
+      <h1 class="title is-2">
+        <a href="{% url 'articles.edit' slug=article.slug %}" class="mr-4 is-size-3 has-text-warning-dark">
+          <span class="icon"><i class="fas fa-pencil"></i></span>
+        </a>
+        <span>{{ article.title }}</span>
+      </h1>
 
       <div class="icon-text mb-6 is-size-7-desktop">
         <span class="icon"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
@@ -77,6 +82,7 @@
         <span>{{ article.views }}
           {% trans 'view,views,views' as views_options %}
           {{ article.views|ru_plural:views_options }}</span>
+
       </div>
 
       <aside class="menu">

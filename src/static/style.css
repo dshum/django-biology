@@ -24,7 +24,6 @@ h1, .content h2, .content h3, .title {
 }
 
 .menu-label {
-  cursor: pointer;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -38,4 +37,8 @@ h1, .content h2, .content h3, .title {
 
 .dashed {
   border-bottom: 1px dashed #999999;
+}
+
+.hand {
+  cursor: pointer;
 }
