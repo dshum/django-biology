@@ -1,0 +1,23 @@
+{% load pagination %}
+
+{% if page_obj.paginator.num_pages > 1 %}
+  <div class="pagination">
+  <span class="step-links">
+    {% if page_obj.has_previous %}
+      <a href="{% page_link 1 %}" class="first">i = 1</a>
+    {% endif %}
+
+    {% for i in page_obj.paginator.page_range %}
+      {% if i == page_obj.number %}
+        <span class="number">{{ i }}</span>
+      {% else %}
+        <a href="{% page_link i %}" class="number">{{ i }}</a>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <a href="{% page_link page_obj.next_page_number %}" class="next">i++</a>
+    {% endif %}
+  </span>
+  </div>
+{% endif %}

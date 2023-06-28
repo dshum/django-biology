@@ -1,0 +1,54 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+
+{% block content %}
+  <nav class="breadcrumb" aria-label="breadcrumbs">
+    <ul>
+      {% for breadcrumb in breadcrumbs %}
+        <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <h1 class="title is-2">Редактирование статьи</h1>
+
+  <form>
+    <div class="field">
+      <label class="label" for="title">Заголовок</label>
+      <div class="control">
+        <input class="input" id="title" type="text" name="title" value="{{ article.title }}" placeholder="Заголовок">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="category">Категория</label>
+      <div class="control">
+        <div class="select">
+          <select id="category" name="category">
+            <optgroup label="Общая биология">
+              <option>Эволюция</option>
+              <option>Биология клетки</option>
+              <option>Генетика</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label" for="content">Текст</label>
+      <div class="control">
+        <textarea class="textarea has-background-dark has-text-light" id="content" name="content" rows="25">{{ article.content }}</textarea>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary">
+          <span class="icon">
+            <i class="fas fa-floppy-disk"></i>
+          </span>
+          <span>Сохранить</span>
+        </button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

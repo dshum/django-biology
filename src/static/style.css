@@ -1,0 +1,38 @@
+html, body {
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+
+.navbar-brand {
+  font-family: "Rubik Moonrocks", sans-serif;
+}
+
+h1, .content h2, .content h3, .title {
+  font-family: "Bitter", sans-serif;
+  color: darkslategrey;
+}
+
+.navbar.is-primary, .hero.is-primary {
+  background: linear-gradient(
+      rgba(0, 30, 0, 0.4),
+      rgba(10, 20, 10, 0.6)
+  ), url("hero.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.menu-label {
+  cursor: pointer;
+}
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.dashed {
+  border-bottom: 1px dashed #999999;
+}

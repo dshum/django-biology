@@ -1,0 +1,31 @@
+{% extends 'layouts/default.html' %}
+
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Feedback' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="title is-2">{% trans 'Feedback' %}</h1>
+
+  <div class="columns">
+    <form class="column is-one-third-desktop" method="POST" novalidate>
+      {% csrf_token %}
+
+      {% include 'bulma/form.html' with form=form %}
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary">
+              <span class="icon">
+                <i class="fas fa-right-to-bracket"></i>
+              </span>
+            <span>{% trans 'Submit' %}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

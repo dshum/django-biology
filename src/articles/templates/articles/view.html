@@ -1,0 +1,95 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+{% load article_extras %}
+
+{% block title %}
+  {{ article.title }}
+{% endblock %}
+
+{% block content %}
+  <div class="columns is-variable is-2-mobile is-4-desktop">
+    <div class="column is-narrow is-one-quarter">
+      <aside class="menu">
+        {% for main_category in main_categories %}
+          <p class="menu-label" data-target="category{{ main_category.id }}">
+            {{ main_category.title }}
+          </p>
+
+          {% if main_category.sub_categories.count %}
+            <ul class="menu-list" id="category{{ main_category.id }}">
+              {% for sub_category in main_category.sub_categories.all %}
+                <li>
+                  <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
+
+                  {% if sub_category.articles.count %}
+                    <ul>
+                      {% for sub_category_article in sub_category.articles.all %}
+                        <li>
+                          <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
+                             href="{% url 'articles.view' slug=sub_category_article.slug %}">
+                            {{ sub_category_article.title }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
+      </aside>
+    </div>
+
+    <div class="column">
+      <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+          {% for breadcrumb in breadcrumbs %}
+            <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <h1 class="title is-2">{{ article.title }}</h1>
+
+      <div class="icon-text mb-6 is-size-7-desktop">
+        <span class="icon"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
+        <span>{{ article.get_level_display }}</span>
+        <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
+        <span>{{ article.content_reading_time_minutes }} {{ article.content_reading_time_minutes|ru_plural:'минута,минуты,минут' }}</span>
+        <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
+        <span>{{ article.views }} {{ article.views|ru_plural:'просмотр,просмотра,просмотров' }}</span>
+      </div>
+
+      <aside class="menu">
+        <p class="menu-label">
+          Содержание статьи
+        </p>
+        <ul class="menu-list article-content is-primary mb-6"></ul>
+      </aside>
+
+      <div class="content has-text-justified">
+        {{ article.content_html|safe }}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const h2Items = document.querySelectorAll('div.content h2');
+    const menu = document.querySelector('ul.menu-list.article-content');
+    const articleImages = document.querySelectorAll('div.content img');
+
+    h2Items.forEach((titleItem, index) => {
+      let id = index + 1
+      titleItem.setAttribute('id', 'link' + id);
+      let html = '<li><a href="#link' + id + '"><span class="dashed">' + titleItem.textContent + '</span></a></li>';
+      menu.insertAdjacentHTML('beforeend', html)
+    });
+
+    articleImages.forEach((image) => {
+      let html = '<div class="is-size-7 has-text-grey">' + image.getAttribute('alt') + '</div>';
+      image.insertAdjacentHTML('afterend', html);
+    });
+  </script>
+{% endblock %}

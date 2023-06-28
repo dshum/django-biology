@@ -1,0 +1,18 @@
+{% extends 'layouts/welcome.html' %}
+
+{% block content %}
+  <div class="columns">
+    {% for category in main_categories %}
+      <div class="column">
+        <h2 class="title is-4">{{ category.title }}</h2>
+        {% if category.sub_categories %}
+          <ul>
+            {% for sub_category in category.sub_categories.all %}
+              <li><a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'layouts/default.html' %}
+
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Login' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="title is-2">{% trans 'Login' %}</h1>
+
+  <div class="columns">
+    <form class="column is-one-third-desktop" method="POST">
+      {% if form.non_field_errors %}
+        <div class="notification is-danger">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      {% csrf_token %}
+
+      <div class="field">
+        <label class="label" for="{{ form.username.id_for_label }}">{% trans 'Username' %}</label>
+        <div class="control">
+          <input class="input" id="{{ form.username.id_for_label }}" type="text" name="{{ form.username.name }}" value="{{ form.username.value|default_if_none:"" }}" placeholder="{% trans 'Username' %}">
+        </div>
+        {% if form.username.errors %}
+          <p class="help is-danger">{{ form.username.errors }}</p>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <label class="label" for="{{ form.password.id_for_label }}">{% trans 'Password' %}</label>
+        <div class="control">
+          <input class="input" id="{{ form.password.id_for_label }}" type="password" name="{{ form.password.name }}" value="{{ form.password.value|default_if_none:"" }}" placeholder="{% trans 'Password' %}">
+        </div>
+        {% if form.password.errors %}
+          <p class="help is-danger">{{ form.password.errors }}</p>
+        {% endif %}
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary">
+            <span class="icon">
+              <i class="fas fa-right-to-bracket"></i>
+            </span>
+            <span>{% trans 'Log In' %}</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}

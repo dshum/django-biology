@@ -1,0 +1,13 @@
+{% extends 'mails/layouts/default.html' %}
+
+{% block content %}
+  <p>New feedback message from {{ site_name }} has been received!</p>
+  <p>
+    Name: {{ message.name }}<br>
+    Email: {{ message.email }}<br>
+    Is human: {{ message.is_human|yesno:"Yes,No" }}
+  </p>
+  <p>
+    {{ message.message|linebreaks }}
+  </p>
+{% endblock %}
