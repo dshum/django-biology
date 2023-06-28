@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-18 15:56+0000\n"
+"POT-Creation-Date: 2023-06-28 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,14 +19,44 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: templates/layouts/welcome.html:8
-msgid "Biology"
-msgstr "Биология"
 
-#: templates/layouts/welcome.html:43
-msgid "New article"
-msgstr "Новая статья"
+#: articles/models.py:16
+msgid "Categories"
+msgstr "Категории"
 
-#: templates/layouts/welcome.html:49
-msgid "Login"
-msgstr "Вход"
+#: articles/models.py:44
+msgid "Easy"
+msgstr "Легкий"
+
+#: articles/models.py:45
+msgid "Medium"
+msgstr "Средний"
+
+#: articles/models.py:46
+msgid "Hard"
+msgstr "Сложный"
+
+#: articles/templates/articles/category.html:71
+msgid "No articles found in this category."
+msgstr "В этой категории статей не найдено."
+
+#: articles/templates/articles/view.html:62
+msgid "minute,minutes,minutes"
+msgstr "минута,минуты,минут"
+
+#: articles/templates/articles/view.html:66
+msgid "view,views,views"
+msgstr "просмотр,просмотра,просмотров"
+
+#: articles/templates/articles/view.html:72
+msgid "Content"
+msgstr "Содержание статьи"
+
+#~ msgid "Biology"
+#~ msgstr "Биология"
+
+#~ msgid "New article"
+#~ msgstr "Новая статья"
+
+#~ msgid "Login"
+#~ msgstr "Вход"

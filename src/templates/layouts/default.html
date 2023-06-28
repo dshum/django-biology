@@ -80,7 +80,6 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-    const $menuLabels = document.querySelectorAll('.menu-label');
 
     $navbarBurgers.forEach(el => {
       el.addEventListener('click', () => {
@@ -89,14 +88,6 @@
 
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
-      });
-    });
-
-    $menuLabels.forEach(el => {
-      el.addEventListener('click', () => {
-        const target = el.dataset.target;
-        const $target = document.getElementById(target);
-        $target.classList.toggle('is-hidden');
       });
     });
   });

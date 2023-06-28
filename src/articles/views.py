@@ -31,10 +31,15 @@ def category(request, id: int):
     if sub_category:
         return redirect('articles.category', id=sub_category.id)
 
+    main_categories = get_main_categories()
+    breadcrumbs = get_category_breadcrumbs(category)
+    current_main_category = breadcrumbs[0]
+
     context = {
         'category': category,
-        'breadcrumbs': get_category_breadcrumbs(category),
-        'main_categories': get_main_categories(),
+        'breadcrumbs': breadcrumbs,
+        'main_categories': main_categories,
+        'current_main_category': current_main_category,
     }
     return render(request, 'articles/category.html', context)
 
@@ -46,10 +51,15 @@ def view(request, slug: str):
     if not article:
         raise Http404
 
+    main_categories = get_main_categories()
+    breadcrumbs = get_article_breadcrumbs(article)
+    current_main_category = breadcrumbs[0]
+
     context = {
         'article': article,
-        'breadcrumbs': get_article_breadcrumbs(article),
-        'main_categories': get_main_categories(),
+        'breadcrumbs': breadcrumbs,
+        'main_categories': main_categories,
+        'current_main_category': current_main_category,
     }
     return render(request, 'articles/view.html', context)
 

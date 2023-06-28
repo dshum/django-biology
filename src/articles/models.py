@@ -2,6 +2,7 @@ import math
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from markdown import markdown
 
 
@@ -12,7 +13,7 @@ class CategoryManager(models.Manager):
 
 class Category(models.Model):
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name_plural = _('Categories')
 
     title = models.CharField(max_length=255)
     order = models.IntegerField(default=0)
@@ -40,9 +41,9 @@ class Category(models.Model):
 
 class Article(models.Model):
     class Level(models.TextChoices):
-        EASY = 'easy', 'Easy'
-        MEDIUM = 'medium', 'Medium'
-        HARD = 'hard', 'Hard'
+        EASY = 'easy', _('Easy')
+        MEDIUM = 'medium', _('Medium')
+        HARD = 'hard', _('Hard')
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(db_index=True)

@@ -1,6 +1,7 @@
 {% extends 'layouts/default.html' %}
 
 {% load static %}
+{% load i18n %}
 {% load article_extras %}
 
 {% block title %}
@@ -12,12 +13,17 @@
     <div class="column is-narrow is-one-quarter">
       <aside class="menu">
         {% for main_category in main_categories %}
-          <p class="menu-label" data-target="category{{ main_category.id }}">
-            {{ main_category.title }}
-          </p>
-
           {% if main_category.sub_categories.count %}
-            <ul class="menu-list" id="category{{ main_category.id }}">
+            <p class="menu-label" data-target="category{{ main_category.id }}">
+              <span class="icon-text">
+                <span class="icon">
+                  <i class="fas fa-chevron-right {% if main_category.id == current_main_category.id %}fa-rotate-90{% endif %}"></i>
+                </span>
+                <span>{{ main_category.title }}</span>
+              </span>
+            </p>
+
+            <ul class="menu-list ml-4 {% if main_category.id != current_main_category.id %}is-hidden{% endif %}" id="category{{ main_category.id }}">
               {% for sub_category in main_category.sub_categories.all %}
                 <li>
                   <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
@@ -37,6 +43,13 @@
                 </li>
               {% endfor %}
             </ul>
+          {% else %}
+            <p class="menu-label">
+              <span class="icon-text">
+                <span class="icon"></span>
+                <span>{{ main_category.title }}</span>
+              </span>
+            </p>
           {% endif %}
         {% endfor %}
       </aside>
@@ -57,14 +70,18 @@
         <span class="icon"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
         <span>{{ article.get_level_display }}</span>
         <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
-        <span>{{ article.content_reading_time_minutes }} {{ article.content_reading_time_minutes|ru_plural:'минута,минуты,минут' }}</span>
+        <span>{{ article.content_reading_time_minutes }}
+          {% trans 'minute,minutes,minutes' as minutes_options %}
+          {{ article.content_reading_time_minutes|ru_plural:minutes_options }}</span>
         <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
-        <span>{{ article.views }} {{ article.views|ru_plural:'просмотр,просмотра,просмотров' }}</span>
+        <span>{{ article.views }}
+          {% trans 'view,views,views' as views_options %}
+          {{ article.views|ru_plural:views_options }}</span>
       </div>
 
       <aside class="menu">
         <p class="menu-label">
-          Содержание статьи
+          {% trans 'Content' %}
         </p>
         <ul class="menu-list article-content is-primary mb-6"></ul>
       </aside>
@@ -76,20 +93,33 @@
   </div>
 
   <script>
-    const h2Items = document.querySelectorAll('div.content h2');
-    const menu = document.querySelector('ul.menu-list.article-content');
-    const articleImages = document.querySelectorAll('div.content img');
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuLabels = document.querySelectorAll('.menu-label');
+      const h2Items = document.querySelectorAll('div.content h2');
+      const menu = document.querySelector('ul.menu-list.article-content');
+      const articleImages = document.querySelectorAll('div.content img');
 
-    h2Items.forEach((titleItem, index) => {
-      let id = index + 1
-      titleItem.setAttribute('id', 'link' + id);
-      let html = '<li><a href="#link' + id + '"><span class="dashed">' + titleItem.textContent + '</span></a></li>';
-      menu.insertAdjacentHTML('beforeend', html)
-    });
+      menuLabels.forEach(menuLabel => {
+        menuLabel.addEventListener('click', () => {
+          const target = document.getElementById(menuLabel.dataset.target);
+          target.classList.toggle('is-hidden');
+          menuLabel.querySelectorAll(':scope i.fas').forEach((icon) => {
+            icon.classList.toggle('fa-rotate-90');
+          });
+        });
+      });
 
-    articleImages.forEach((image) => {
-      let html = '<div class="is-size-7 has-text-grey">' + image.getAttribute('alt') + '</div>';
-      image.insertAdjacentHTML('afterend', html);
+      h2Items.forEach((titleItem, index) => {
+        let id = index + 1
+        titleItem.setAttribute('id', 'link' + id);
+        let html = '<li><a href="#link' + id + '"><span class="dashed">' + titleItem.textContent + '</span></a></li>';
+        menu.insertAdjacentHTML('beforeend', html)
+      });
+
+      articleImages.forEach((image) => {
+        let html = '<div class="is-size-7 has-text-grey">' + image.getAttribute('alt') + '</div>';
+        image.insertAdjacentHTML('afterend', html);
+      });
     });
   </script>
 {% endblock %}

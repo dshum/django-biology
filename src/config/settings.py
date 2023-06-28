@@ -166,6 +166,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
     os.path.join(BASE_DIR, 'articles', 'locale'),
+    os.path.join(BASE_DIR, 'feedback', 'locale'),
 ]
 
 LANGUAGE_CODE = 'ru'
