@@ -32,14 +32,29 @@
     {% else %}
       <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
       <div class="control">
-        {% render_field field %}
-        {% if field.help_text %}
-          <p class="help">{{ field.help_text|safe }}</p>
+        {% if field.errors %}
+          {% render_field field class+='is-danger' %}
+        {% else %}
+          {% render_field field %}
         {% endif %}
-        {% for error in field.errors %}
-          <p class="help is-danger">{{ error }}</p>
-        {% endfor %}
       </div>
     {% endif %}
+    {% if field.help_text %}
+      <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+    {% for error in field.errors %}
+      <p class="help is-danger">{{ error }}</p>
+    {% endfor %}
   </div>
 {% endfor %}
+
+<div class="field">
+  <div class="control">
+    <button class="button is-primary">
+      {% if icon %}
+        <span class="icon"><i class="{{ icon }}"></i></span>
+      {% endif %}
+      <span>{{ submit }}</span>
+    </button>
+  </div>
+</div>

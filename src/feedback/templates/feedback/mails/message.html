@@ -1,11 +1,12 @@
 {% extends 'mails/layouts/default.html' %}
 
+{% load i18n %}
+
 {% block content %}
-  <p>New feedback message from {{ site_name }} has been received!</p>
+  <p>{% trans 'New feedback message has been received!' %}</p>
   <p>
-    Name: {{ message.name }}<br>
-    Email: {{ message.email }}<br>
-    Is human: {{ message.is_human|yesno:"Yes,No" }}
+    {% trans 'Name' %}: {{ message.name }}<br>
+    {% trans 'Email' %}: {{ message.email }}<br>
   </p>
   <p>
     {{ message.message|linebreaks }}

@@ -1,6 +1,5 @@
 {% extends 'layouts/default.html' %}
 
-{% load widget_tweaks %}
 {% load i18n %}
 
 {% block title %}
@@ -13,19 +12,8 @@
   <div class="columns">
     <form class="column is-one-third-desktop" method="POST" novalidate>
       {% csrf_token %}
-
-      {% include 'bulma/form.html' with form=form %}
-
-      <div class="field">
-        <div class="control">
-          <button class="button is-primary">
-              <span class="icon">
-                <i class="fas fa-right-to-bracket"></i>
-              </span>
-            <span>{% trans 'Submit' %}</span>
-          </button>
-        </div>
-      </div>
+      {% trans 'Send' as send %}
+      {% include 'bulma/form.html' with form=form icon='fas fa-envelope' submit=send %}
     </form>
   </div>
 {% endblock %}

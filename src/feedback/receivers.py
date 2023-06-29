@@ -1,13 +1,10 @@
-from django.conf import settings
 from django.dispatch import receiver
 
-from .mails import MessageMail
+from .mails import send_feedback_message
 from .models import Message
 from .signals import message_received
 
 
 @receiver(message_received)
-def send_message_email(sender, message: Message, **kwargs):
-    Mailer(MessageMail(message)) \
-        .attach('mainecoon.jpg', 'cat') \
-        .send()
+def send_message(sender, message: Message, **kwargs):
+    send_feedback_message(message)

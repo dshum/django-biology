@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 17:59+0000\n"
+"POT-Creation-Date: 2023-06-29 13:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: feedback/forms.py:8
+#: feedback/forms.py:8 feedback/templates/feedback/mails/message.html:8
 msgid "Name"
 msgstr "Имя"
 
@@ -36,16 +36,28 @@ msgstr "Мы никому не передадим ваш адрес электр
 msgid "Message"
 msgstr "Сообщение"
 
-#: feedback/templates/feedback/create.html:7
-#: feedback/templates/feedback/create.html:11
+#: feedback/mails.py:14
+msgid "New message"
+msgstr "Новое сообщение"
+
+#: feedback/templates/feedback/create.html:6
+#: feedback/templates/feedback/create.html:10
 #: feedback/templates/feedback/index.html:6
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: feedback/templates/feedback/create.html:25
-msgid "Submit"
+#: feedback/templates/feedback/create.html:15
+msgid "Send"
 msgstr "Отправить"
 
-#: feedback/views.py:30
+#: feedback/templates/feedback/mails/message.html:6
+msgid "New feedback message has been received!"
+msgstr "Получено новое сообщение обратной связи!"
+
+#: feedback/templates/feedback/mails/message.html:9
+msgid "Email"
+msgstr "Email"
+
+#: feedback/views.py:28
 msgid "Your message has been sent!"
 msgstr "Сообщение успешно отправлено!"

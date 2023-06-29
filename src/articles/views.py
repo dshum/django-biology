@@ -69,6 +69,9 @@ def edit(request, slug: str):
     if not article:
         raise Http404
 
+    if article.user.pk != request.user.pk:
+        return redirect('articles.view', slug=article.slug)
+
     context = {
         'article': article,
         'breadcrumbs': get_article_breadcrumbs(article),

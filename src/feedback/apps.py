@@ -6,5 +6,4 @@ class FeedbackConfig(AppConfig):
     name = 'feedback'
 
     def ready(self):
-        pass
-        # from .receivers import send_message_email
+        from .receivers import send_message

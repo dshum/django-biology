@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
 from django.utils.translation import gettext_lazy as _
 
 from .forms import CreateMessageForm
@@ -26,7 +24,7 @@ def create(request):
             if request.user.is_authenticated:
                 message.user = request.user
             message.save()
-            # message_received.send(sender='feedback_create_message', message=message)
+            message_received.send(sender='feedback_views_create', message=message)
             messages.add_message(request, messages.SUCCESS, _('Your message has been sent!'))
             return redirect('feedback.create')
     elif request.user.is_authenticated:

@@ -65,9 +65,11 @@
       </nav>
 
       <h1 class="title is-2">
-        <a href="{% url 'articles.edit' slug=article.slug %}" class="mr-4 is-size-3 has-text-warning-dark">
-          <span class="icon"><i class="fas fa-pencil"></i></span>
-        </a>
+        {% if article.user.id == user.id %}
+          <a href="{% url 'articles.edit' slug=article.slug %}" class="mr-4 is-size-3 has-text-warning-dark">
+            <span class="icon"><i class="fas fa-pencil"></i></span>
+          </a>
+        {% endif %}
         <span>{{ article.title }}</span>
       </h1>
 
