@@ -8,14 +8,6 @@ from .models import Message
 from .signals import message_received
 
 
-def index(request):
-    messages = Message.objects.recent()
-    paginator = Paginator(messages, 5)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'feedback/index.html', {'messages_page_obj': page_obj})
-
-
 def create(request):
     if request.method == 'POST':
         form = CreateMessageForm(request.POST)

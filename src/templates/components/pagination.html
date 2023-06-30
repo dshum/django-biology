@@ -1,23 +1,23 @@
-{% load pagination %}
+{% load article_extras %}
 
 {% if page_obj.paginator.num_pages > 1 %}
-  <div class="pagination">
-  <span class="step-links">
+  <nav class="pagination mt-6" role="navigation" aria-label="pagination">
     {% if page_obj.has_previous %}
-      <a href="{% page_link 1 %}" class="first">i = 1</a>
+      <a href="{% page_link page_obj.previous_page_number %}"
+         class="pagination-previous">Previous</a>
     {% endif %}
-
-    {% for i in page_obj.paginator.page_range %}
-      {% if i == page_obj.number %}
-        <span class="number">{{ i }}</span>
-      {% else %}
-        <a href="{% page_link i %}" class="number">{{ i }}</a>
-      {% endif %}
-    {% endfor %}
-
     {% if page_obj.has_next %}
-      <a href="{% page_link page_obj.next_page_number %}" class="next">i++</a>
+      <a href="{% page_link page_obj.next_page_number %}"
+         class="pagination-next">Next page</a>
     {% endif %}
-  </span>
-  </div>
+    <ul class="pagination-list">
+      {% for i in page_obj.paginator.page_range %}
+        <li>
+          <a href="{% page_link i %}"
+             class="pagination-link {% if i == page_obj.number %}is-current{% endif %}"
+             aria-label="Goto page 1" aria-current="page">{{ i }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
 {% endif %}

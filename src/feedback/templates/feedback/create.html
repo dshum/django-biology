@@ -10,7 +10,7 @@
   <h1 class="title is-2">{% trans 'Feedback' %}</h1>
 
   <div class="columns">
-    <form class="column is-one-third-desktop" method="POST" novalidate>
+    <form class="column is-half-desktop" method="POST" novalidate>
       {% csrf_token %}
       {% trans 'Send' as send %}
       {% include 'bulma/form.html' with form=form icon='fas fa-envelope' submit=send %}

@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load i18n %}
+{% load cache %}
 {% load article_extras %}
 
 {% block title %}
@@ -11,48 +12,50 @@
 {% block content %}
   <div class="columns is-variable is-2-mobile is-4-desktop">
     <div class="column is-narrow is-one-quarter">
-      <aside class="menu">
-        {% for main_category in main_categories %}
-          {% if main_category.sub_categories.count %}
-            <p class="menu-label hand" data-target="category{{ main_category.id }}">
+      {% cache 300 article_menu article.id %}
+        <aside class="menu">
+          {% for main_category in main_categories %}
+            {% if main_category.sub_categories.count %}
+              <p class="menu-label hand" data-target="category{{ main_category.id }}">
               <span class="icon-text">
                 <span class="icon">
                   <i class="fas fa-chevron-right {% if main_category.id == current_main_category.id %}fa-rotate-90{% endif %}"></i>
                 </span>
                 <span>{{ main_category.title }}</span>
               </span>
-            </p>
+              </p>
 
-            <ul class="menu-list ml-4 {% if main_category.id != current_main_category.id %}is-hidden{% endif %}" id="category{{ main_category.id }}">
-              {% for sub_category in main_category.sub_categories.all %}
-                <li>
-                  <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
+              <ul class="menu-list ml-4 {% if main_category.id != current_main_category.id %}is-hidden{% endif %}" id="category{{ main_category.id }}">
+                {% for sub_category in main_category.sub_categories.all %}
+                  <li>
+                    <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
 
-                  {% if sub_category.articles.count %}
-                    <ul>
-                      {% for sub_category_article in sub_category.articles.all %}
-                        <li>
-                          <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
-                             href="{% url 'articles.view' slug=sub_category_article.slug %}">
-                            {{ sub_category_article.title }}
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="menu-label">
+                    {% if sub_category.articles.count %}
+                      <ul>
+                        {% for sub_category_article in sub_category.articles.all %}
+                          <li>
+                            <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
+                               href="{% url 'articles.view' slug=sub_category_article.slug %}">
+                              {{ sub_category_article.title }}
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p class="menu-label">
               <span class="icon-text">
                 <span class="icon"></span>
                 <span>{{ main_category.title }}</span>
               </span>
-            </p>
-          {% endif %}
-        {% endfor %}
-      </aside>
+              </p>
+            {% endif %}
+          {% endfor %}
+        </aside>
+      {% endcache %}
     </div>
 
     <div class="column">

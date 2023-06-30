@@ -6,7 +6,9 @@
   <p>{% trans 'New feedback message has been received!' %}</p>
   <p>
     {% trans 'Name' %}: {{ message.name }}<br>
-    {% trans 'Email' %}: {{ message.email }}<br>
+    {% if message.email %}
+      {% trans 'Email' %}: {{ message.email }}<br>
+    {% endif %}
   </p>
   <p>
     {{ message.message|linebreaks }}

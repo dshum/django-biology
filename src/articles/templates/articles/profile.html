@@ -1,0 +1,33 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load article_extras %}
+
+{% block title %}
+  {% trans 'Profile' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="title is-2">{% trans 'Profile' %}</h1>
+
+  {% if articles_page_obj %}
+    <h2 class="title is-4">{% trans 'Your articles' %}</h2>
+
+    {% for article in articles_page_obj %}
+      <h2 class="is-size-4"><a href="{% url 'articles.edit' slug=article.slug %}">{{ article.title }}</a></h2>
+
+      <div class="icon-text mb-4 is-size-7-desktop">
+        <a href="{% url 'articles.category' id=article.category.pk %}" class="tag is-light">{{ article.category.title }}</a>
+        <span class="icon ml-4"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
+        <span>{{ article.get_level_display }}</span>
+        <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
+        <span>{{ article.content_reading_time_minutes }} {{ article.content_reading_time_minutes|ru_plural:'минута,минуты,минут' }}</span>
+        <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
+        <span>{{ article.views }} {{ article.views|ru_plural:'просмотр,просмотра,просмотров' }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% include 'components/pagination.html' with page_obj=articles_page_obj %}
+{% endblock %}

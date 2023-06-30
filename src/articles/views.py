@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
 from .services import (get_main_categories, get_first_article_in_category, get_first_sub_category, get_article_by_slug,
-                       get_article_breadcrumbs, get_category_by_id, get_category_breadcrumbs)
+                       get_article_breadcrumbs, get_category_by_id, get_category_breadcrumbs,
+                       get_user_articles_paginator, increment_article_views)
 
 
 # @cache_page(60 * 5)
@@ -14,6 +17,17 @@ def index(request):
         'main_categories': get_main_categories(),
     }
     return render(request, 'articles/index.html', context)
+
+
+@login_required
+def profile(request):
+    page_number = request.GET.get('page')
+    articles_page_obj = get_user_articles_paginator(request.user, page_number)
+
+    context = {
+        'articles_page_obj': articles_page_obj,
+    }
+    return render(request, 'articles/profile.html', context)
 
 
 # @cache_page(60 * 5)
@@ -50,6 +64,9 @@ def view(request, slug: str):
     article = get_article_by_slug(slug)
     if not article:
         raise Http404
+
+    if article.user.pk != request.user.pk:
+        increment_article_views(article)
 
     main_categories = get_main_categories()
     breadcrumbs = get_article_breadcrumbs(article)

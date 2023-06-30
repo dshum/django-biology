@@ -1,6 +1,7 @@
 {% extends 'layouts/default.html' %}
 
 {% load static %}
+{% load i18n %}
 
 {% block content %}
   <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -8,10 +9,11 @@
       {% for breadcrumb in breadcrumbs %}
         <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
       {% endfor %}
+      <li><a href="{% url 'articles.view' slug=article.slug %}">{{ article.title }}</a></li>
     </ul>
   </nav>
 
-  <h1 class="title is-2">Редактирование статьи</h1>
+  <h1 class="title is-2">{% trans 'Edit article' %}</h1>
 
   <form>
     <div class="field">

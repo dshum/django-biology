@@ -6,14 +6,10 @@ from django.utils.translation import gettext_lazy as _
 from markdown import markdown
 
 
-class CategoryManager(models.Manager):
-    def get_main_categories(self):
-        return self.filter(parent_category=None).order_by('order')
-
-
 class Category(models.Model):
     class Meta:
         verbose_name_plural = _('Categories')
+        ordering = ['order']
 
     title = models.CharField(max_length=255)
     order = models.IntegerField(default=0)
@@ -33,13 +29,17 @@ class Category(models.Model):
         related_name='article_categories'
     )
 
-    objects = CategoryManager()
+    objects = models.Manager()
 
     def __str__(self):
         return f'#{self.pk} {self.title}'
 
 
 class Article(models.Model):
+    class Meta:
+        verbose_name_plural = _('Articles')
+        ordering = ['order']
+
     class Level(models.TextChoices):
         EASY = 'easy', _('Easy')
         MEDIUM = 'medium', _('Medium')

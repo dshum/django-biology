@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-28 19:49+0000\n"
+"POT-Creation-Date: 2023-06-30 00:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,27 +36,31 @@ msgstr "Средний"
 msgid "Hard"
 msgstr "Сложный"
 
-#: articles/templates/articles/category.html:71
+#: articles/templates/articles/category.html:86
 msgid "No articles found in this category."
 msgstr "В этой категории статей не найдено."
 
-#: articles/templates/articles/view.html:62
+#: articles/templates/articles/edit.html:15
+msgid "Edit article"
+msgstr "Редактирование статьи"
+
+#: articles/templates/articles/profile.html:8
+#: articles/templates/articles/profile.html:12
+msgid "Profile"
+msgstr "Профиль"
+
+#: articles/templates/articles/profile.html:15
+msgid "Your articles"
+msgstr "Ваши статьи"
+
+#: articles/templates/articles/view.html:81
 msgid "minute,minutes,minutes"
 msgstr "минута,минуты,минут"
 
-#: articles/templates/articles/view.html:66
+#: articles/templates/articles/view.html:85
 msgid "view,views,views"
 msgstr "просмотр,просмотра,просмотров"
 
-#: articles/templates/articles/view.html:72
+#: articles/templates/articles/view.html:92
 msgid "Content"
 msgstr "Содержание статьи"
-
-#~ msgid "Biology"
-#~ msgstr "Биология"
-
-#~ msgid "New article"
-#~ msgstr "Новая статья"
-
-#~ msgid "Login"
-#~ msgstr "Вход"
