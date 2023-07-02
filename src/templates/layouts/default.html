@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter">
   <link href="{% static 'fontawesome-free-6.3.0-web/css/all.css' %}" rel="stylesheet">
   <link href="{% static 'style.css' %}" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org@1.9.2" integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
   <nav class="navbar is-light">
     <div class="container">
       <div class="navbar-brand">
-        <a href="{% url 'articles.index' %}" class="navbar-item is-size-4 prevent-select">
+        <a href="{% url 'articles.index' %}" class="navbar-item is-size-4 is-unselectable">
           macrobaena.ru
         </a>
         <div class="navbar-burger" data-target="navbar-menu">
@@ -45,6 +46,9 @@
               <div class="navbar-dropdown is-boxed is-right">
                 <a class="navbar-item" href="{% url 'articles.profile' %}">
                   {% trans 'Profile' %}
+                </a>
+                <a class="navbar-item" href="{% url 'articles.profile.images' %}">
+                  {% trans 'Images' %}
                 </a>
                 <hr class="navbar-divider">
                 <a class="navbar-item" href="{% url 'logout' %}">

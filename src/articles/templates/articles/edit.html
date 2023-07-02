@@ -4,53 +4,185 @@
 {% load i18n %}
 
 {% block content %}
-  <nav class="breadcrumb" aria-label="breadcrumbs">
-    <ul>
-      {% for breadcrumb in breadcrumbs %}
-        <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
-      {% endfor %}
-      <li><a href="{% url 'articles.view' slug=article.slug %}">{{ article.title }}</a></li>
-    </ul>
-  </nav>
-
   <h1 class="title is-2">{% trans 'Edit article' %}</h1>
 
-  <form>
-    <div class="field">
-      <label class="label" for="title">Заголовок</label>
-      <div class="control">
-        <input class="input" id="title" type="text" name="title" value="{{ article.title }}" placeholder="Заголовок">
-      </div>
-    </div>
-    <div class="field">
-      <label class="label" for="category">Категория</label>
-      <div class="control">
-        <div class="select">
-          <select id="category" name="category">
-            <optgroup label="Общая биология">
-              <option>Эволюция</option>
-              <option>Биология клетки</option>
-              <option>Генетика</option>
-            </optgroup>
-          </select>
+  <div class="columns is-variable is-2 is-4-desktop">
+    <div class="column">
+      <form>
+        <div class="field">
+          <label class="label" for="title">Заголовок</label>
+          <div class="control">
+            <input class="input" id="title" type="text" name="title" value="{{ article.title }}" placeholder="Заголовок">
+          </div>
         </div>
-      </div>
+
+        <div class="field">
+          <label class="label" for="category">Категория</label>
+          <div class="control">
+            <div class="select">
+              <select id="category" name="category">
+                <optgroup label="Общая биология">
+                  <option>Эволюция</option>
+                  <option>Биология клетки</option>
+                  <option>Генетика</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="content">Текст</label>
+          <div class="control">
+            <textarea class="textarea has-background-dark has-text-light" id="content" name="content" rows="30">{{ article.content }}</textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary">
+              <span class="icon"><i class="fas fa-floppy-disk"></i></span>
+              <span>Сохранить</span>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="field">
-      <label class="label" for="content">Текст</label>
-      <div class="control">
-        <textarea class="textarea has-background-dark has-text-light" id="content" name="content" rows="25">{{ article.content }}</textarea>
-      </div>
+
+    <div class="column is-narrow is-one-quarter">
+      <ul class="px-2" style="border: 1px red; height: 80vh; overflow-y: scroll;">
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 1</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'images/creationism.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 2</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/questions/filename_c6d44132.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_7d9e9e77.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_2dbb11c9.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_df439f53.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_58e9550d.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_c55c6ccd.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="https://stepenin.ru/storage/images/pictures/image_4566fa1e.jpg" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+        <li class="mb-4">
+          <figure class="image">
+            <img src="{% static 'hero.jpg' %}" height="128" alt="">
+          </figure>
+          <h6>Изображение 3</h6>
+        </li>
+      </ul>
     </div>
-    <div class="field">
-      <div class="control">
-        <button class="button is-primary">
-          <span class="icon">
-            <i class="fas fa-floppy-disk"></i>
-          </span>
-          <span>Сохранить</span>
-        </button>
-      </div>
-    </div>
-  </form>
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import F
 
-from .models import Category, Article
+from .models import Category, Article, Image
 
 
 def get_main_categories():
@@ -34,7 +34,7 @@ def get_first_sub_category(category_id: int):
 
 
 def get_article_by_slug(slug: str):
-    return Article.objects.get(slug=slug)
+    return Article.objects.filter(slug=slug).first()
 
 
 def get_article_breadcrumbs(article: Article):
@@ -49,6 +49,12 @@ def get_article_breadcrumbs(article: Article):
 def get_user_articles_paginator(user: User, page_number: int = 1, page_size: int = 10):
     articles = Article.objects.filter(user_id=user.pk).order_by('-created_at')
     paginator = Paginator(articles, page_size)
+    return paginator.get_page(page_number)
+
+
+def get_user_images_paginator(user: User, page_number: int = 1, page_size: int = 16):
+    images = Image.objects.filter(user_id=user.pk).order_by('-created_at')
+    paginator = Paginator(images, page_size)
     return paginator.get_page(page_number)
 
 

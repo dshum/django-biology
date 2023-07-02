@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 13:12+0000\n"
+"POT-Creation-Date: 2023-07-01 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,10 +54,10 @@ msgstr "Отправить"
 msgid "New feedback message has been received!"
 msgstr "Получено новое сообщение обратной связи!"
 
-#: feedback/templates/feedback/mails/message.html:9
+#: feedback/templates/feedback/mails/message.html:10
 msgid "Email"
 msgstr "Email"
 
-#: feedback/views.py:28
+#: feedback/views.py:20
 msgid "Your message has been sent!"
 msgstr "Сообщение успешно отправлено!"

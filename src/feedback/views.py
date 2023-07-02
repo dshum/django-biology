@@ -9,17 +9,7 @@ from .signals import message_received
 
 
 def create(request):
-    if request.method == 'POST':
-        form = CreateMessageForm(request.POST)
-        if form.is_valid():
-            message = form.save(commit=False)
-            if request.user.is_authenticated:
-                message.user = request.user
-            message.save()
-            message_received.send(sender='feedback_views_create', message=message)
-            messages.add_message(request, messages.SUCCESS, _('Your message has been sent!'))
-            return redirect('feedback.create')
-    elif request.user.is_authenticated:
+    if request.user.is_authenticated:
         form = CreateMessageForm(initial={
             'name': request.user.first_name + ' ' + request.user.last_name,
             'email': request.user.email,
@@ -28,3 +18,25 @@ def create(request):
         form = CreateMessageForm()
 
     return render(request, 'feedback/create.html', {'form': form})
+
+
+def form(request):
+    form = CreateMessageForm(request.POST)
+
+    if form.is_valid():
+        message = form.save(commit=False)
+        if request.user.is_authenticated:
+            message.user = request.user
+        message.save()
+        message_received.send(sender='feedback_views_create', message=message)
+        messages.add_message(request, messages.SUCCESS, _('Your message has been sent!'))
+
+        if request.user.is_authenticated:
+            form = CreateMessageForm(initial={
+                'name': request.user.first_name + ' ' + request.user.last_name,
+                'email': request.user.email,
+            })
+        else:
+            form = CreateMessageForm()
+
+    return render(request, 'feedback/form.html', {'form': form})

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-30 00:58+0000\n"
+"POT-Creation-Date: 2023-07-01 22:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,9 +20,13 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: articles/models.py:16
+#: articles/models.py:11
 msgid "Categories"
 msgstr "Категории"
+
+#: articles/models.py:40
+msgid "Articles"
+msgstr "Статьи"
 
 #: articles/models.py:44
 msgid "Easy"
@@ -36,13 +40,29 @@ msgstr "Средний"
 msgid "Hard"
 msgstr "Сложный"
 
+#: articles/models.py:91
+msgid "Images"
+msgstr "Изображения"
+
 #: articles/templates/articles/category.html:86
 msgid "No articles found in this category."
 msgstr "В этой категории статей не найдено."
 
-#: articles/templates/articles/edit.html:15
+#: articles/templates/articles/edit.html:7
 msgid "Edit article"
 msgstr "Редактирование статьи"
+
+#: articles/templates/articles/images.html:8
+#: articles/templates/articles/images.html:12
+msgid "Article images"
+msgstr "Изображения для статей"
+
+#: articles/templates/articles/images.html:22
+#: articles/templates/articles/images.html:30
+#: articles/templates/articles/images.html:38
+#: articles/templates/articles/images.html:46
+msgid "Uploaded at"
+msgstr "Загружено"
 
 #: articles/templates/articles/profile.html:8
 #: articles/templates/articles/profile.html:12
@@ -53,14 +73,14 @@ msgstr "Профиль"
 msgid "Your articles"
 msgstr "Ваши статьи"
 
-#: articles/templates/articles/view.html:81
+#: articles/templates/articles/view.html:84
 msgid "minute,minutes,minutes"
 msgstr "минута,минуты,минут"
 
-#: articles/templates/articles/view.html:85
+#: articles/templates/articles/view.html:88
 msgid "view,views,views"
 msgstr "просмотр,просмотра,просмотров"
 
-#: articles/templates/articles/view.html:92
+#: articles/templates/articles/view.html:95
 msgid "Content"
 msgstr "Содержание статьи"

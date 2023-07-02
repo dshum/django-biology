@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Article, Category
+from .models import Article, Category, Image
 
 
 @admin.register(Category)
@@ -31,3 +31,15 @@ class ArticleAdmin(admin.ModelAdmin):
     )
     search_fields = ('title', 'level')
     ordering = ('order',)
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'image',
+        'user',
+        'created_at',
+    )
+    search_fields = ('title',)
+    ordering = ('-created_at',)

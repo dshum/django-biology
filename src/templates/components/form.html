@@ -6,6 +6,7 @@
 
 {% if messages %}
   <div class="notification is-success">
+    <div class="delete"></div>
     {% for message in messages %}
       <div>{{ message }}</div>
     {% endfor %}
@@ -58,3 +59,13 @@
     </button>
   </div>
 </div>
+
+<script>
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+</script>

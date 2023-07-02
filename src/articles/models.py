@@ -84,3 +84,21 @@ class Article(models.Model):
             'abbr',
             'md_in_html'
         ])
+
+
+class Image(models.Model):
+    class Meta:
+        verbose_name_plural = _('Images')
+        ordering = ['-created_at']
+
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images')
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        db_index=True,
+        related_name='images'
+    )
+
+    objects = models.Manager()

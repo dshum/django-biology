@@ -100,6 +100,8 @@
       <div class="content has-text-justified">
         {{ article.content_html|safe }}
       </div>
+
+      <div class="is-hidden" hx-get="{% url 'articles.increment_views' slug=article.slug %}" hx-trigger="load delay:1s"></div>
     </div>
   </div>
 

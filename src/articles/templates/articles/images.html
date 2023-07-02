@@ -1,0 +1,102 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load article_extras %}
+
+{% block title %}
+  {% trans 'Article images' %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="title is-2">{% trans 'Article images' %}</h1>
+
+  <div class="tile is-ancestor">
+    <div class="tile is-parent is-6">
+      <div class="tile is-child is-vertical notification is-light">
+        <form method="POST">
+          <div class="field">
+            <label class="label" for="title">{% trans 'Title' %}</label>
+            <div class="control">
+              <input class="input" type="text" id="title" name="title">
+            </div>
+          </div>
+          <div class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <div class="level-item">
+                  <div class="field">
+                    <div class="control">
+                      <div class="file">
+                        <label class="file-label">
+                          <input class="file-input" type="file" id="image" name="image">
+                          <span class="file-cta">
+                            <span class="file-icon"><i class="fas fa-upload"></i></span>
+                            <span class="file-label">{% trans 'Choose a file...' %}</span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="field is-grouped">
+                <div class="control">
+                  <button type="reset" class="button is-outlined">
+                    <span>{% trans 'Cancel' %}</span>
+                  </button>
+                </div>
+                <div class="control">
+                  <button type="submit" class="button is-primary">
+                    <span>{% trans 'Upload' %}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% if images_page_obj %}
+    <div class="columns is-multiline">
+      {% for image in images_page_obj %}
+        <div class="column is-one-quarter">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image">
+                <img src="{{ image.image.url }}" width="480" alt="" title="{{ image.title }}">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6">{{ image.title }}</p>
+                  <p class="subtitle is-7">{% trans 'Uploaded at' %} {{ image.created_at }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% include 'components/pagination.html' with page_obj=images_page_obj %}
+
+  <script>
+    const fileFields = document.querySelectorAll('.file.has-name');
+    fileFields.forEach((fileField) => {
+      const fileInput = fileField.querySelector(':scope input[type=file]');
+      fileInput.onchange = () => {
+        if (fileInput.files.length > 0) {
+          const fileName = fileField.querySelector(':scope .file-name');
+          fileName.textContent = fileInput.files[0].name;
+        }
+      }
+    });
+  </script>
+{% endblock %}

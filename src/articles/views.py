@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
 from .services import (get_main_categories, get_first_article_in_category, get_first_sub_category, get_article_by_slug,
                        get_article_breadcrumbs, get_category_by_id, get_category_breadcrumbs,
-                       get_user_articles_paginator, increment_article_views)
+                       get_user_articles_paginator, increment_article_views, get_user_images_paginator)
 
 
 # @cache_page(60 * 5)
@@ -30,8 +30,17 @@ def profile(request):
     return render(request, 'articles/profile.html', context)
 
 
-# @cache_page(60 * 5)
-# @vary_on_cookie
+@login_required
+def images(request):
+    page_number = request.GET.get('page')
+    images_page_obj = get_user_images_paginator(request.user, page_number)
+
+    context = {
+        'images_page_obj': images_page_obj,
+    }
+    return render(request, 'articles/images.html', context)
+
+
 def category(request, id: int):
     category = get_category_by_id(id)
     if not category:
@@ -58,15 +67,10 @@ def category(request, id: int):
     return render(request, 'articles/category.html', context)
 
 
-# @cache_page(60 * 5)
-# @vary_on_cookie
 def view(request, slug: str):
     article = get_article_by_slug(slug)
     if not article:
         raise Http404
-
-    if article.user.pk != request.user.pk:
-        increment_article_views(article)
 
     main_categories = get_main_categories()
     breadcrumbs = get_article_breadcrumbs(article)
@@ -91,6 +95,16 @@ def edit(request, slug: str):
 
     context = {
         'article': article,
-        'breadcrumbs': get_article_breadcrumbs(article),
     }
     return render(request, 'articles/edit.html', context)
+
+
+def increment_views(request, slug: str):
+    article = get_article_by_slug(slug)
+    if not article:
+        raise Http404
+
+    if article.user.pk != request.user.pk:
+        increment_article_views(article)
+
+    return HttpResponse()
