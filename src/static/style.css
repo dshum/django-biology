@@ -52,3 +52,7 @@ h1, .content h2, .content h3, .title {
 .hand {
   cursor: pointer;
 }
+
+.no-wrap {
+  white-space: nowrap;
+}

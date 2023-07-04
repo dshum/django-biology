@@ -31,6 +31,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', include('articles.urls')),
     path('feedback/', include('feedback.urls')),
+    path('deutsch/', include('deutsch.urls')),
 ]
 
 if settings.DEBUG:

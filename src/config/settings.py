@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'articles',
     'feedback',
+    'deutsch',
 ]
 
 MIDDLEWARE = [
@@ -179,6 +180,7 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
     os.path.join(BASE_DIR, 'articles', 'locale'),
     os.path.join(BASE_DIR, 'feedback', 'locale'),
+    os.path.join(BASE_DIR, 'deutsch', 'locale'),
 ]
 
 LANGUAGE_CODE = 'ru'
