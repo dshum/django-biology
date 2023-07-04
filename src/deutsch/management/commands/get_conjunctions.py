@@ -11,8 +11,9 @@ from ...models import ListCategory, Word, WordList
 class Command(BaseCommand):
     help = 'Grab german adverbs from deutsch-sprechen.ru'
     urls = {
-        2: 'https://online-teacher.ru/blog/%D1%81%D0%BE%D1%87%D0%B8%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BD%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B',
-        3: 'https://online-teacher.ru/blog/%D0%BF%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B-%D0%B2-%D0%BD%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%BE%D0%BC-%D1%8F%D0%B7%D1%8B%D0%BA',
+        # 2: 'https://online-teacher.ru/blog/%D1%81%D0%BE%D1%87%D0%B8%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%BD%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%B8%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B',
+        # 3: 'https://online-teacher.ru/blog/%D0%BF%D0%BE%D0%B4%D1%87%D0%B8%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B-%D0%B2-%D0%BD%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%BE%D0%BC-%D1%8F%D0%B7%D1%8B%D0%BA',
+        # 4: 'https://online-teacher.ru/blog/%D0%BF%D0%B0%D1%80%D0%BD%D1%8B%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B-%D0%B4%D0%B2%D0%BE%D0%B9%D0%BD%D1%8B%D0%B5-%D1%81%D0%BE%D1%8E%D0%B7%D1%8B-%D0%B2-%D0%BD%D0%B5%D0%BC%D0%B5%D1%86%D0%BA%D0%BE%D0%BC',
     }
 
     def handle(self, *args, **options):
@@ -53,6 +54,15 @@ class Command(BaseCommand):
                         word=original_word,
                         translated_word=translated_word,
                         list_category_id=list_category.id)
+                    self.stdout.write('{} {}'.format(original_word, translated_word))
+                else:
+                    tds = tr.find_all('td')
+                    translated_word = tds[0].text.strip().replace('«', '').replace('»', '')
+                    original_word = tds[1].text.strip().replace('«', '').replace('»', '')
+                    word = Word.objects.create(
+                        word=original_word,
+                        translated_word=translated_word,
+                        word_list_id=word_list_id)
                     self.stdout.write('{} {}'.format(original_word, translated_word))
 
         self.stdout.write(self.style.SUCCESS('Done'))

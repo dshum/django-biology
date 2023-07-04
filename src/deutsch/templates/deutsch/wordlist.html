@@ -10,6 +10,19 @@
 {% block content %}
   <h1 class="title is-2">{{ word_list.title }}</h1>
 
+  {% if word_list.words.count %}
+    <div class="columns is-multiline mb-6">
+      {% for word in word_list.words.all %}
+        <div class="column is-4">
+          <a href="https://translate.yandex.ru/?utm_source=slovari&source_lang=de&target_lang=ru&text={{ word.word }}"
+             target="_blank" class="has-text-black">
+            <b class="mr-3">{{ word.word }}</b>
+          </a> {{ word.translated_word }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
   {% for list_category in word_list.categories.all %}
     <h2 class="title is-4">{{ list_category.title }}</h2>
     <div class="columns is-multiline mb-6">
