@@ -1,0 +1,15 @@
+{% load i18n %}
+
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3 has-background-light has-background-image"
+            style="background: url('{{ image.image.url }}');">
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="content">
+      <div class="title is-6 mb-2">{{ image.title }}</div>
+      <div class="is-size-7">{% trans 'Uploaded at' %} {{ image.created_at }}</div>
+    </div>
+  </div>
+</div>

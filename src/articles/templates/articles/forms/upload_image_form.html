@@ -1,0 +1,82 @@
+{% load i18n %}
+
+{% if messages %}
+  <div class="notification is-success">
+    <div class="delete"></div>
+    {% for message in messages %}
+      <div>{{ message }}</div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if form.non_field_errors %}
+  <div class="notification is-danger">
+    {% for error in form.non_field_errors %}
+      {{ error }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+<form method="POST" enctype="multipart/form-data" novalidate
+      hx-trigger="submit" hx-encoding="multipart/form-data"
+      hx-post="{% url 'articles.profile.images.form' %}"
+      hx-target="this" hx-swap="outerHTML">
+  {% csrf_token %}
+  <div class="field">
+    <label class="label" for="title">{% trans 'Title' %}</label>
+    <div class="control">
+      {{ form.title }}
+      {% for error in form.title.errors %}
+        <p class="help is-danger">{{ error }}</p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="level">
+    <div class="level-left">
+      <div class="level-item">
+        <div class="level-item">
+          <div class="field">
+            <div class="control">
+              <div class="file">
+                <label class="file-label">
+                  {{ form.image }}
+                  <span class="file-cta">
+                    <span class="file-icon"><i class="fas fa-upload"></i></span>
+                    <span class="file-label">{% trans 'Choose a file...' %}</span>
+                  </span>
+                </label>
+              </div>
+              {% for error in form.image.errors %}
+                <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="level-right">
+      <div class="field is-grouped">
+        <div class="control">
+          <button type="reset" class="button is-outlined">
+            <span>{% trans 'Cancel' %}</span>
+          </button>
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">
+            <span>{% trans 'Upload' %}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
+</script>

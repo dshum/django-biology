@@ -1,13 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-from django.http import Http404, JsonResponse, HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_cookie
+from django.utils.translation import gettext_lazy as _
 
-from .services import (get_main_categories, get_first_article_in_category, get_first_sub_category, get_article_by_slug,
-                       get_article_breadcrumbs, get_category_by_id, get_category_breadcrumbs,
-                       get_user_articles_paginator, increment_article_views, get_user_images_paginator)
+from .forms import UploadImageForm
+from .services import *
 
 
 # @cache_page(60 * 5)
@@ -23,7 +21,6 @@ def index(request):
 def profile(request):
     page_number = request.GET.get('page')
     articles_page_obj = get_user_articles_paginator(request.user, page_number)
-
     context = {
         'articles_page_obj': articles_page_obj,
     }
@@ -32,13 +29,37 @@ def profile(request):
 
 @login_required
 def images(request):
+    form = UploadImageForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'articles/images.html', context)
+
+
+def upload_image_form(request):
+    form = UploadImageForm(request.POST, request.FILES)
+    if form.is_valid():
+        image = form.save(commit=False)
+        if request.user.is_authenticated:
+            image.user = request.user
+        image.save()
+        messages.add_message(request, messages.SUCCESS, _('New image has been uploaded!'))
+
+        form = UploadImageForm()
+        response = render(request, 'articles/forms/upload_image_form.html', {'form': form})
+        response.headers['HX-Trigger'] = 'newImage'
+        return response
+
+    return render(request, 'articles/forms/upload_image_form.html', {'form': form})
+
+
+def images_list(request):
     page_number = request.GET.get('page')
     images_page_obj = get_user_images_paginator(request.user, page_number)
-
     context = {
         'images_page_obj': images_page_obj,
     }
-    return render(request, 'articles/images.html', context)
+    return render(request, 'articles/images_list.html', context)
 
 
 def category(request, id: int):

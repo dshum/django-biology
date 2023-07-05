@@ -1,0 +1,11 @@
+{% if images_page_obj %}
+  <div class="columns is-multiline">
+    {% for image in images_page_obj %}
+      <div class="column is-one-quarter">
+        {% include 'articles/image_card.html' with image=image %}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% include 'components/htmx_pagination.html' with page_obj=images_page_obj %}

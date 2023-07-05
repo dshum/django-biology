@@ -56,3 +56,14 @@ h1, .content h2, .content h3, .title {
 .no-wrap {
   white-space: nowrap;
 }
+
+figure.has-background-image {
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}

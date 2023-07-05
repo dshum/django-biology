@@ -52,7 +52,7 @@ def get_user_articles_paginator(user: User, page_number: int = 1, page_size: int
     return paginator.get_page(page_number)
 
 
-def get_user_images_paginator(user: User, page_number: int = 1, page_size: int = 16):
+def get_user_images_paginator(user: User, page_number: int = 1, page_size: int = 8):
     images = Image.objects.filter(user_id=user.pk).order_by('-created_at')
     paginator = Paginator(images, page_size)
     return paginator.get_page(page_number)
