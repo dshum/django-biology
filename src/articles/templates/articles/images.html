@@ -14,12 +14,12 @@
   <div class="tile is-ancestor">
     <div class="tile is-parent is-6">
       <div class="tile is-child is-vertical notification is-light">
-        {% include 'articles/forms/upload_image_form.html' with form=form %}
+        {% include 'articles/upload_image_form.html' with form=form %}
       </div>
     </div>
   </div>
 
-  <div class="has-htmx-pagination"
+  <div class="images has-htmx-pagination"
       hx-get="{% url 'articles.profile.images.list' %}"
       hx-trigger="load, newImage from:body">
   </div>

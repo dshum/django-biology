@@ -1,6 +1,9 @@
 {% load i18n %}
 
 <div class="card">
+  <button class="delete" title="{% trans 'Delete' %}"
+          hx-delete="{% url 'articles.images.delete' id=image.pk %}"
+          hx-target="closest .images"></button>
   <div class="card-image">
     <figure class="image is-4by3 has-background-light has-background-image"
             style="background: url('{{ image.image.url }}');">

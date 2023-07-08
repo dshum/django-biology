@@ -1,7 +1,7 @@
 {% load article_extras %}
 
 {% if page_obj.paginator.num_pages > 1 %}
-  <nav class="pagination mt-6" role="navigation" aria-label="pagination">
+  <nav class="pagination mt-4" role="navigation" aria-label="pagination">
     {% if page_obj.has_previous %}
       <a href="{% page_link page_obj.previous_page_number %}"
          class="pagination-previous">Previous</a>

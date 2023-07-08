@@ -27,7 +27,9 @@
         <span>{{ article.views }} {{ article.views|ru_plural:'просмотр,просмотра,просмотров' }}</span>
       </div>
     {% endfor %}
-  {% endif %}
 
-  {% include 'components/pagination.html' with page_obj=articles_page_obj %}
+    {% include 'components/pagination.html' with page_obj=articles_page_obj %}
+  {% else %}
+    <p>{% trans 'No articles found.' %}</p>
+  {% endif %}
 {% endblock %}

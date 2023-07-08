@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
 
@@ -46,11 +46,11 @@ def upload_image_form(request):
         messages.add_message(request, messages.SUCCESS, _('New image has been uploaded!'))
 
         form = UploadImageForm()
-        response = render(request, 'articles/forms/upload_image_form.html', {'form': form})
+        response = render(request, 'articles/upload_image_form.html', {'form': form})
         response.headers['HX-Trigger'] = 'newImage'
         return response
 
-    return render(request, 'articles/forms/upload_image_form.html', {'form': form})
+    return render(request, 'articles/upload_image_form.html', {'form': form})
 
 
 def images_list(request):
@@ -60,6 +60,11 @@ def images_list(request):
         'images_page_obj': images_page_obj,
     }
     return render(request, 'articles/images_list.html', context)
+
+
+def delete_image(request, id: int):
+    request.user.images.filter(pk=id).delete()
+    return images_list(request)
 
 
 def category(request, id: int):
@@ -114,8 +119,11 @@ def edit(request, slug: str):
     if article.user.pk != request.user.pk:
         return redirect('articles.view', slug=article.slug)
 
+    images = Image.objects.all()
+
     context = {
         'article': article,
+        'images': images,
     }
     return render(request, 'articles/edit.html', context)
 

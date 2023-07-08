@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if messages %}
-  <div class="notification is-success">
+  <div class="notification is-success fade-out">
     <div class="delete"></div>
     {% for message in messages %}
       <div>{{ message }}</div>
@@ -78,5 +78,9 @@
     $delete.addEventListener('click', () => {
       $notification.parentNode.removeChild($notification);
     });
+  });
+
+  document.querySelectorAll('.fade-out').forEach((item) => {
+    item.classList.add('start');
   });
 </script>

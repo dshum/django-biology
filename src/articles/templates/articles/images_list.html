@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if images_page_obj %}
   <div class="columns is-multiline">
     {% for image in images_page_obj %}
@@ -6,6 +8,8 @@
       </div>
     {% endfor %}
   </div>
-{% endif %}
 
-{% include 'components/htmx_pagination.html' with page_obj=images_page_obj %}
+  {% include 'components/htmx_pagination.html' with page_obj=images_page_obj %}
+{% else %}
+  <p>{% trans 'No images found' %}</p>
+{% endif %}

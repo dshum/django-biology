@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'articles',
     'feedback',
     'deutsch',
+    # Should be last
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

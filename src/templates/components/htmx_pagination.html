@@ -1,7 +1,7 @@
 {% load article_extras %}
 
 {% if page_obj.paginator.num_pages > 1 %}
-  <nav class="pagination mt-6" role="navigation" aria-label="pagination">
+  <nav class="pagination" role="navigation" aria-label="pagination">
     {% if page_obj.has_previous %}
       <a hx-get="{% url 'articles.profile.images.list' %}{% page_link page_obj.previous_page_number %}"
          hx-target="closest .has-htmx-pagination" hx-swap="innerHTML"
