@@ -15,4 +15,5 @@ urlpatterns = [
     path('articles/<int:id>/edit', views.edit, name='articles.edit'),
     path('articles/<int:id>/form', views.article_form, name='articles.form'),
     path('articles/<int:id>/increment_views', views.increment_views, name='articles.increment_views'),
+    path('404', views.not_found),
 ]

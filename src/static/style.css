@@ -29,11 +29,22 @@ h1, .content h2, .content h3, .title {
   background-size: cover;
 }
 
-.hero.is-404 {
+.hero.article-not-found {
   background: linear-gradient(
       rgba(20, 20, 20, 0.2),
       rgba(10, 20, 10, 0.4)
   ), url("iguana404.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.hero.page-not-found {
+  background: linear-gradient(
+      rgba(20, 20, 20, 0.2),
+      rgba(10, 20, 10, 0.4)
+  ), url("turtle404.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -45,7 +56,7 @@ h1, .content h2, .content h3, .title {
 }
 
 .hero .hero-foot .copyright {
-  background: rgba(100, 100, 100, 0.6);
+  background: rgba(100, 100, 100, 0.5);
 }
 
 .navbar-brand {

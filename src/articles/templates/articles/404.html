@@ -3,8 +3,12 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}
+  {% trans 'Article not found' %}
+{% endblock %}
+
 {% block content %}
-  <section class="hero is-404 is-medium is-primary">
+  <section class="hero article-not-found is-medium is-primary">
     <div class="hero-body">
       <div class="container">
         <div class="title is-2">

@@ -17,6 +17,10 @@ def index(request):
     return render(request, 'articles/index.html', context)
 
 
+def not_found(request):
+    return render(request, '404.html')
+
+
 @login_required
 def profile(request):
     page_number = request.GET.get('page')
