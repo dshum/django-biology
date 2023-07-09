@@ -26,7 +26,7 @@ def get_category_breadcrumbs(category: Category):
 
 
 def get_first_article_in_category(category_id: int):
-    return Article.objects.filter(category_id=category_id).first()
+    return Article.objects.filter(category_id=category_id, publish=True).first()
 
 
 def get_first_sub_category(category_id: int):
@@ -34,7 +34,7 @@ def get_first_sub_category(category_id: int):
 
 
 def get_article_by_slug(slug: str):
-    return Article.objects.filter(slug=slug).first()
+    return Article.objects.filter(slug=slug, publish=True).first()
 
 
 def get_article_by_id(id: int):

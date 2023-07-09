@@ -34,6 +34,9 @@ class Category(models.Model):
     def __str__(self):
         return f'#{self.pk} {self.title}'
 
+    def published_articles(self):
+        return self.articles.filter(publish=True)
+
 
 class Article(models.Model):
     class Meta:

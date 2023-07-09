@@ -18,6 +18,15 @@ h1, .content h2, .content h3, .title {
   color: darkslategrey;
 }
 
+/*Temporary solution against bursting navbar with buttons*/
+nav.navbar {
+  height: 3.5rem !important;
+}
+
+.navbar-brand {
+  font-family: "Rubik Moonrocks", sans-serif;
+}
+
 .hero.is-welcome {
   background: linear-gradient(
       rgba(20, 20, 20, 0.2),
@@ -57,10 +66,6 @@ h1, .content h2, .content h3, .title {
 
 .hero .hero-foot .copyright {
   background: rgba(100, 100, 100, 0.5);
-}
-
-.navbar-brand {
-  font-family: "Rubik Moonrocks", sans-serif;
 }
 
 .menu-label {
@@ -120,4 +125,8 @@ figure.has-background-image {
 
 .help a {
   text-decoration: underline;
+}
+
+blockquote {
+  font-size: 85%;
 }

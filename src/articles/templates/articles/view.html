@@ -17,12 +17,12 @@
           {% for main_category in main_categories %}
             {% if main_category.sub_categories.count %}
               <p class="menu-label hand" data-target="category{{ main_category.id }}">
-              <span class="icon-text">
-                <span class="icon">
-                  <i class="fas fa-chevron-right {% if main_category.id == current_main_category.id %}fa-rotate-90{% endif %}"></i>
+                <span class="icon-text">
+                  <span class="icon">
+                    <i class="fas fa-chevron-right {% if main_category.id == current_main_category.id %}fa-rotate-90{% endif %}"></i>
+                  </span>
+                  <span>{{ main_category.title }}</span>
                 </span>
-                <span>{{ main_category.title }}</span>
-              </span>
               </p>
 
               <ul class="menu-list ml-4 {% if main_category.id != current_main_category.id %}is-hidden{% endif %}" id="category{{ main_category.id }}">
@@ -30,9 +30,9 @@
                   <li>
                     <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
 
-                    {% if sub_category.articles.count %}
+                    {% if sub_category.published_articles.count %}
                       <ul>
-                        {% for sub_category_article in sub_category.articles.all %}
+                        {% for sub_category_article in sub_category.published_articles.all %}
                           <li>
                             <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
                                href="{% url 'articles.view' slug=sub_category_article.slug %}">
@@ -67,6 +67,15 @@
         </ul>
       </nav>
 
+      {% if messages %}
+        <div class="notification is-success">
+          <div class="delete"></div>
+          {% for message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
           <a href="{% url 'articles.edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
@@ -82,11 +91,16 @@
         <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
         <span>{{ article.content_reading_time_minutes }}
           {% trans 'minute,minutes,minutes' as minutes_options %}
-          {{ article.content_reading_time_minutes|ru_plural:minutes_options }}</span>
+          {{ article.content_reading_time_minutes|ru_plural:minutes_options }}
+        </span>
         <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
         <span>{{ article.views }}
           {% trans 'view,views,views' as views_options %}
-          {{ article.views|ru_plural:views_options }}</span>
+          {{ article.views|ru_plural:views_options }}
+        </span>
+        {% if not article.publish %}
+          <span class="tag is-warning is-rounded ml-4">{% trans 'Not published' %}</span>
+        {% endif %}
       </div>
 
       <aside class="menu">

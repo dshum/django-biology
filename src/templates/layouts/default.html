@@ -31,14 +31,14 @@
       </div>
       <div id="navbar-menu" class="navbar-menu">
         <div class="navbar-end">
-          <div class="navbar-item">
-            <a class="button is-primary">
-              <span class="icon"><i class="fas fa-plus"></i></span>
-              <span>{% trans 'New article' %}</span>
-            </a>
-          </div>
-
           {% if user.is_authenticated %}
+            <div class="navbar-item">
+              <a href="{% url 'articles.create' %}" class="button is-rounded is-primary icon-text">
+                <span class="icon"><i class="fas fa-plus"></i></span>
+                <span>{% trans 'New article' %}</span>
+              </a>
+            </div>
+
             <div class="navbar-item has-dropdown is-hoverable">
               <span class="navbar-link">
                 {{ user.first_name }}

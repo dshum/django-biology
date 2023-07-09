@@ -1,0 +1,10 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  <h1 class="title is-2">{% trans 'New article' %}</h1>
+
+  {% include 'articles/create_article_form.html' %}
+{% endblock %}

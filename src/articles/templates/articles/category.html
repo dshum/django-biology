@@ -31,9 +31,9 @@
                     {{ sub_category.title }}
                   </a>
 
-                  {% if sub_category.articles.count %}
+                  {% if sub_category.published_articles.count %}
                     <ul>
-                      {% for sub_category_article in sub_category.articles.all %}
+                      {% for sub_category_article in sub_category.published_articles.all %}
                         <li>
                           <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
                              href="{% url 'articles.view' slug=sub_category_article.slug %}">
@@ -69,8 +69,8 @@
 
       <h1 class="title is-2">{{ category.title }}</h1>
 
-      {% if category.articles.count %}
-        {% for article in category.articles %}
+      {% if category.published_articles.count %}
+        {% for article in category.published_articles.all %}
           <h2 class="is-size-4"><a href="{% url 'articles.view' slug=article.slug %}">{{ article.title }}</a></h2>
 
           <div class="icon-text mb-6 is-size-7-desktop">

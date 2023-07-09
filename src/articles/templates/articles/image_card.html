@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load article_extras %}
 
 <div class="card">
   <button class="delete" title="{% trans 'Delete' %}"
@@ -12,7 +13,10 @@
   <div class="card-content">
     <div class="content">
       <div class="title is-6 mb-2">{{ image.title }}</div>
-      <div class="is-size-7">{% trans 'Uploaded at' %} {{ image.created_at }}</div>
+      <div class="is-size-7">
+        {{ image.image.size|filesize:'kb' }} {% trans 'Kb' %},
+        {% trans 'uploaded at' %} {{ image.created_at }}
+      </div>
     </div>
   </div>
 </div>

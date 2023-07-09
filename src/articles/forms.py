@@ -16,7 +16,8 @@ class EditArticleForm(forms.ModelForm):
                                   'class': 'textarea',
                                   'rows': 25,
                               }))
-    publish = forms.BooleanField(label=_('Publish'), required=False)
+    publish = forms.BooleanField(label=_('Publish'), required=False,
+                                 help_text=_('The article will be visible to all users'))
 
     class Meta:
         model = Article

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 00:27+0000\n"
+"POT-Creation-Date: 2023-07-09 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: articles/forms.py:8 articles/forms.py:27
+#: articles/forms.py:8 articles/forms.py:28
 #: articles/templates/articles/upload_image_form.html:26
 msgid "Title"
 msgstr "Заголовок"
@@ -41,7 +41,11 @@ msgstr "Текст"
 msgid "Publish"
 msgstr "Опубликовать"
 
-#: articles/forms.py:29
+#: articles/forms.py:20
+msgid "The article will be visible to all users"
+msgstr "Статья будет видна всем пользователям"
+
+#: articles/forms.py:30
 msgid "Image"
 msgstr "Изображение"
 
@@ -69,17 +73,32 @@ msgstr "Сложный"
 msgid "Images"
 msgstr "Изображения"
 
-#: articles/templates/articles/404.html:6
+#: articles/templates/articles/404.html:7
+#: articles/templates/articles/404.html:15
 msgid "Article not found"
 msgstr "Статья не найдена"
 
-#: articles/templates/articles/404.html:8
+#: articles/templates/articles/404.html:18
 msgid "Go to main page"
 msgstr "На главную страницу"
 
 #: articles/templates/articles/category.html:86
 msgid "No articles found in this category."
 msgstr "В этой категории статей не найдено."
+
+#: articles/templates/articles/create.html:7
+msgid "New article"
+msgstr "Новая статья"
+
+#: articles/templates/articles/create_article_form.html:13
+#: articles/templates/articles/edit_article_form.html:20
+msgid "Markdown guide"
+msgstr "Руководство по Markdown"
+
+#: articles/templates/articles/create_article_form.html:18
+#: articles/templates/articles/edit_article_form.html:25
+msgid "Save"
+msgstr "Сохранить"
 
 #: articles/templates/articles/edit.html:7
 msgid "Edit article"
@@ -89,21 +108,17 @@ msgstr "Редактирование статьи"
 msgid "See the published article"
 msgstr "Смотреть опубликованную статью"
 
-#: articles/templates/articles/edit_article_form.html:20
-msgid "Markdown guide"
-msgstr "Руководство по Markdown"
-
-#: articles/templates/articles/edit_article_form.html:25
-msgid "Save"
-msgstr "Сохранить"
-
-#: articles/templates/articles/image_card.html:4
+#: articles/templates/articles/image_card.html:5
 msgid "Delete"
 msgstr "Удалить"
 
-#: articles/templates/articles/image_card.html:15
-msgid "Uploaded at"
-msgstr "Загружено"
+#: articles/templates/articles/image_card.html:17
+msgid "Kb"
+msgstr "Кб"
+
+#: articles/templates/articles/image_card.html:18
+msgid "uploaded at"
+msgstr "загружено"
 
 #: articles/templates/articles/images.html:8
 #: articles/templates/articles/images.html:12
@@ -139,18 +154,26 @@ msgstr "Отмена"
 msgid "Upload"
 msgstr "Загрузить"
 
-#: articles/templates/articles/view.html:84
+#: articles/templates/articles/view.html:86
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: articles/templates/articles/view.html:94
 msgid "minute,minutes,minutes"
 msgstr "минута,минуты,минут"
 
-#: articles/templates/articles/view.html:88
+#: articles/templates/articles/view.html:98
 msgid "view,views,views"
 msgstr "просмотр,просмотра,просмотров"
 
-#: articles/templates/articles/view.html:94
+#: articles/templates/articles/view.html:104
 msgid "Content"
 msgstr "Содержание статьи"
 
-#: articles/views.py:46
+#: articles/views.py:53
 msgid "New image has been uploaded!"
 msgstr "Новое изображение загружено!"
+
+#: articles/views.py:199
+msgid "New article has been created!"
+msgstr "Новая статья создана!"

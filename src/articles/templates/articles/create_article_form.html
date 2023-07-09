@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<form novalidate
+      hx-trigger="submit" hx-post="{% url 'articles.form.create' %}"
+      hx-target="this" hx-swap="outerHTML">
+  {% csrf_token %}
+
+  <nav class="level is-mobile is-size-7-mobile">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <span class="icon-text">
+        <span class="icon has-text-grey-light"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+        <span><a href="https://www.markdownguide.org/basic-syntax/" target="_blank">{% trans 'Markdown guide' %}</a></span>
+      </span>
+    </div>
+  </nav>
+
+  {% trans 'Save' as save %}
+  {% include 'components/form.html' with form=form icon='fas fa-floppy-disk' submit=save %}
+</form>

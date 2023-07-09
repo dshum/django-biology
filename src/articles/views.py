@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template.defaulttags import url
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from .forms import UploadImageForm, EditArticleForm
@@ -40,6 +42,7 @@ def images(request):
     return render(request, 'articles/images.html', context)
 
 
+@login_required
 def upload_image_form(request):
     form = UploadImageForm(request.POST, request.FILES)
     if form.is_valid():
@@ -57,6 +60,7 @@ def upload_image_form(request):
     return render(request, 'articles/upload_image_form.html', {'form': form})
 
 
+@login_required
 def images_list(request):
     page_number = request.GET.get('page')
     images_page_obj = get_user_images_paginator(request.user, page_number)
@@ -66,6 +70,7 @@ def images_list(request):
     return render(request, 'articles/images_list.html', context)
 
 
+@login_required
 def delete_image(request, id: int):
     request.user.images.filter(pk=id).delete()
     return images_list(request)
@@ -115,9 +120,10 @@ def view(request, slug: str):
     return render(request, 'articles/view.html', context)
 
 
+@login_required
 def published(request, id: int):
     article = get_article_by_id(id)
-    if not article:
+    if not article or (not article.publish and article.user != request.user):
         return render(request, 'articles/404.html')
 
     main_categories = get_main_categories()
@@ -136,7 +142,7 @@ def published(request, id: int):
 def increment_views(request, id: int):
     article = get_article_by_id(id)
     if not article:
-        return render(request, 'articles/404.html')
+        return HttpResponse(status=404)
 
     if article.user.pk != request.user.pk:
         increment_article_views(article)
@@ -144,6 +150,19 @@ def increment_views(request, id: int):
     return HttpResponse()
 
 
+@login_required
+def create(request):
+    images = Image.objects.all()
+    form = EditArticleForm()
+
+    context = {
+        'images': images,
+        'form': form,
+    }
+    return render(request, 'articles/create.html', context)
+
+
+@login_required
 def edit(request, id: int):
     article = get_article_by_id(id)
     if not article:
@@ -162,8 +181,32 @@ def edit(request, id: int):
     return render(request, 'articles/edit.html', context)
 
 
+@login_required
+def article_create_form(request):
+    form = EditArticleForm(request.POST)
+    context = {
+        'form': form,
+    }
+    response = render(request, 'articles/create_article_form.html', context)
+
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.user = request.user
+        article.reading_time_minutes = 0
+        article.category_id = 1
+        article.save()
+
+        messages.add_message(request, messages.SUCCESS, _('New article has been created!'))
+        response.headers['HX-Redirect'] = reverse('articles.view.published', kwargs={'id': article.pk})
+
+    return response
+
+
+@login_required
 def article_form(request, id: int):
     article = get_article_by_id(id)
+    if not article:
+        return HttpResponse(status=404)
 
     form = EditArticleForm(request.POST, instance=article)
     if form.is_valid():
@@ -173,5 +216,4 @@ def article_form(request, id: int):
         'article': article,
         'form': form,
     }
-
     return render(request, 'articles/edit_article_form.html', context)

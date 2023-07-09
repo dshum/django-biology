@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-04 02:35+0000\n"
+"POT-Creation-Date: 2023-07-09 13:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,16 +16,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: templates/404.html:7 templates/404.html:15
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:18
+msgid "Go to main page"
+msgstr ""
 
 #: templates/layouts/default.html:8 templates/layouts/welcome.html:8
 #: templates/layouts/welcome.html:73
 msgid "Biology"
 msgstr "Биология"
 
-#: templates/layouts/default.html:37 templates/layouts/welcome.html:36
+#: templates/layouts/default.html:38 templates/layouts/welcome.html:37
 msgid "New article"
 msgstr "Новая статья"
 
@@ -46,7 +54,7 @@ msgstr "Выход"
 msgid "Login"
 msgstr "Вход"
 
-#: templates/layouts/default.html:81 templates/layouts/welcome.html:93
+#: templates/layouts/default.html:81 templates/layouts/welcome.html:100
 msgid "Feedback"
 msgstr "Обратная связь"
 
