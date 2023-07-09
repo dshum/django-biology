@@ -228,7 +228,7 @@ MANAGERS = [(os.getenv('ADMIN_NAME'), os.getenv('ADMIN_EMAIL'))]
 # Login
 
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'articles.index'
+LOGIN_REDIRECT_URL = 'articles.profile.articles'
 LOGOUT_REDIRECT_URL = 'articles.index'
 
 # Sentry settings

@@ -23,17 +23,4 @@
       hx-get="{% url 'articles.profile.images.list' %}"
       hx-trigger="load, newImage from:body">
   </div>
-
-  <script>
-    const fileFields = document.querySelectorAll('.file.has-name');
-    fileFields.forEach((fileField) => {
-      const fileInput = fileField.querySelector(':scope input[type=file]');
-      fileInput.onchange = () => {
-        if (fileInput.files.length > 0) {
-          const fileName = fileField.querySelector(':scope .file-name');
-          fileName.textContent = fileInput.files[0].name;
-        }
-      }
-    });
-  </script>
 {% endblock %}

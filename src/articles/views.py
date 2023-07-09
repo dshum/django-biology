@@ -25,21 +25,26 @@ def not_found(request):
 
 @login_required
 def profile(request):
+    return render(request, 'articles/profile/index.html')
+
+
+@login_required
+def user_articles(request):
     page_number = request.GET.get('page')
     articles_page_obj = get_user_articles_paginator(request.user, page_number)
     context = {
         'articles_page_obj': articles_page_obj,
     }
-    return render(request, 'articles/profile.html', context)
+    return render(request, 'articles/profile/articles.html', context)
 
 
 @login_required
-def images(request):
+def user_images(request):
     form = UploadImageForm()
     context = {
         'form': form,
     }
-    return render(request, 'articles/images.html', context)
+    return render(request, 'articles/profile/images.html', context)
 
 
 @login_required

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 13:04+0000\n"
+"POT-Creation-Date: 2023-07-09 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,14 +22,18 @@ msgstr ""
 
 #: templates/404.html:7 templates/404.html:15
 msgid "Page not found"
-msgstr ""
+msgstr "Страница не найдена"
 
 #: templates/404.html:18
 msgid "Go to main page"
-msgstr ""
+msgstr "На главную страницу"
+
+#: templates/components/form.html:74
+msgid "Cancel"
+msgstr "Отмена"
 
 #: templates/layouts/default.html:8 templates/layouts/welcome.html:8
-#: templates/layouts/welcome.html:73
+#: templates/layouts/welcome.html:76
 msgid "Biology"
 msgstr "Биология"
 
@@ -42,23 +46,27 @@ msgid "Profile"
 msgstr "Профиль"
 
 #: templates/layouts/default.html:51 templates/layouts/welcome.html:50
+msgid "Articles"
+msgstr "Cтатьи"
+
+#: templates/layouts/default.html:54 templates/layouts/welcome.html:53
 msgid "Images"
 msgstr "Изображения"
 
-#: templates/layouts/default.html:55 templates/layouts/welcome.html:54
+#: templates/layouts/default.html:58 templates/layouts/welcome.html:57
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/layouts/default.html:62 templates/layouts/welcome.html:61
+#: templates/layouts/default.html:65 templates/layouts/welcome.html:64
 #: templates/registration/login.html:6 templates/registration/login.html:10
 msgid "Login"
 msgstr "Вход"
 
-#: templates/layouts/default.html:81 templates/layouts/welcome.html:100
+#: templates/layouts/default.html:84 templates/layouts/welcome.html:103
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: templates/layouts/welcome.html:76
+#: templates/layouts/welcome.html:79
 msgid "Materials for study"
 msgstr "Материалы для изучения"
 

@@ -30,9 +30,9 @@
                   <li>
                     <a href="{% url 'articles.category' id=sub_category.id %}">{{ sub_category.title }}</a>
 
-                    {% if sub_category.published_articles.count %}
+                    {% if sub_category.articles.published.count %}
                       <ul>
-                        {% for sub_category_article in sub_category.published_articles.all %}
+                        {% for sub_category_article in sub_category.articles.published.all %}
                           <li>
                             <a {% if sub_category_article.id == article.id %}class="is-active"{% endif %}
                                href="{% url 'articles.view' slug=sub_category_article.slug %}">

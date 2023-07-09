@@ -1,11 +1,13 @@
 {% load i18n %}
 {% load article_extras %}
 
-<div class="card">
+<div class="card is-fullheight">
   <button class="delete" title="{% trans 'Delete' %}"
           hx-delete="{% url 'articles.images.delete' id=image.pk %}"
           hx-target="closest .images"></button>
-  <div class="card-image">
+  <div class="card-image is-clickable" title="{% trans 'Click to copy image URL' %}"
+       data-image-url="{{ image.image.url }}" data-image-title="{{ image.title }}">
+    <div class="copied">{% trans 'Copied' %}</div>
     <figure class="image is-4by3 has-background-light has-background-image"
             style="background: url('{{ image.image.url }}');">
     </figure>

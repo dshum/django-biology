@@ -34,8 +34,10 @@ class Category(models.Model):
     def __str__(self):
         return f'#{self.pk} {self.title}'
 
-    def published_articles(self):
-        return self.articles.filter(publish=True)
+
+class ArticleManager(models.Manager):
+    def published(self):
+        return self.filter(publish=True)
 
 
 class Article(models.Model):
@@ -71,7 +73,7 @@ class Article(models.Model):
         related_name='articles'
     )
 
-    objects = models.Manager()
+    objects = ArticleManager()
 
     def content_reading_time_minutes(self):
         words_count = len(str(self.content).split(' '))

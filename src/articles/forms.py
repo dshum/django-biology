@@ -17,7 +17,7 @@ class EditArticleForm(forms.ModelForm):
                                   'rows': 25,
                               }))
     publish = forms.BooleanField(label=_('Publish'), required=False,
-                                 help_text=_('The article will be visible to all users'))
+                                 help_text=_('The article will be visible to all users.'))
 
     class Meta:
         model = Article

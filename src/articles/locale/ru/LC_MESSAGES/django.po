@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 14:11+0000\n"
+"POT-Creation-Date: 2023-07-09 18:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,8 +42,8 @@ msgid "Publish"
 msgstr "Опубликовать"
 
 #: articles/forms.py:20
-msgid "The article will be visible to all users"
-msgstr "Статья будет видна всем пользователям"
+msgid "The article will be visible to all users."
+msgstr "Статья будет видна всем пользователям."
 
 #: articles/forms.py:30
 msgid "Image"
@@ -53,23 +53,23 @@ msgstr "Изображение"
 msgid "Categories"
 msgstr "Категории"
 
-#: articles/models.py:43
+#: articles/models.py:45
 msgid "Articles"
 msgstr "Статьи"
 
-#: articles/models.py:47
+#: articles/models.py:49
 msgid "Easy"
 msgstr "Легкий"
 
-#: articles/models.py:48
+#: articles/models.py:50
 msgid "Medium"
 msgstr "Средний"
 
-#: articles/models.py:49
+#: articles/models.py:51
 msgid "Hard"
 msgstr "Сложный"
 
-#: articles/models.py:95
+#: articles/models.py:97
 msgid "Images"
 msgstr "Изображения"
 
@@ -112,40 +112,49 @@ msgstr "Предпросмотр статьи"
 msgid "Delete"
 msgstr "Удалить"
 
-#: articles/templates/articles/image_card.html:17
+#: articles/templates/articles/image_card.html:8
+msgid "Click to copy image URL"
+msgstr "Нажмите, чтобы скопировать URL изображения"
+
+#: articles/templates/articles/image_card.html:10
+msgid "Copied"
+msgstr "Скопировано"
+
+#: articles/templates/articles/image_card.html:19
 msgid "Kb"
 msgstr "Кб"
 
-#: articles/templates/articles/image_card.html:18
+#: articles/templates/articles/image_card.html:20
 msgid "uploaded at"
 msgstr "загружено"
-
-#: articles/templates/articles/images.html:8
-#: articles/templates/articles/images.html:12
-msgid "Article images"
-msgstr "Изображения для статей"
 
 #: articles/templates/articles/images_list.html:14
 msgid "No images found."
 msgstr "Изображений не найдено."
 
-#: articles/templates/articles/profile.html:8
-#: articles/templates/articles/profile.html:12
+#: articles/templates/articles/profile/articles.html:8
+#: articles/templates/articles/profile/index.html:8
+#: articles/templates/articles/profile/index.html:12
 msgid "Profile"
 msgstr "Профиль"
 
-#: articles/templates/articles/profile.html:15
+#: articles/templates/articles/profile/articles.html:12
 msgid "Your articles"
 msgstr "Ваши статьи"
 
-#: articles/templates/articles/profile.html:31
+#: articles/templates/articles/profile/articles.html:29
 #: articles/templates/articles/view.html:102
 msgid "Not published"
 msgstr "Не опубликовано"
 
-#: articles/templates/articles/profile.html:38
+#: articles/templates/articles/profile/articles.html:36
 msgid "No articles found."
 msgstr "Статей не найдено."
+
+#: articles/templates/articles/profile/images.html:8
+#: articles/templates/articles/profile/images.html:12
+msgid "Article images"
+msgstr "Изображения для статей"
 
 #: articles/templates/articles/upload_image_form.html:45
 msgid "Choose a file..."
@@ -171,10 +180,10 @@ msgstr "просмотр,просмотра,просмотров"
 msgid "Content"
 msgstr "Содержание статьи"
 
-#: articles/views.py:53
+#: articles/views.py:58
 msgid "New image has been uploaded!"
 msgstr "Новое изображение загружено!"
 
-#: articles/views.py:199
+#: articles/views.py:204
 msgid "New article has been created!"
 msgstr "Новая статья создана!"
