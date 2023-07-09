@@ -15,7 +15,7 @@
     <h2 class="title is-4">{% trans 'Your articles' %}</h2>
 
     {% for article in articles_page_obj %}
-      <h2 class="is-size-4"><a href="{% url 'articles.edit' slug=article.slug %}">{{ article.title }}</a></h2>
+      <h2 class="is-size-4"><a href="{% url 'articles.edit' id=article.pk %}">{{ article.title }}</a></h2>
 
       <div class="icon-text mb-4 is-size-7-desktop">
         <a href="{% url 'articles.category' id=article.category.pk %}" class="tag is-light">{{ article.category.title }}</a>

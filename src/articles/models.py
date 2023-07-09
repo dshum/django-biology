@@ -52,6 +52,7 @@ class Article(models.Model):
     reading_time_minutes = models.SmallIntegerField(default=None)
     views = models.IntegerField(default=0)
     order = models.IntegerField(default=0)
+    publish = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
         User,

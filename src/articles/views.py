@@ -4,7 +4,7 @@ from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import gettext_lazy as _
 
-from .forms import UploadImageForm
+from .forms import UploadImageForm, EditArticleForm
 from .services import *
 
 
@@ -70,7 +70,7 @@ def delete_image(request, id: int):
 def category(request, id: int):
     category = get_category_by_id(id)
     if not category:
-        raise Http404
+        return render('articles/404.html')
 
     article = get_first_article_in_category(id)
     if article:
@@ -95,8 +95,8 @@ def category(request, id: int):
 
 def view(request, slug: str):
     article = get_article_by_slug(slug)
-    if not article:
-        raise Http404
+    if not article or not article.publish:
+        return render(request, 'articles/404.html')
 
     main_categories = get_main_categories()
     breadcrumbs = get_article_breadcrumbs(article)
@@ -111,29 +111,63 @@ def view(request, slug: str):
     return render(request, 'articles/view.html', context)
 
 
-def edit(request, slug: str):
-    article = get_article_by_slug(slug)
+def published(request, id: int):
+    article = get_article_by_id(id)
     if not article:
-        raise Http404
+        return render(request, 'articles/404.html')
 
-    if article.user.pk != request.user.pk:
-        return redirect('articles.view', slug=article.slug)
-
-    images = Image.objects.all()
+    main_categories = get_main_categories()
+    breadcrumbs = get_article_breadcrumbs(article)
+    current_main_category = breadcrumbs[0]
 
     context = {
         'article': article,
-        'images': images,
+        'breadcrumbs': breadcrumbs,
+        'main_categories': main_categories,
+        'current_main_category': current_main_category,
     }
-    return render(request, 'articles/edit.html', context)
+    return render(request, 'articles/view.html', context)
 
 
-def increment_views(request, slug: str):
-    article = get_article_by_slug(slug)
+def increment_views(request, id: int):
+    article = get_article_by_id(id)
     if not article:
-        raise Http404
+        return render(request, 'articles/404.html')
 
     if article.user.pk != request.user.pk:
         increment_article_views(article)
 
     return HttpResponse()
+
+
+def edit(request, id: int):
+    article = get_article_by_id(id)
+    if not article:
+        return render(request, 'articles/404.html')
+    elif article.user.pk != request.user.pk:
+        return redirect('articles.view', slug=article.slug)
+
+    images = Image.objects.all()
+    form = EditArticleForm(instance=article)
+
+    context = {
+        'article': article,
+        'images': images,
+        'form': form,
+    }
+    return render(request, 'articles/edit.html', context)
+
+
+def article_form(request, id: int):
+    article = get_article_by_id(id)
+
+    form = EditArticleForm(request.POST, instance=article)
+    if form.is_valid():
+        form.save()
+
+    context = {
+        'article': article,
+        'form': form,
+    }
+
+    return render(request, 'articles/edit_article_form.html', context)

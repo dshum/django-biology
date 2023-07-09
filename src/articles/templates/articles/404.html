@@ -1,0 +1,26 @@
+{% extends 'layouts/default.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  <section class="hero is-404 is-medium is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <div class="title is-2">
+          {% trans 'Article not found' %}
+        </div>
+        <div class="subtitle is-4 mt-4">
+          <a href="{% url 'articles.index' %}">{% trans 'Go to main page' %}</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <div class="copyright is-size-7 has-text-light px-2 is-pulled-right">
+        Photo by
+        <a href="https://unsplash.com/@a2eorigins?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alex Perez</a> on
+        <a href="https://unsplash.com/photos/c3I5YrzglMM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+      </div>
+    </div>
+  </section>
+{% endblock %}

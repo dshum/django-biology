@@ -69,7 +69,7 @@
 
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
-          <a href="{% url 'articles.edit' slug=article.slug %}" class="mr-4 is-size-3 has-text-warning-dark">
+          <a href="{% url 'articles.edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
             <span class="icon"><i class="fas fa-pencil"></i></span>
           </a>
         {% endif %}
@@ -87,7 +87,6 @@
         <span>{{ article.views }}
           {% trans 'view,views,views' as views_options %}
           {{ article.views|ru_plural:views_options }}</span>
-
       </div>
 
       <aside class="menu">
@@ -101,7 +100,7 @@
         {{ article.content_html|safe }}
       </div>
 
-      <div class="is-hidden" hx-get="{% url 'articles.increment_views' slug=article.slug %}" hx-trigger="load delay:1s"></div>
+      <div class="is-hidden" hx-get="{% url 'articles.increment_views' id=article.pk %}" hx-trigger="load delay:1s"></div>
     </div>
   </div>
 

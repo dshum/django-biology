@@ -10,7 +10,8 @@ class CreateMessageForm(forms.ModelForm):
     email = forms.EmailField(label=_('Email (optional)'), required=False,
                              help_text=_('We will not give your email to anyone.'),
                              widget=forms.EmailInput(attrs={'class': 'input'}))
-    message = forms.CharField(label=_('Message'), required=True, widget=forms.Textarea(attrs={'class': 'textarea'}))
+    message = forms.CharField(label=_('Message'), required=True,
+                              widget=forms.Textarea(attrs={'class': 'textarea'}))
 
     class Meta:
         model = Message

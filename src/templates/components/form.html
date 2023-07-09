@@ -30,6 +30,16 @@
           {{ field.label }}
         </label>
       </div>
+    {% elif field.field.widget.input_type == 'radio' %}
+      <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+      <div class="control">
+        {% for choice in field.field.widget.choices %}
+          <label class="radio">
+            <input type="radio" name="{{ field.name }}" value="{{ choice.0 }}" {% if choice.0 == field.value %}checked{% endif %}>
+            {{ choice.1 }}
+          </label>
+        {% endfor %}
+      </div>
     {% else %}
       <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
       <div class="control">

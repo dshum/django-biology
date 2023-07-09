@@ -35,7 +35,7 @@ msgstr "Профиль"
 
 #: templates/layouts/default.html:51 templates/layouts/welcome.html:50
 msgid "Images"
-msgstr ""
+msgstr "Изображения"
 
 #: templates/layouts/default.html:55 templates/layouts/welcome.html:54
 msgid "Logout"

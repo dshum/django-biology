@@ -11,6 +11,8 @@ urlpatterns = [
     path('profile/images/delete/<int:id>', views.delete_image, name='articles.images.delete'),
     path('categories/<int:id>', views.category, name='articles.category'),
     path('articles/<str:slug>', views.view, name='articles.view'),
-    path('articles/<str:slug>/edit', views.edit, name='articles.edit'),
-    path('articles/<str:slug>/increment_views', views.increment_views, name='articles.increment_views'),
+    path('articles/<int:id>/published', views.published, name='articles.view.published'),
+    path('articles/<int:id>/edit', views.edit, name='articles.edit'),
+    path('articles/<int:id>/form', views.article_form, name='articles.form'),
+    path('articles/<int:id>/increment_views', views.increment_views, name='articles.increment_views'),
 ]

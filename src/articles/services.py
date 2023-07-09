@@ -37,6 +37,10 @@ def get_article_by_slug(slug: str):
     return Article.objects.filter(slug=slug).first()
 
 
+def get_article_by_id(id: int):
+    return Article.objects.get(pk=id)
+
+
 def get_article_breadcrumbs(article: Article):
     categories = []
     parent = article.category
