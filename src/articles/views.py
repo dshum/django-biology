@@ -121,7 +121,7 @@ def view(request, slug: str):
 
 
 @login_required
-def published(request, id: int):
+def preview(request, id: int):
     article = get_article_by_id(id)
     if not article or (not article.publish and article.user != request.user):
         return render(request, 'articles/404.html')
@@ -197,7 +197,7 @@ def article_create_form(request):
         article.save()
 
         messages.add_message(request, messages.SUCCESS, _('New article has been created!'))
-        response.headers['HX-Redirect'] = reverse('articles.view.published', kwargs={'id': article.pk})
+        response.headers['HX-Redirect'] = reverse('articles.view.preview', kwargs={'id': article.pk})
 
     return response
 

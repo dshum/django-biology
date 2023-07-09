@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 13:26+0000\n"
+"POT-Creation-Date: 2023-07-09 14:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,23 +53,23 @@ msgstr "Изображение"
 msgid "Categories"
 msgstr "Категории"
 
-#: articles/models.py:40
+#: articles/models.py:43
 msgid "Articles"
 msgstr "Статьи"
 
-#: articles/models.py:44
+#: articles/models.py:47
 msgid "Easy"
 msgstr "Легкий"
 
-#: articles/models.py:45
+#: articles/models.py:48
 msgid "Medium"
 msgstr "Средний"
 
-#: articles/models.py:46
+#: articles/models.py:49
 msgid "Hard"
 msgstr "Сложный"
 
-#: articles/models.py:92
+#: articles/models.py:95
 msgid "Images"
 msgstr "Изображения"
 
@@ -105,8 +105,8 @@ msgid "Edit article"
 msgstr "Редактирование статьи"
 
 #: articles/templates/articles/edit_article_form.html:13
-msgid "See the published article"
-msgstr "Смотреть опубликованную статью"
+msgid "Article preview"
+msgstr "Предпросмотр статьи"
 
 #: articles/templates/articles/image_card.html:5
 msgid "Delete"
@@ -138,7 +138,12 @@ msgstr "Профиль"
 msgid "Your articles"
 msgstr "Ваши статьи"
 
-#: articles/templates/articles/profile.html:33
+#: articles/templates/articles/profile.html:31
+#: articles/templates/articles/view.html:102
+msgid "Not published"
+msgstr "Не опубликовано"
+
+#: articles/templates/articles/profile.html:38
 msgid "No articles found."
 msgstr "Статей не найдено."
 
@@ -154,11 +159,7 @@ msgstr "Отмена"
 msgid "Upload"
 msgstr "Загрузить"
 
-#: articles/templates/articles/view.html:86
-msgid "Not published"
-msgstr "Не опубликовано"
-
-#: articles/templates/articles/view.html:94
+#: articles/templates/articles/view.html:93
 msgid "minute,minutes,minutes"
 msgstr "минута,минуты,минут"
 
@@ -166,7 +167,7 @@ msgstr "минута,минуты,минут"
 msgid "view,views,views"
 msgstr "просмотр,просмотра,просмотров"
 
-#: articles/templates/articles/view.html:104
+#: articles/templates/articles/view.html:108
 msgid "Content"
 msgstr "Содержание статьи"
 
