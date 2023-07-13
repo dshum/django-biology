@@ -40,6 +40,7 @@ ALLOWED_HOSTS = [
 
 if ENABLE_DEBUG_TOOLBAR:
     import socket
+
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[: ip.rfind('.')] + '.1' for ip in ips] + \
                    ['127.0.0.1', '10.0.2.2', '192.168.0.1', '93.81.255.146']
@@ -225,6 +226,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
 EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
+EMAIL_TIMEOUT = 3
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
