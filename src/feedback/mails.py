@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
+from sentry_sdk import capture_exception
 
 from .models import Message
 
@@ -15,4 +16,9 @@ def send_feedback_message(message: Message):
     if message.email:
         email_message.reply_to.append(message.email)
     email_message.content_subtype = 'html'
-    email_message.send()
+
+    try:
+        email_message.send()
+    except Exception as e:
+        capture_exception(e)
+
