@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import logging.config
 import os
 from ast import literal_eval
+from dotenv import load_dotenv
 from pathlib import Path
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +35,7 @@ ENABLE_DEBUG_TOOLBAR = literal_eval(os.getenv('ENABLE_DEBUG_TOOLBAR', 'False'))
 
 ALLOWED_HOSTS = [
     'localhost',
+    'learnbio.ru',
 ]
 
 if ENABLE_DEBUG_TOOLBAR:
@@ -113,7 +117,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://redis:6379',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
         'KEY_PREFIX': 'django_biology',
         'TIMEOUT': 300,
     },
@@ -197,7 +201,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'assets'
+STATIC_ROOT = '/home/denis/django_biology/src/assets'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
