@@ -30,8 +30,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = literal_eval(os.getenv('DEBUG', 'False'))
-ENABLE_DEBUG_TOOLBAR = literal_eval(os.getenv('ENABLE_DEBUG_TOOLBAR', 'False'))
+DEBUG = True
+# literal_eval(os.getenv('DEBUG', 'False'))
+ENABLE_DEBUG_TOOLBAR = True
+# literal_eval(os.getenv('ENABLE_DEBUG_TOOLBAR', 'False'))
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -42,7 +44,12 @@ if ENABLE_DEBUG_TOOLBAR:
     import socket
 
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[: ip.rfind('.')] + '.1' for ip in ips] + ['127.0.0.1', '10.0.2.2']
+    INTERNAL_IPS = [ip[: ip.rfind('.')] + '.1' for ip in ips] + ['127.0.0.1', '10.0.2.2', '192.168.0.1',
+                                                                 '93.81.255.146']
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+}
 
 # Application definition
 
