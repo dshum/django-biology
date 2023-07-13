@@ -1,14 +1,21 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _, gettext
 
-from .models import Image, Article
+from .models import Image, Article, Category
+from .services import get_grouped_categories
 
 
 class EditArticleForm(forms.ModelForm):
     title = forms.CharField(label=_('Title'), required=True, max_length=255,
                             widget=forms.TextInput(attrs={'class': 'input'}))
-    slug = forms.SlugField(label=_('Slug'), required=True, max_length=255,
+    slug = forms.SlugField(label=_('Slug'), required=True, max_length=50,
                            widget=forms.TextInput(attrs={'class': 'input'}))
+    category = forms.IntegerField(label=_('Category'), required=True,
+                                  widget=forms.Select(attrs={'class': 'select'},
+                                                      choices=get_grouped_categories()))
+    category2 = forms.ModelChoiceField(label=_('Category2'), required=True,
+                                       widget=forms.Select(attrs={'class': 'select'}),
+                                       queryset=Category.objects.all())
     level = forms.ChoiceField(label=_('Level'), required=True, choices=Article.Level.choices,
                               widget=forms.RadioSelect())
     content = forms.CharField(label=_('Text'), required=True,
@@ -21,7 +28,7 @@ class EditArticleForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('title', 'slug', 'level', 'content', 'publish')
+        fields = ('title', 'slug', 'category', 'level', 'content', 'publish')
 
 
 class UploadImageForm(forms.ModelForm):

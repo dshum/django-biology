@@ -6,6 +6,10 @@ from django.utils.translation import gettext_lazy as _
 from markdown import markdown
 
 
+class CategoryManager(models.Manager):
+    pass
+
+
 class Category(models.Model):
     class Meta:
         verbose_name_plural = _('Categories')
@@ -29,7 +33,7 @@ class Category(models.Model):
         related_name='article_categories'
     )
 
-    objects = models.Manager()
+    objects = CategoryManager()
 
     def __str__(self):
         return f'#{self.pk} {self.title}'

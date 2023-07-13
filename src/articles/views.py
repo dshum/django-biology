@@ -178,6 +178,9 @@ def edit(request, id: int):
     images = Image.objects.all()
     form = EditArticleForm(instance=article)
 
+    grouped_categories = get_grouped_categories()
+    print(grouped_categories)
+
     context = {
         'article': article,
         'images': images,
