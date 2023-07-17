@@ -132,5 +132,4 @@ dmypy.json
 .pyre/
 
 # Django assets and media files
-src/assets/
-src/media/
+src/prod/
