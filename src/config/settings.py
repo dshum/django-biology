@@ -182,7 +182,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # https://django.readthedocs.io/en/stable/ref/settings.html#std-setting-SECURE_CROSS_ORIGIN_OPENER_POLICY
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+# SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
