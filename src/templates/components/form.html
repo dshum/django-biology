@@ -6,7 +6,7 @@
 {% endfor %}
 
 {% if messages %}
-  <div class="notification is-success">
+  <div class="notification is-success fade-out">
     <div class="delete"></div>
     {% for message in messages %}
       <div>{{ message }}</div>
@@ -24,7 +24,18 @@
 
 {% for field in form.visible_fields %}
   <div class="field">
-    {% if field.field.widget.input_type == 'checkbox' %}
+    {% if field.field.widget.input_type == 'select' %}
+      <div class="control">
+        <label class="label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        <div class="select">
+          {% if field.errors %}
+            {% render_field field class+='is-danger' %}
+          {% else %}
+            {% render_field field %}
+          {% endif %}
+        </div>
+      </div>
+    {% elif field.field.widget.input_type == 'checkbox' %}
       <div class="control">
         <label class="checkbox">
           {% render_field field class='mr-1' %}
@@ -83,5 +94,9 @@
     $delete.addEventListener('click', () => {
       $notification.parentNode.removeChild($notification);
     });
+  });
+
+  document.querySelectorAll('.fade-out').forEach((item) => {
+    item.classList.add('start');
   });
 </script>

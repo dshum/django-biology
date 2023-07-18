@@ -11,11 +11,7 @@ class EditArticleForm(forms.ModelForm):
     slug = forms.SlugField(label=_('Slug'), required=True, max_length=50,
                            widget=forms.TextInput(attrs={'class': 'input'}))
     category = forms.IntegerField(label=_('Category'), required=True,
-                                  widget=forms.Select(attrs={'class': 'select'},
-                                                      choices=get_grouped_categories()))
-    category2 = forms.ModelChoiceField(label=_('Category2'), required=True,
-                                       widget=forms.Select(attrs={'class': 'select'}),
-                                       queryset=Category.objects.all())
+                                  widget=forms.Select(choices=get_grouped_categories()))
     level = forms.ChoiceField(label=_('Level'), required=True, choices=Article.Level.choices,
                               widget=forms.RadioSelect())
     content = forms.CharField(label=_('Text'), required=True,
@@ -29,6 +25,10 @@ class EditArticleForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ('title', 'slug', 'category', 'level', 'content', 'publish')
+
+    def clean_category(self):
+        category_id = self.cleaned_data.get('category')
+        return Category.objects.get(pk=category_id)
 
 
 class UploadImageForm(forms.ModelForm):

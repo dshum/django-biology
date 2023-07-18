@@ -2,7 +2,6 @@
 
 {% load static %}
 {% load i18n %}
-{% load article_extras %}
 
 {% block title %}
   {% trans 'Profile' %}
@@ -13,21 +12,17 @@
 
   {% if articles_page_obj %}
     {% for article in articles_page_obj %}
-      <h2 class="is-size-5">
-        <a href="{% url 'articles.edit' id=article.pk %}">{{ article.title }}</a>
-      </h2>
+      <div class="my-4">
+        <h2 class="is-size-5">
+          <a href="{% url 'articles.edit' id=article.pk %}" class="mr-1 is-size-6 has-text-warning-dark">
+            <span class="icon"><i class="fas fa-pencil"></i></span>
+          </a>
+          <a href="{% url 'articles.view.preview' id=article.pk %}">{{ article.title }}</a>
+        </h2>
 
-      <div class="icon-text mb-4 is-size-7-desktop">
-        <a href="{% url 'articles.category' id=article.category.pk %}" class="tag is-light">{{ article.category.title }}</a>
-        <span class="icon ml-4"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
-        <span>{{ article.get_level_display }}</span>
-        <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
-        <span>{{ article.content_reading_time_minutes }} {{ article.content_reading_time_minutes|ru_plural:'минута,минуты,минут' }}</span>
-        <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
-        <span>{{ article.views }} {{ article.views|ru_plural:'просмотр,просмотра,просмотров' }}</span>
-        {% if not article.publish %}
-          <span class="tag is-warning is-rounded ml-4">{% trans 'Not published' %}</span>
-        {% endif %}
+        <div class="my-2">
+          {% include 'articles/components/details.html' with show_category=True %}
+        </div>
       </div>
     {% endfor %}
 

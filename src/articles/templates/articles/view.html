@@ -85,25 +85,9 @@
         <span>{{ article.title }}</span>
       </h1>
 
-      <div class="icon-text mb-6 is-size-7-desktop">
-        <span class="icon"><i class="fas fa-graduation-cap has-text-grey-light"></i></span>
-        <span>{{ article.get_level_display }}</span>
-        <span class="icon ml-4"><i class="fas fa-clock has-text-grey-light"></i></span>
-        <span>{{ article.content_reading_time_minutes }}
-          {% trans 'minute,minutes,minutes' as minutes_options %}
-          {{ article.content_reading_time_minutes|ru_plural:minutes_options }}
-        </span>
-        <span class="icon ml-4"><i class="fas fa-eye has-text-grey-light"></i></span>
-        <span>{{ article.views }}
-          {% trans 'view,views,views' as views_options %}
-          {{ article.views|ru_plural:views_options }}
-        </span>
-        {% if not article.publish %}
-          <span class="tag is-warning is-rounded ml-4">{% trans 'Not published' %}</span>
-        {% endif %}
-      </div>
+      {% include 'articles/components/details.html' %}
 
-      <aside class="menu">
+      <aside class="menu my-6">
         <p class="menu-label">
           {% trans 'Content' %}
         </p>

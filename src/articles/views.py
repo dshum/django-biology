@@ -178,9 +178,6 @@ def edit(request, id: int):
     images = Image.objects.all()
     form = EditArticleForm(instance=article)
 
-    grouped_categories = get_grouped_categories()
-    print(grouped_categories)
-
     context = {
         'article': article,
         'images': images,
@@ -201,7 +198,6 @@ def article_create_form(request):
         article = form.save(commit=False)
         article.user = request.user
         article.reading_time_minutes = 0
-        article.category_id = 1
         article.save()
 
         messages.add_message(request, messages.SUCCESS, _('New article has been created!'))
