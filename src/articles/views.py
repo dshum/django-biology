@@ -161,6 +161,7 @@ def create(request):
     form = EditArticleForm()
 
     context = {
+        'upload_image_form': upload_image_form,
         'images': images,
         'form': form,
     }
@@ -177,9 +178,11 @@ def edit(request, id: int):
 
     images = Image.objects.all()
     form = EditArticleForm(instance=article)
+    upload_image_form = UploadImageForm()
 
     context = {
         'article': article,
+        'upload_image_form': upload_image_form,
         'images': images,
         'form': form,
     }

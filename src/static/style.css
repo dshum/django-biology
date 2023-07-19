@@ -169,3 +169,46 @@ blockquote {
     opacity: 0.7;
   }
 }
+
+.sidebar {
+  position: fixed;
+  top: 3.5rem;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: right 0.4s ease-out;
+}
+
+.sidebar .sidebar-toggler i {
+  transition: transform 0.4s linear;
+}
+
+.sidebar .sidebar-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  max-width: 30rem;
+}
+
+.sidebar .sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar.is-minimized {
+  right: -30rem;
+}
+
+.sidebar.is-minimized .sidebar-toggler i {
+  transform: rotate(-180deg);
+}
+
+@media (max-width: 768px) {
+  .sidebar .sidebar-content {
+    max-width: 20rem;
+  }
+
+  .sidebar.is-minimized {
+    right: -20rem;
+  }
+}
