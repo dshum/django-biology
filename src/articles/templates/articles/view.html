@@ -44,7 +44,9 @@
         <span>{{ article.title }}</span>
       </h1>
 
-      {% include 'articles/components/details.html' %}
+      {% cache 300 article_details article.id %}
+        {% include 'articles/components/details.html' %}
+      {% endcache %}
 
       <aside class="menu my-6">
         <p class="menu-label">
