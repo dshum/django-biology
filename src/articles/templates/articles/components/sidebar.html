@@ -4,7 +4,7 @@
   </div>
   <div class="sidebar-content box has-background-white">
     <div class="notification is-light">
-      {% include 'articles/upload_image_form.html' with form=form %}
+      {% include 'articles/upload_image_form.html' with form=upload_image_form %}
     </div>
     <div class="field mb-5">
       <div class="control">
@@ -42,7 +42,7 @@
       copied.classList.add('fade-in-and-out');
       setTimeout(() => {
         copied.classList.remove('fade-in-and-out');
-      }, 1000);
+      }, 1500);
     });
   });
 </script>

@@ -140,16 +140,16 @@ blockquote {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  background: rgba(50, 100, 100, 0.5);
+  background: rgba(100, 75, 50, 0.6);
   color: white;
-  padding: 0 2rem;
+  padding: 0.5rem 2rem;
   font-size: 1rem;
-  border-radius: 2rem;
+  border-radius: 3rem;
 }
 
 .fade-in-and-out {
-  -webkit-animation: fadeinout 1s ease-in forwards;
-  animation: fadeinout 1s ease-in forwards;
+  -webkit-animation: fadeinout 1.5s linear forwards;
+  animation: fadeinout 1.5s linear forwards;
 }
 
 @-webkit-keyframes fadeinout {
@@ -157,7 +157,7 @@ blockquote {
     opacity: 0;
   }
   33% {
-    opacity: 0.7;
+    opacity: 1;
   }
 }
 
@@ -166,7 +166,7 @@ blockquote {
     opacity: 0;
   }
   33% {
-    opacity: 0.7;
+    opacity: 1;
   }
 }
 
