@@ -1,6 +1,7 @@
 {% extends 'layouts/default.html' %}
 
 {% load static %}
+{% load cache %}
 {% load i18n %}
 
 {% block content %}
@@ -8,5 +9,7 @@
 
   {% include 'articles/edit_article_form.html' %}
 
-  {% include 'articles/components/sidebar.html' %}
+  {% cache 300 article_sidebar %}
+    {% include 'articles/components/sidebar.html' %}
+  {% endcache %}
 {% endblock %}

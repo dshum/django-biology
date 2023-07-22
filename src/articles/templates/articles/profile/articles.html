@@ -1,6 +1,7 @@
 {% extends 'layouts/default.html' %}
 
 {% load static %}
+{% load cache %}
 {% load i18n %}
 
 {% block title %}
@@ -21,7 +22,9 @@
         </h2>
 
         <div class="my-2">
-          {% include 'articles/components/details.html' with show_category=True %}
+          {% cache 300 article_details article.id %}
+            {% include 'articles/components/details.html' with show_category=True %}
+          {% endcache %}
         </div>
       </div>
     {% endfor %}

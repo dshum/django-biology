@@ -25,13 +25,12 @@
 
 <script>
   const sidebarToggler = document.getElementById('sidebar-toggler');
+  const cardImages = document.querySelectorAll('.card-image');
 
   sidebarToggler.addEventListener('click', () => {
     const sidebar = sidebarToggler.closest('.sidebar');
     sidebar.classList.toggle('is-minimized');
   });
-
-  const cardImages = document.querySelectorAll('.card-image');
 
   cardImages.forEach((cardImage) => {
     cardImage.addEventListener('click', (event) => {

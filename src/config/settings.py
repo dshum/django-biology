@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import logging.config
 import os
+import socket
 from ast import literal_eval
+
+from django.urls import resolve
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -36,18 +39,33 @@ ALLOWED_HOSTS = [
     'learnbio.ru',
 ]
 
-if ENABLE_DEBUG_TOOLBAR:
-    import socket
+# Debug toolbar
+# See https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html
 
-    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[: ip.rfind('.')] + '.1' for ip in ips] + \
-                   ['127.0.0.1', '10.0.2.2', '192.168.0.1', '93.81.255.146']
-    DEBUG_TOOLBAR_CONFIG = {
-        'SHOW_TOOLBAR_CALLBACK': lambda request: True,
-    }
-    # DEBUG_TOOLBAR_PANELS = [
-    #     'cachalot.panels.CachalotPanel',
-    # ]
+EXCLUDED_PATTERNS = [
+    'articles.increment_views',
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'config.settings.show_toolbar',
+}
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.history.HistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    # 'debug_toolbar.panels.redirects.RedirectsPanel',
+    # 'debug_toolbar.panels.profiling.ProfilingPanel',
+    'cachalot.panels.CachalotPanel',
+]
 
 # Application definition
 
@@ -263,3 +281,8 @@ if not DEBUG:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
+
+
+def show_toolbar(request):
+    request_url = resolve(request.path_info).url_name
+    return ENABLE_DEBUG_TOOLBAR and request_url not in EXCLUDED_PATTERNS
