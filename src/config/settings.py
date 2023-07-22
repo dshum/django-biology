@@ -45,6 +45,9 @@ if ENABLE_DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_CONFIG = {
         'SHOW_TOOLBAR_CALLBACK': lambda request: True,
     }
+    # DEBUG_TOOLBAR_PANELS = [
+    #     'cachalot.panels.CachalotPanel',
+    # ]
 
 # Application definition
 
@@ -55,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cachalot',
     'debug_toolbar',
     'widget_tweaks',
     'articles',
