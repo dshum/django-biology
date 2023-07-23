@@ -23,6 +23,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
+    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     # path("password_reset/",

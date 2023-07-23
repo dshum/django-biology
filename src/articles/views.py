@@ -76,6 +76,16 @@ def images_list(request):
 
 
 @login_required
+def sidebar_images_list(request):
+    page_number = request.GET.get('page')
+    images_page_obj = get_sidebar_images_paginator(page_number)
+    context = {
+        'images_page_obj': images_page_obj,
+    }
+    return render(request, 'articles/sidebar_images_list.html', context)
+
+
+@login_required
 def delete_image(request, id: int):
     request.user.images.filter(pk=id).delete()
     return images_list(request)
@@ -141,7 +151,7 @@ def preview(request, id: int):
         'main_categories': main_categories,
         'current_main_category': current_main_category,
     }
-    return render(request, 'articles/view.html', context)
+    return render(request, 'articles/preview.html', context)
 
 
 def increment_views(request, id: int):
@@ -176,14 +186,14 @@ def edit(request, id: int):
     elif article.user.pk != request.user.pk:
         return redirect('articles.view', slug=article.slug)
 
-    images = Image.objects.all()
     form = EditArticleForm(instance=article)
     upload_image_form = UploadImageForm()
+    images_page_obj = get_sidebar_images_paginator()
 
     context = {
         'article': article,
         'upload_image_form': upload_image_form,
-        'images': images,
+        'images_page_obj': images_page_obj,
         'form': form,
     }
     return render(request, 'articles/edit.html', context)

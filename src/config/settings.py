@@ -25,7 +25,7 @@ from sentry_sdk.integrations.django import DjangoIntegration
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+# https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
@@ -40,7 +40,7 @@ ALLOWED_HOSTS = [
 ]
 
 # Debug toolbar
-# See https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html
+# https://django-debug-toolbar.readthedocs.io/en/latest/configuration.html
 
 EXCLUDED_PATTERNS = [
     'articles.increment_views',
@@ -70,6 +70,9 @@ DEBUG_TOOLBAR_PANELS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # Styling for django admin. Should go before admin app.
+    # https://django-grappelli.readthedocs.io/en/latest/index.html
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +85,8 @@ INSTALLED_APPS = [
     'articles',
     'feedback',
     'deutsch',
-    # Should be last
+    # Automatically removes the files of models. Should be the last.
+    # https://github.com/un1t/django-cleanup
     'django_cleanup.apps.CleanupConfig',
 ]
 

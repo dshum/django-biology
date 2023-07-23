@@ -20,11 +20,21 @@
     <div class="column">
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
+          <li><a href="{% url 'articles.profile.articles' %}">{% trans 'Your articles' %}</a></li>
           {% for breadcrumb in breadcrumbs %}
             <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
           {% endfor %}
         </ul>
       </nav>
+
+      {% if messages %}
+        <div class="notification is-success">
+          <div class="delete"></div>
+          {% for message in messages %}
+            <div>{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
 
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
@@ -49,8 +59,6 @@
       <div class="content has-text-justified">
         {{ article.content_html|safe }}
       </div>
-
-      <div class="is-hidden" hx-get="{% url 'articles.increment_views' id=article.pk %}" hx-trigger="load delay:1s"></div>
     </div>
   </div>
 

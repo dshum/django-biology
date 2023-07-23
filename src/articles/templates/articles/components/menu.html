@@ -40,3 +40,19 @@
     {% endif %}
   {% endfor %}
 </aside>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuLabels = document.querySelectorAll('.menu-label');
+
+    menuLabels.forEach(menuLabel => {
+      menuLabel.addEventListener('click', () => {
+        const target = document.getElementById(menuLabel.dataset.target);
+        target.classList.toggle('is-hidden');
+        menuLabel.querySelectorAll(':scope i.fas').forEach((icon) => {
+          icon.classList.toggle('fa-rotate-90');
+        });
+      });
+    });
+  });
+</script>

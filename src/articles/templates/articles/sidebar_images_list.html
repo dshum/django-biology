@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% for image in images_page_obj %}
+  <div class="column is-half">
+    {% include 'articles/image_card.html' with image=image %}
+  </div>
+{% endfor %}
+
+{% if images_page_obj.has_next %}
+  <div class="load-more-images" hx-get="{% url 'articles.sidebar.images.list' %}?page={{ images_page_obj.next_page_number }}"
+       hx-trigger="intersect"
+       hx-swap="outerHTML">{% trans 'Loading...' %}</div>
+{% endif %}

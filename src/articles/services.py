@@ -75,5 +75,11 @@ def get_user_images_paginator(user: User, page_number: int = 1, page_size: int =
     return paginator.get_page(page_number)
 
 
+def get_sidebar_images_paginator(page_number: int = 1, page_size: int = 4):
+    images = Image.objects.order_by('-created_at')
+    paginator = Paginator(images, page_size)
+    return paginator.get_page(page_number)
+
+
 def increment_article_views(article: Article):
     Article.objects.filter(pk=article.pk).update(views=F('views') + 1)

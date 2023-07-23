@@ -9,7 +9,5 @@
 
   {% include 'articles/edit_article_form.html' %}
 
-  {% cache 300 article_sidebar %}
-    {% include 'articles/components/sidebar.html' %}
-  {% endcache %}
+  {% include 'articles/components/sidebar.html' %}
 {% endblock %}
