@@ -1,7 +1,5 @@
 {% extends 'layouts/default.html' %}
 
-{% load static %}
-{% load cache %}
 {% load i18n %}
 
 {% block title %}
@@ -11,26 +9,20 @@
 {% block content %}
   <h1 class="title is-2">{% trans 'Your articles' %}</h1>
 
-  {% if articles_page_obj %}
-    {% for article in articles_page_obj %}
-      <div class="my-4">
-        <h2 class="is-size-5">
-          <a href="{% url 'articles.edit' id=article.pk %}" class="mr-1 is-size-6 has-text-warning-dark">
-            <span class="icon"><i class="fas fa-pencil"></i></span>
-          </a>
-          <a href="{% url 'articles.view.preview' id=article.pk %}">{{ article.title }}</a>
-        </h2>
+  <div class="field my-4">
+    <div class="control">
+      <label>
+        <input type="text" name="search" class="input" placeholder="{% trans 'Search' %}"
+               hx-trigger="keyup changed delay:500ms, search"
+               hx-get="{% url 'articles.profile.articles.list' %}"
+               hx-target=".articles"
+        >
+      </label>
+    </div>
+  </div>
 
-        <div class="my-2">
-          {% cache 300 article_details article.id %}
-            {% include 'articles/components/details.html' with show_category=True %}
-          {% endcache %}
-        </div>
-      </div>
-    {% endfor %}
-
-    {% include 'components/pagination.html' with page_obj=articles_page_obj %}
-  {% else %}
-    <p>{% trans 'No articles found.' %}</p>
-  {% endif %}
+  <div class="articles has-htmx-pagination"
+       hx-get="{% url 'articles.profile.articles.list' %}"
+       hx-trigger="load">
+  </div>
 {% endblock %}

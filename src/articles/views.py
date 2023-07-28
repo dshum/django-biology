@@ -30,12 +30,18 @@ def profile(request):
 
 @login_required
 def user_articles(request):
+    return render(request, 'articles/profile/articles.html')
+
+
+@login_required
+def articles_list(request):
+    search = request.GET.get('search')
     page_number = request.GET.get('page')
-    articles_page_obj = get_user_articles_paginator(request.user, page_number)
+    articles_page_obj = get_user_articles_paginator(request.user, search, page_number)
     context = {
         'articles_page_obj': articles_page_obj,
     }
-    return render(request, 'articles/profile/articles.html', context)
+    return render(request, 'articles/articles_list.html', context)
 
 
 @login_required
@@ -67,8 +73,9 @@ def upload_image_form(request):
 
 @login_required
 def images_list(request):
+    search = request.GET.get('search')
     page_number = request.GET.get('page')
-    images_page_obj = get_user_images_paginator(request.user, page_number)
+    images_page_obj = get_user_images_paginator(request.user, search, page_number)
     context = {
         'images_page_obj': images_page_obj,
     }
@@ -77,8 +84,9 @@ def images_list(request):
 
 @login_required
 def sidebar_images_list(request):
+    search = request.GET.get('search')
     page_number = request.GET.get('page')
-    images_page_obj = get_sidebar_images_paginator(page_number)
+    images_page_obj = get_sidebar_images_paginator(search, page_number)
     context = {
         'images_page_obj': images_page_obj,
     }

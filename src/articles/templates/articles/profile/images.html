@@ -19,6 +19,18 @@
     </div>
   </div>
 
+  <div class="field my-4">
+      <div class="control">
+        <label>
+          <input type="text" name="search" class="input" placeholder="{% trans 'Search' %}"
+                 hx-trigger="keyup changed delay:500ms, search"
+                 hx-get="{% url 'articles.profile.images.list' %}"
+                 hx-target=".images"
+          >
+        </label>
+      </div>
+    </div>
+
   <div class="images has-htmx-pagination"
       hx-get="{% url 'articles.profile.images.list' %}"
       hx-trigger="load, newImage from:body">

@@ -1,0 +1,27 @@
+{% load cache %}
+{% load i18n %}
+
+{% if articles_page_obj %}
+  {% for article in articles_page_obj %}
+    <div class="my-4">
+      <h2 class="is-size-5">
+        <a href="{% url 'articles.edit' id=article.pk %}" class="mr-1 is-size-6 has-text-warning-dark">
+          <span class="icon"><i class="fas fa-pencil"></i></span>
+        </a>
+        <a href="{% url 'articles.view.preview' id=article.pk %}">{{ article.title }}</a>
+      </h2>
+
+      <div class="my-2">
+        {% cache 300 article_details article.id %}
+          {% include 'articles/components/details.html' with show_category=True %}
+        {% endcache %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="my-4">
+    {% include 'components/htmx_pagination.html' with page_obj=articles_page_obj url='articles.profile.articles.list' %}
+  </div>
+{% else %}
+  <p>{% trans 'No articles found.' %}</p>
+{% endif %}
