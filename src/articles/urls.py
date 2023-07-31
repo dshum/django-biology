@@ -7,6 +7,7 @@ urlpatterns = [
     path('categories/<int:id>', views.category, name='articles.category'),
 
     path('profile', views.profile, name='articles.profile'),
+    path('profile/form', views.edit_profile_form, name='profile.form'),
     path('profile/articles', views.user_articles, name='articles.profile.articles'),
     path('profile/articles/list', views.articles_list, name='articles.profile.articles.list'),
     path('profile/images', views.user_images, name='articles.profile.images'),

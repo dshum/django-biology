@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<form class="column is-half-desktop" novalidate
+      hx-trigger="submit" hx-post="{% url 'profile.form' %}"
+      hx-target="this" hx-swap="outerHTML">
+  {% csrf_token %}
+
+  {% trans 'Save' as save %}
+  {% include 'components/form.html' with form=form icon='fas fa-floppy-disk' submit=save %}
+</form>

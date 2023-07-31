@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-09 18:37+0000\n"
+"POT-Creation-Date: 2023-07-31 23:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Страница не найдена"
 msgid "Go to main page"
 msgstr "На главную страницу"
 
-#: templates/components/form.html:74
+#: templates/components/form.html:85
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -42,16 +42,16 @@ msgid "New article"
 msgstr "Новая статья"
 
 #: templates/layouts/default.html:48 templates/layouts/welcome.html:47
-msgid "Profile"
-msgstr "Профиль"
-
-#: templates/layouts/default.html:51 templates/layouts/welcome.html:50
 msgid "Articles"
 msgstr "Cтатьи"
 
-#: templates/layouts/default.html:54 templates/layouts/welcome.html:53
+#: templates/layouts/default.html:51 templates/layouts/welcome.html:50
 msgid "Images"
 msgstr "Изображения"
+
+#: templates/layouts/default.html:54 templates/layouts/welcome.html:53
+msgid "Profile"
+msgstr "Профиль"
 
 #: templates/layouts/default.html:58 templates/layouts/welcome.html:57
 msgid "Logout"

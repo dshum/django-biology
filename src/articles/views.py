@@ -6,7 +6,7 @@ from django.template.defaulttags import url
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from .forms import UploadImageForm, EditArticleForm
+from .forms import UploadImageForm, EditArticleForm, EditProfileForm
 from .services import *
 
 
@@ -25,7 +25,24 @@ def not_found(request):
 
 @login_required
 def profile(request):
-    return render(request, 'articles/profile/index.html')
+    form = EditProfileForm(instance=request.user)
+    context = {
+        'form': form,
+    }
+    return render(request, 'articles/profile/index.html', context)
+
+
+@login_required
+def edit_profile_form(request):
+    form = EditProfileForm(request.POST, instance=request.user)
+    if form.is_valid():
+        form.save()
+        messages.add_message(request, messages.SUCCESS, _('Your profile has been updated!'))
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'articles/edit_profile_form.html', context)
 
 
 @login_required

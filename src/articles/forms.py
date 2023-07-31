@@ -1,8 +1,22 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _, gettext
 
 from .models import Image, Article, Category
 from .services import get_grouped_categories
+
+
+class EditProfileForm(forms.ModelForm):
+    first_name = forms.CharField(label=_('First name'), required=True, max_length=150,
+                                 widget=forms.TextInput(attrs={'class': 'input'}))
+    last_name = forms.CharField(label=_('Last name'), required=True, max_length=150,
+                                widget=forms.TextInput(attrs={'class': 'input'}))
+    email = forms.EmailField(label=_('Email'), required=True, max_length=254,
+                             widget=forms.EmailInput(attrs={'class': 'input'}))
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
 
 
 class EditArticleForm(forms.ModelForm):
