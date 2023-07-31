@@ -236,7 +236,6 @@ STATIC_ROOT = BASE_DIR / 'prod' / 'static'
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'articles' / 'static',
 ]
 MEDIA_ROOT = BASE_DIR / 'prod' / 'media'
 MEDIA_URL = 'media/'
