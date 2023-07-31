@@ -9,17 +9,7 @@
 {% block content %}
   <h1 class="title is-2">{% trans 'Your articles' %}</h1>
 
-  <div class="field my-4">
-    <div class="control">
-      <label>
-        <input type="search" name="search" class="input" placeholder="{% trans 'Search' %}"
-               hx-trigger="keyup changed delay:500ms, search"
-               hx-get="{% url 'articles.profile.articles.list' %}"
-               hx-target=".articles"
-        >
-      </label>
-    </div>
-  </div>
+  {% include 'articles/components/articles_search.html' %}
 
   <div class="articles has-htmx-pagination"
        hx-get="{% url 'articles.profile.articles.list' %}"

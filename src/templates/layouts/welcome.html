@@ -43,14 +43,14 @@
                 {{ user.first_name }}
               </a>
               <div class="navbar-dropdown is-boxed is-right">
-                <a class="navbar-item" href="{% url 'articles.profile' %}">
-                  {% trans 'Profile' %}
-                </a>
                 <a class="navbar-item" href="{% url 'articles.profile.articles' %}">
                   {% trans 'Articles' %}
                 </a>
                 <a class="navbar-item" href="{% url 'articles.profile.images' %}">
                   {% trans 'Images' %}
+                </a>
+                <a class="navbar-item" href="{% url 'articles.profile' %}">
+                  {% trans 'Profile' %}
                 </a>
                 <hr class="navbar-divider">
                 <a class="navbar-item" href="{% url 'logout' %}">

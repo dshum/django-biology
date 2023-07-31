@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="field my-4">
+  <div class="control">
+    <label>
+      <input type="search" name="search" class="input" placeholder="{% trans 'Search' %}"
+             hx-trigger="keyup changed delay:500ms, search"
+             hx-get="{% url 'articles.sidebar.images.list' %}"
+             hx-target=".images">
+    </label>
+  </div>
+</div>

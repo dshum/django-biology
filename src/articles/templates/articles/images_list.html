@@ -13,21 +13,3 @@
 {% else %}
   <p>{% trans 'No images found.' %}</p>
 {% endif %}
-
-<script>
-  const cardImages = document.querySelectorAll('.card-image');
-
-  cardImages.forEach((cardImage) => {
-    cardImage.addEventListener('click', (event) => {
-      const title = cardImage.dataset.imageTitle;
-      const url = cardImage.dataset.imageUrl;
-      const copied = cardImage.parentElement.querySelector('.copied');
-      const imageMarkdown = `![${title}](${url})`;
-      navigator.clipboard.writeText(imageMarkdown);
-      copied.classList.add('fade-in-and-out');
-      setTimeout(() => {
-        copied.classList.remove('fade-in-and-out');
-      }, 1500);
-    });
-  });
-</script>

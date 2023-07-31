@@ -34,6 +34,11 @@ def user_articles(request):
 
 
 @login_required
+def user_images(request):
+    return render(request, 'articles/profile/images.html')
+
+
+@login_required
 def articles_list(request):
     search = request.GET.get('search')
     page_number = request.GET.get('page')
@@ -45,28 +50,22 @@ def articles_list(request):
 
 
 @login_required
-def user_images(request):
-    form = UploadImageForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'articles/profile/images.html', context)
-
-
-@login_required
 def upload_image_form(request):
-    form = UploadImageForm(request.POST, request.FILES)
-    if form.is_valid():
-        image = form.save(commit=False)
-        if request.user.is_authenticated:
-            image.user = request.user
-        image.save()
-        messages.add_message(request, messages.SUCCESS, _('New image has been uploaded!'))
+    if request.method == 'POST':
+        form = UploadImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            if request.user.is_authenticated:
+                image.user = request.user
+            image.save()
+            messages.add_message(request, messages.SUCCESS, _('New image has been uploaded!'))
 
+            form = UploadImageForm()
+            response = render(request, 'articles/upload_image_form.html', {'form': form})
+            response.headers['HX-Trigger'] = 'newImage'
+            return response
+    else:
         form = UploadImageForm()
-        response = render(request, 'articles/upload_image_form.html', {'form': form})
-        response.headers['HX-Trigger'] = 'newImage'
-        return response
 
     return render(request, 'articles/upload_image_form.html', {'form': form})
 
@@ -83,6 +82,12 @@ def images_list(request):
 
 
 @login_required
+def delete_image(request, id: int):
+    request.user.images.filter(pk=id).delete()
+    return images_list(request)
+
+
+@login_required
 def sidebar_images_list(request):
     search = request.GET.get('search')
     page_number = request.GET.get('page')
@@ -91,12 +96,6 @@ def sidebar_images_list(request):
         'images_page_obj': images_page_obj,
     }
     return render(request, 'articles/sidebar_images_list.html', context)
-
-
-@login_required
-def delete_image(request, id: int):
-    request.user.images.filter(pk=id).delete()
-    return images_list(request)
 
 
 @login_required
@@ -181,13 +180,9 @@ def increment_views(request, id: int):
 
 @login_required
 def create(request):
-    upload_image_form = UploadImageForm()
-    images_page_obj = get_sidebar_images_paginator()
     form = EditArticleForm()
 
     context = {
-        'upload_image_form': upload_image_form,
-        'images_page_obj': images_page_obj,
         'form': form,
     }
     return render(request, 'articles/create.html', context)
@@ -202,20 +197,16 @@ def edit(request, id: int):
         return redirect('articles.view', slug=article.slug)
 
     form = EditArticleForm(instance=article)
-    upload_image_form = UploadImageForm()
-    images_page_obj = get_sidebar_images_paginator()
 
     context = {
         'article': article,
-        'upload_image_form': upload_image_form,
-        'images_page_obj': images_page_obj,
         'form': form,
     }
     return render(request, 'articles/edit.html', context)
 
 
 @login_required
-def article_create_form(request):
+def create_article_form(request):
     form = EditArticleForm(request.POST)
     context = {
         'form': form,
@@ -235,7 +226,7 @@ def article_create_form(request):
 
 
 @login_required
-def article_form(request, id: int):
+def edit_article_form(request, id: int):
     article = get_article_by_id(id)
     if not article:
         return HttpResponse(status=404)
