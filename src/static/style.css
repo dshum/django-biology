@@ -42,7 +42,7 @@ nav.navbar {
   background: linear-gradient(
       rgba(20, 20, 20, 0.2),
       rgba(10, 20, 10, 0.4)
-  ), url("iguana404.jpg") no-repeat center center;
+  ), url("articles/iguana404.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
