@@ -1,13 +1,13 @@
+{% load article_extras %}
 {% load i18n %}
 
 {% for image in images_page_obj %}
   <div class="column is-half">
-    {% include 'articles/image_card.html' with image=image %}
+    {% include 'articles/image_card.html' with image=image delete_url='articles.sidebar.images.delete' %}
   </div>
 {% endfor %}
 
 {% if images_page_obj.has_next %}
-  <div class="load-more-images" hx-get="{% url 'articles.sidebar.images.list' %}?page={{ images_page_obj.next_page_number }}"
-       hx-trigger="intersect"
-       hx-swap="outerHTML">{% trans 'Loading...' %}</div>
+  <div class="load-more-images" hx-get="{% url 'articles.sidebar.images.list' %}{% page_link images_page_obj.next_page_number %}"
+       hx-trigger="intersect" hx-swap="outerHTML">{% trans 'Loading...' %}</div>
 {% endif %}

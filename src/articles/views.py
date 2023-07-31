@@ -99,6 +99,12 @@ def delete_image(request, id: int):
     return images_list(request)
 
 
+@login_required
+def delete_sidebar_image(request, id: int):
+    request.user.images.filter(pk=id).delete()
+    return sidebar_images_list(request)
+
+
 def category(request, id: int):
     category = get_category_by_id(id)
     if not category:
@@ -175,12 +181,13 @@ def increment_views(request, id: int):
 
 @login_required
 def create(request):
-    images = Image.objects.all()
+    upload_image_form = UploadImageForm()
+    images_page_obj = get_sidebar_images_paginator()
     form = EditArticleForm()
 
     context = {
         'upload_image_form': upload_image_form,
-        'images': images,
+        'images_page_obj': images_page_obj,
         'form': form,
     }
     return render(request, 'articles/create.html', context)

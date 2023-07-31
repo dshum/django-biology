@@ -4,21 +4,25 @@
   <div id="sidebar-toggler" class="sidebar-toggler button m-4 is-outlined">
     <i class="fas fa-long-arrow-right"></i>
   </div>
+
   <div class="sidebar-content box has-background-white">
     <div class="notification is-light">
       {% include 'articles/upload_image_form.html' with form=upload_image_form %}
     </div>
-    <div class="field mb-5">
+
+    <div class="field my-4">
       <div class="control">
         <label>
-          <input type="text" name="search" class="input" placeholder="Search">
+          <input type="search" name="search" class="input" placeholder="{% trans 'Search' %}"
+                 hx-trigger="keyup changed delay:500ms, search"
+                 hx-get="{% url 'articles.sidebar.images.list' %}"
+                 hx-target=".images">
         </label>
       </div>
     </div>
-    <div class="columns is-multiline">
-      <div class="column load-more-images" hx-get="{% url 'articles.sidebar.images.list' %}"
-           hx-trigger="load intersect"
-           hx-swap="outerHTML">{% trans 'Loading...' %}</div>
+
+    <div class="images columns is-multiline"
+         hx-get="{% url 'articles.sidebar.images.list' %}" hx-trigger="load, newImage from:body">
     </div>
   </div>
 </div>

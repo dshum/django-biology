@@ -122,7 +122,7 @@ msgstr "Редактирование статьи"
 
 #: articles/templates/articles/edit_article_form.html:13
 msgid "Article preview"
-msgstr "Предпросмотр статьи"
+msgstr "Просмотр статьи"
 
 #: articles/templates/articles/image_card.html:5
 msgid "Delete"

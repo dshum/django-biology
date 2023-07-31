@@ -188,6 +188,7 @@ blockquote {
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 30rem;
   max-width: 30rem;
 }
 
@@ -205,6 +206,7 @@ blockquote {
 
 @media (max-width: 768px) {
   .sidebar .sidebar-content {
+    width: 20rem;
     max-width: 20rem;
   }
 

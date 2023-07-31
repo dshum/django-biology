@@ -1,14 +1,5 @@
 {% load i18n %}
 
-{% if messages %}
-  <div class="notification is-success fade-out">
-    <div class="delete"></div>
-    {% for message in messages %}
-      <div>{{ message }}</div>
-    {% endfor %}
-  </div>
-{% endif %}
-
 {% if form.non_field_errors %}
   <div class="notification is-danger">
     {% for error in form.non_field_errors %}
@@ -62,17 +53,3 @@
     </div>
   </div>
 </form>
-
-<script>
-  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
-
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-    });
-  });
-
-  document.querySelectorAll('.fade-out').forEach((item) => {
-    item.classList.add('start');
-  });
-</script>
