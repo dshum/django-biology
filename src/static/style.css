@@ -136,15 +136,19 @@ blockquote {
   position: absolute;
   z-index: 100;
   display: flex;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  background: rgba(100, 75, 50, 0.6);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(100, 100, 100, 0.7);
   color: white;
-  padding: 0.5rem 2rem;
   font-size: 1rem;
-  border-radius: 3rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.copied > div {
+  margin: auto;
 }
 
 .fade-in-and-out {

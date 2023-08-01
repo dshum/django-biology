@@ -42,7 +42,7 @@ def edit_profile_form(request):
     context = {
         'form': form,
     }
-    return render(request, 'articles/edit_profile_form.html', context)
+    return render(request, 'articles/htmx/edit_profile_form.html', context)
 
 
 @login_required
@@ -63,7 +63,7 @@ def articles_list(request):
     context = {
         'articles_page_obj': articles_page_obj,
     }
-    return render(request, 'articles/articles_list.html', context)
+    return render(request, 'articles/htmx/articles_list.html', context)
 
 
 @login_required
@@ -78,13 +78,13 @@ def upload_image_form(request):
             messages.add_message(request, messages.SUCCESS, _('New image has been uploaded!'))
 
             form = UploadImageForm()
-            response = render(request, 'articles/upload_image_form.html', {'form': form})
+            response = render(request, 'articles/htmx/upload_image_form.html', {'form': form})
             response.headers['HX-Trigger'] = 'newImage'
             return response
     else:
         form = UploadImageForm()
 
-    return render(request, 'articles/upload_image_form.html', {'form': form})
+    return render(request, 'articles/htmx/upload_image_form.html', {'form': form})
 
 
 @login_required
@@ -95,7 +95,7 @@ def images_list(request):
     context = {
         'images_page_obj': images_page_obj,
     }
-    return render(request, 'articles/images_list.html', context)
+    return render(request, 'articles/htmx/images_list.html', context)
 
 
 @login_required
@@ -112,7 +112,7 @@ def sidebar_images_list(request):
     context = {
         'images_page_obj': images_page_obj,
     }
-    return render(request, 'articles/sidebar_images_list.html', context)
+    return render(request, 'articles/htmx/sidebar_images_list.html', context)
 
 
 @login_required
@@ -228,7 +228,7 @@ def create_article_form(request):
     context = {
         'form': form,
     }
-    response = render(request, 'articles/create_article_form.html', context)
+    response = render(request, 'articles/htmx/create_article_form.html', context)
 
     if form.is_valid():
         article = form.save(commit=False)
@@ -256,4 +256,4 @@ def edit_article_form(request, id: int):
         'article': article,
         'form': form,
     }
-    return render(request, 'articles/edit_article_form.html', context)
+    return render(request, 'articles/htmx/edit_article_form.html', context)

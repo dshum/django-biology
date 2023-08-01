@@ -1,7 +1,8 @@
 {% load i18n %}
 
 <form class="column is-half-desktop" novalidate
-      hx-trigger="submit" hx-post="{% url 'feedback.form' %}" hx-target="this" hx-swap="outerHTML">
+      hx-trigger="submit" hx-post="{% url 'feedback.form' %}"
+      hx-target="this" hx-swap="outerHTML">
   {% csrf_token %}
   {% trans 'Send' as send %}
   {% include 'components/form.html' with form=form icon='fas fa-envelope' submit=send %}

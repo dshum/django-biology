@@ -7,7 +7,7 @@
           hx-target="closest .images"></button>
   <div class="card-image is-clickable" title="{% trans 'Click to copy image URL' %}"
        data-image-url="{{ image.image.url }}" data-image-title="{{ image.title }}">
-    <div class="copied">{% trans 'URL copied' %}</div>
+    <div class="copied"><div>{% trans 'URL copied' %}</div></div>
     <figure class="image is-4by3 has-background-light has-background-image"
             style="background: url('{{ image.image.url }}');">
     </figure>
