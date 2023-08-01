@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('', include('articles.urls')),
     path('feedback/', include('feedback.urls')),
     path('deutsch/', include('deutsch.urls')),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ]
 
 if settings.DEBUG:
