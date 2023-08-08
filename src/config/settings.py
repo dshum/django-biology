@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import logging.config
 import os
 import socket
+import warnings
 from ast import literal_eval
 
 from django.urls import resolve

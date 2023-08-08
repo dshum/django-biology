@@ -22,7 +22,7 @@ class EditProfileForm(forms.ModelForm):
 class EditArticleForm(forms.ModelForm):
     title = forms.CharField(label=_('Title'), required=True, max_length=255,
                             widget=forms.TextInput(attrs={'class': 'input'}))
-    slug = forms.SlugField(label=_('Slug'), required=True, max_length=50,
+    slug = forms.SlugField(label=_('Slug'), required=False, max_length=50,
                            widget=forms.TextInput(attrs={'class': 'input'}))
     category = forms.IntegerField(label=_('Category'), required=True,
                                   widget=forms.Select(choices=get_grouped_categories()))
