@@ -38,6 +38,7 @@ ENABLE_DEBUG_TOOLBAR = literal_eval(os.getenv('ENABLE_DEBUG_TOOLBAR', 'False'))
 ALLOWED_HOSTS = [
     'localhost',
     'learnbio.ru',
+    '185.154.193.136',
 ]
 
 # Debug toolbar
