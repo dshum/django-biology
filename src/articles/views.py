@@ -10,8 +10,6 @@ from .forms import UploadImageForm, EditArticleForm, EditProfileForm
 from .services import *
 
 
-# @cache_page(60 * 5)
-# @vary_on_cookie
 def index(request):
     context = {
         'main_categories': get_main_categories(),
@@ -96,6 +94,21 @@ def images_list(request):
         'images_page_obj': images_page_obj,
     }
     return render(request, 'articles/htmx/images_list.html', context)
+
+
+@login_required
+def confirm_delete_image(request, id: int):
+    image = get_image_by_id(id)
+    if not image:
+        return HttpResponse(status=404)
+
+    mode = request.GET.get('mode')
+    delete_url = 'articles.sidebar.images.delete' if mode == 'sidebar' else 'articles.images.delete'
+    context = {
+        'image': image,
+        'delete_url': delete_url,
+    }
+    return render(request, 'articles/htmx/confirm_delete_image.html', context)
 
 
 @login_required

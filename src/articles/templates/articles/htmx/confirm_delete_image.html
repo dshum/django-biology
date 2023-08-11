@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<div class="modal is-active"
+     _="on closeModal remove .is-active then wait for animationend then remove me">>
+  <div class="modal-background" _="on click trigger closeModal"></div>
+  <div class="modal-content">
+    <div class="box is-size-5">
+      <div>{% trans 'Are you sure want to delete this image?' %}</div>
+      <hr>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-danger"
+                  hx-delete="{% url delete_url id=image.pk %}"
+                  hx-target="closest .images">
+            {% trans 'Delete' %}
+          </button>
+        </div>
+        <div class="control">
+          <button class="button is-light" _="on click trigger closeModal">
+            {% trans 'Cancel' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

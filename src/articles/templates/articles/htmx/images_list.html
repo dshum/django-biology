@@ -4,7 +4,7 @@
   <div class="columns is-multiline">
     {% for image in images_page_obj %}
       <div class="column is-one-quarter">
-        {% include 'articles/components/image_card.html' with image=image delete_url='articles.images.delete' %}
+        {% include 'articles/components/image_card.html' with image=image %}
       </div>
     {% endfor %}
   </div>

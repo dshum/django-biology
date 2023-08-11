@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 23:02+0000\n"
+"POT-Creation-Date: 2023-08-11 23:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgid "Email"
 msgstr "Email"
 
 #: articles/forms.py:23 articles/forms.py:49
-#: articles/templates/articles/upload_image_form.html:17
+#: articles/templates/articles/htmx/upload_image_form.html:17
 msgid "Title"
 msgstr "Заголовок"
 
@@ -98,10 +98,6 @@ msgstr "Статья не найдена"
 msgid "Go to main page"
 msgstr "На главную страницу"
 
-#: articles/templates/articles/articles_list.html:26
-msgid "No articles found."
-msgstr "Статей не найдено."
-
 #: articles/templates/articles/category.html:86
 msgid "No articles found in this category."
 msgstr "В этой категории статей не найдено."
@@ -124,52 +120,78 @@ msgstr "просмотр,просмотра,просмотров"
 msgid "Not published"
 msgstr "Не опубликовано"
 
+#: articles/templates/articles/components/image_card.html:6
+#: articles/templates/articles/htmx/confirm_delete_image.html:13
+msgid "Delete"
+msgstr "Удалить"
+
+#: articles/templates/articles/components/image_card.html:10
+msgid "Click to copy image URL"
+msgstr "Нажмите, чтобы скопировать URL изображения"
+
+#: articles/templates/articles/components/image_card.html:13
+msgid "URL copied"
+msgstr "URL cкопирован"
+
+#: articles/templates/articles/components/image_card.html:23
+msgid "Kb"
+msgstr "Кб"
+
+#: articles/templates/articles/components/image_card.html:24
+msgid "uploaded at"
+msgstr "загружено"
+
 #: articles/templates/articles/create.html:7
 msgid "New article"
 msgstr "Новая статья"
-
-#: articles/templates/articles/create_article_form.html:13
-#: articles/templates/articles/edit_article_form.html:20
-msgid "Markdown guide"
-msgstr "Руководство по Markdown"
-
-#: articles/templates/articles/create_article_form.html:18
-#: articles/templates/articles/edit_article_form.html:25
-#: articles/templates/articles/edit_profile_form.html:8
-msgid "Save"
-msgstr "Сохранить"
 
 #: articles/templates/articles/edit.html:8
 msgid "Edit article"
 msgstr "Редактирование статьи"
 
-#: articles/templates/articles/edit_article_form.html:13
+#: articles/templates/articles/htmx/articles_list.html:26
+msgid "No articles found."
+msgstr "Статей не найдено."
+
+#: articles/templates/articles/htmx/confirm_delete_image.html:8
+msgid "Are you sure want to delete this image?"
+msgstr "Вы точно хотите удалить это изображение?"
+
+#: articles/templates/articles/htmx/confirm_delete_image.html:16
+#: articles/templates/articles/htmx/upload_image_form.html:51
+msgid "Cancel"
+msgstr "Отмена"
+
+#: articles/templates/articles/htmx/create_article_form.html:13
+#: articles/templates/articles/htmx/edit_article_form.html:20
+msgid "Markdown guide"
+msgstr "Руководство по Markdown"
+
+#: articles/templates/articles/htmx/create_article_form.html:18
+#: articles/templates/articles/htmx/edit_article_form.html:25
+#: articles/templates/articles/htmx/edit_profile_form.html:8
+msgid "Save"
+msgstr "Сохранить"
+
+#: articles/templates/articles/htmx/edit_article_form.html:13
 msgid "Article preview"
 msgstr "Просмотр статьи"
 
-#: articles/templates/articles/image_card.html:5
-msgid "Delete"
-msgstr "Удалить"
-
-#: articles/templates/articles/image_card.html:8
-msgid "Click to copy image URL"
-msgstr "Нажмите, чтобы скопировать URL изображения"
-
-#: articles/templates/articles/image_card.html:10
-msgid "URL copied"
-msgstr "URL cкопирован"
-
-#: articles/templates/articles/image_card.html:19
-msgid "Kb"
-msgstr "Кб"
-
-#: articles/templates/articles/image_card.html:20
-msgid "uploaded at"
-msgstr "загружено"
-
-#: articles/templates/articles/images_list.html:14
+#: articles/templates/articles/htmx/images_list.html:14
 msgid "No images found."
 msgstr "Изображений не найдено."
+
+#: articles/templates/articles/htmx/sidebar_images_list.html:12
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#: articles/templates/articles/htmx/upload_image_form.html:33
+msgid "Choose a file..."
+msgstr "Выберите файл..."
+
+#: articles/templates/articles/htmx/upload_image_form.html:46
+msgid "Upload"
+msgstr "Загрузить"
 
 #: articles/templates/articles/preview.html:23
 #: articles/templates/articles/profile/articles.html:10
@@ -192,30 +214,14 @@ msgstr "Профиль"
 msgid "Article images"
 msgstr "Изображения для статей"
 
-#: articles/templates/articles/sidebar_images_list.html:12
-msgid "Loading..."
-msgstr "Загрузка..."
-
-#: articles/templates/articles/upload_image_form.html:33
-msgid "Choose a file..."
-msgstr "Выберите файл..."
-
-#: articles/templates/articles/upload_image_form.html:46
-msgid "Upload"
-msgstr "Загрузить"
-
-#: articles/templates/articles/upload_image_form.html:51
-msgid "Cancel"
-msgstr "Отмена"
-
-#: articles/views.py:40
+#: articles/views.py:38
 msgid "Your profile has been updated!"
 msgstr "Ваш профиль был обновлен!"
 
-#: articles/views.py:78
+#: articles/views.py:76
 msgid "New image has been uploaded!"
 msgstr "Новое изображение загружено!"
 
-#: articles/views.py:239
+#: articles/views.py:252
 msgid "New article has been created!"
 msgstr "Новая статья создана!"

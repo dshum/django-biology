@@ -87,5 +87,9 @@ def get_sidebar_images_paginator(search: str = None, page_number: int = 1, page_
     return paginator.get_page(page_number)
 
 
+def get_image_by_id(id: int):
+    return Image.objects.get(pk=id)
+
+
 def increment_article_views(article: Article):
     Article.objects.filter(pk=article.pk).update(views=F('views') + 1)

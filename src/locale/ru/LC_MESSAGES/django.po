@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-31 23:02+0000\n"
+"POT-Creation-Date: 2023-08-11 23:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,40 +33,40 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: templates/layouts/default.html:8 templates/layouts/welcome.html:8
-#: templates/layouts/welcome.html:76
+#: templates/layouts/welcome.html:77
 msgid "Biology"
 msgstr "Биология"
 
-#: templates/layouts/default.html:38 templates/layouts/welcome.html:37
+#: templates/layouts/default.html:40 templates/layouts/welcome.html:38
 msgid "New article"
 msgstr "Новая статья"
 
-#: templates/layouts/default.html:48 templates/layouts/welcome.html:47
+#: templates/layouts/default.html:50 templates/layouts/welcome.html:48
 msgid "Articles"
 msgstr "Cтатьи"
 
-#: templates/layouts/default.html:51 templates/layouts/welcome.html:50
+#: templates/layouts/default.html:53 templates/layouts/welcome.html:51
 msgid "Images"
 msgstr "Изображения"
 
-#: templates/layouts/default.html:54 templates/layouts/welcome.html:53
+#: templates/layouts/default.html:56 templates/layouts/welcome.html:54
 msgid "Profile"
 msgstr "Профиль"
 
-#: templates/layouts/default.html:58 templates/layouts/welcome.html:57
+#: templates/layouts/default.html:60 templates/layouts/welcome.html:58
 msgid "Logout"
 msgstr "Выход"
 
-#: templates/layouts/default.html:65 templates/layouts/welcome.html:64
+#: templates/layouts/default.html:67 templates/layouts/welcome.html:65
 #: templates/registration/login.html:6 templates/registration/login.html:10
 msgid "Login"
 msgstr "Вход"
 
-#: templates/layouts/default.html:84 templates/layouts/welcome.html:103
+#: templates/layouts/default.html:86 templates/layouts/welcome.html:104
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: templates/layouts/welcome.html:79
+#: templates/layouts/welcome.html:80
 msgid "Materials for study"
 msgstr "Материалы для изучения"
 

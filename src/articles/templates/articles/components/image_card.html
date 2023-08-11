@@ -2,12 +2,16 @@
 {% load article_extras %}
 
 <div class="card is-fullheight">
-  <button class="delete" title="{% trans 'Delete' %}"
-          hx-delete="{% url delete_url id=image.pk %}"
-          hx-target="closest .images"></button>
+  {% if image.user.pk == user.pk %}
+    <button class="delete" title="{% trans 'Delete' %}"
+            hx-get="{% url 'articles.images.delete.confirm' id=image.pk %}?mode={{ mode }}"
+            hx-target="closest .images" hx-swap="beforeend"></button>
+  {% endif %}
   <div class="card-image is-clickable" title="{% trans 'Click to copy image URL' %}"
        data-image-url="{{ image.image.url }}" data-image-title="{{ image.title }}">
-    <div class="copied"><div>{% trans 'URL copied' %}</div></div>
+    <div class="copied">
+      <div>{% trans 'URL copied' %}</div>
+    </div>
     <figure class="image is-4by3 has-background-light has-background-image"
             style="background: url('{{ image.image.url }}');">
     </figure>

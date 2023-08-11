@@ -3,7 +3,7 @@
 
 {% for image in images_page_obj %}
   <div class="column is-half">
-    {% include 'articles/components/image_card.html' with image=image delete_url='articles.sidebar.images.delete' %}
+    {% include 'articles/components/image_card.html' with image=image mode='sidebar' %}
   </div>
 {% endfor %}
 
