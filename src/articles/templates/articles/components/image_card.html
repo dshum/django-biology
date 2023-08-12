@@ -8,8 +8,17 @@
             hx-target="closest .images" hx-swap="beforeend"></button>
   {% endif %}
   <div class="card-image is-clickable" title="{% trans 'Click to copy image URL' %}"
-       data-image-url="{{ image.image.url }}" data-image-title="{{ image.title }}">
-    <div class="copied">
+       _="on click
+              throttled at 1s
+              set text to `![{{ image.title }}]({{ image.image.url }})`
+              js(text)
+                  if ('clipboard' in window.navigator) {
+                     navigator.clipboard.writeText(text)
+                  }
+              end
+              then send imageCopied to the first <div.copied/> in me">
+    <div class="copied"
+         _="on imageCopied transition my opacity to 1 over 200ms then wait 600ms then transition my opacity to 0 over 200ms">
       <div>{% trans 'URL copied' %}</div>
     </div>
     <figure class="image is-4by3 has-background-light has-background-image"

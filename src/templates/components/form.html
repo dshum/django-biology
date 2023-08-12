@@ -6,8 +6,11 @@
 {% endfor %}
 
 {% if messages %}
-  <div class="notification is-success fade-out">
-    <div class="delete"></div>
+  <div class="notification is-success"
+       _="on load wait 3s then transition my opacity to 0 over 200ms then remove me
+          on closeMessage transition my opacity to 0 over 200ms then remove me">
+    <div class="delete"
+         _="on click trigger closeMessage"></div>
     {% for message in messages %}
       <div>{{ message }}</div>
     {% endfor %}
@@ -86,17 +89,3 @@
     </button>
   </div>
 </div>
-
-<script>
-  (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
-
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-    });
-  });
-
-  document.querySelectorAll('.fade-out').forEach((item) => {
-    item.classList.add('start');
-  });
-</script>

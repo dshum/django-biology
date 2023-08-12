@@ -1,11 +1,16 @@
 {% load i18n %}
 
-<div class="modal is-active"
-     _="on closeModal remove .is-active then wait for animationend then remove me">>
+<div class="modal is-active opacity-0"
+     _="on load transition my opacity to 1 over 100ms
+        on closeModal transition my opacity to 0 over 200ms then remove me">
   <div class="modal-background" _="on click trigger closeModal"></div>
   <div class="modal-content">
     <div class="box is-size-5">
       <div>{% trans 'Are you sure want to delete this image?' %}</div>
+      <hr>
+      <figure class="image is-2by1 has-background-light has-background-image"
+              style="background: url('{{ image.image.url }}');">
+      </figure>
       <hr>
       <div class="field is-grouped">
         <div class="control">
@@ -23,3 +28,4 @@
       </div>
     </div>
   </div>
+</div>
