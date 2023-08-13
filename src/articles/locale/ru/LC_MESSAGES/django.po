@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-13 19:44+0000\n"
+"POT-Creation-Date: 2023-08-13 21:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr "Уровень"
 msgid "Text"
 msgstr "Текст"
 
-#: articles/forms.py:36
+#: articles/forms.py:36 articles/templates/articles/htmx/articles_list.html:37
 msgid "Publish"
 msgstr "Опубликовать"
 
@@ -65,27 +65,27 @@ msgstr "Статья будет видна всем пользователям."
 msgid "Image"
 msgstr "Изображение"
 
-#: articles/models.py:15
+#: articles/models.py:23
 msgid "Categories"
 msgstr "Категории"
 
-#: articles/models.py:49
+#: articles/models.py:82
 msgid "Articles"
 msgstr "Статьи"
 
-#: articles/models.py:53
+#: articles/models.py:86
 msgid "Easy"
 msgstr "Легкий"
 
-#: articles/models.py:54
+#: articles/models.py:87
 msgid "Medium"
 msgstr "Средний"
 
-#: articles/models.py:55
+#: articles/models.py:88
 msgid "Hard"
 msgstr "Сложный"
 
-#: articles/models.py:101
+#: articles/models.py:153
 msgid "Images"
 msgstr "Изображения"
 
@@ -120,8 +120,8 @@ msgstr "просмотр,просмотра,просмотров"
 msgid "Not published"
 msgstr "Не опубликовано"
 
-#: articles/templates/articles/components/details.html:32
 #: articles/templates/articles/components/image_card.html:6
+#: articles/templates/articles/htmx/articles_list.html:28
 #: articles/templates/articles/htmx/confirm_delete_article.html:17
 #: articles/templates/articles/htmx/confirm_delete_image.html:19
 msgid "Delete"
@@ -151,7 +151,15 @@ msgstr "Новая статья"
 msgid "Edit article"
 msgstr "Редактирование статьи"
 
-#: articles/templates/articles/htmx/articles_list.html:26
+#: articles/templates/articles/htmx/articles_list.html:20
+msgid "Edit"
+msgstr "Редактировать"
+
+#: articles/templates/articles/htmx/articles_list.html:45
+msgid "Hide"
+msgstr "Скрыть"
+
+#: articles/templates/articles/htmx/articles_list.html:57
 msgid "No articles found."
 msgstr "Статей не найдено."
 
@@ -225,10 +233,10 @@ msgstr "Изображения для статей"
 msgid "Your profile has been updated!"
 msgstr "Ваш профиль был обновлен!"
 
-#: articles/views.py:94
+#: articles/views.py:92
 msgid "New image has been uploaded!"
 msgstr "Новое изображение загружено!"
 
-#: articles/views.py:270
+#: articles/views.py:264
 msgid "New article has been created!"
 msgstr "Новая статья создана!"

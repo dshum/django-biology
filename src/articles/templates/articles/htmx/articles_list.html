@@ -5,9 +5,6 @@
   {% for article in articles_page_obj %}
     <div class="my-4">
       <h2 class="is-size-5">
-        <a href="{% url 'articles.edit' id=article.pk %}" class="mr-1 is-size-6 has-text-warning-dark">
-          <span class="icon"><i class="fas fa-pencil"></i></span>
-        </a>
         <a href="{% url 'articles.view.preview' id=article.pk %}">{{ article.title }}</a>
       </h2>
 
@@ -15,6 +12,38 @@
         {% cache 300 article_details article.id %}
           {% include 'articles/components/details.html' with show_category=True %}
         {% endcache %}
+      </div>
+
+      <div class="my-2 field is-grouped">
+        <div class="control">
+          <a href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-warning">
+            {% trans 'Edit' %}
+          </a>
+        </div>
+
+        <div class="control">
+          {% if not article.publish %}
+            <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-info"
+                    hx-post="{% url 'articles.articles.publish' id=article.pk %}?publish=1"
+                    hx-target="closest .articles">
+              {% trans 'Publish' %}
+            </button>
+          {% else %}
+            <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-info"
+                    hx-post="{% url 'articles.articles.publish' id=article.pk %}?publish=0"
+                    hx-target="closest .articles">
+              {% trans 'Hide' %}
+            </button>
+          {% endif %}
+        </div>
+
+        <div class="control">
+          <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-danger"
+                  hx-get="{% url 'articles.articles.delete.confirm' id=article.pk %}"
+                  hx-target="closest .articles" hx-swap="beforeend">
+            {% trans 'Delete' %}
+          </button>
+        </div>
       </div>
     </div>
   {% endfor %}

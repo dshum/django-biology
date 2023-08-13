@@ -13,6 +13,7 @@ urlpatterns = [
     path('profile/articles/delete/<int:id>/confirm', views.confirm_delete_article,
          name='articles.articles.delete.confirm'),
     path('profile/articles/delete/<int:id>', views.delete_article, name='articles.articles.delete'),
+    path('profile/articles/publish/<int:id>', views.publish_article, name='articles.articles.publish'),
     path('profile/images', views.user_images, name='articles.profile.images'),
     path('profile/images/form', views.upload_image_form, name='articles.profile.images.form'),
     path('profile/images/list', views.images_list, name='articles.profile.images.list'),

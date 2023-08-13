@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaulttags import url
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -66,9 +66,7 @@ def articles_list(request):
 
 @login_required
 def confirm_delete_article(request, id: int):
-    article = get_article_by_id(id)
-    if not article:
-        return HttpResponse(status=404)
+    article = get_object_or_404(Article, pk=id)
 
     context = {
         'article': article,
@@ -79,6 +77,15 @@ def confirm_delete_article(request, id: int):
 @login_required
 def delete_article(request, id: int):
     request.user.articles.filter(pk=id).delete()
+    return articles_list(request)
+
+
+@login_required
+def publish_article(request, id: int):
+    article = get_object_or_404(Article, pk=id)
+    publish = int(request.GET.get('publish'))
+    article.publish = publish
+    article.save()
     return articles_list(request)
 
 
@@ -116,9 +123,7 @@ def images_list(request):
 
 @login_required
 def confirm_delete_image(request, id: int):
-    image = get_image_by_id(id)
-    if not image:
-        return HttpResponse(status=404)
+    image = get_object_or_404(Image, pk=id)
 
     mode = request.GET.get('mode')
     delete_url = 'articles.sidebar.images.delete' if mode == 'sidebar' else 'articles.images.delete'
@@ -157,11 +162,11 @@ def category(request, id: int):
     if not category:
         return render('articles/404.html')
 
-    article = get_first_article_in_category(id)
+    article = get_first_article_in_category(category)
     if article:
         return redirect('articles.view', slug=article.slug)
 
-    sub_category = get_first_sub_category(id)
+    sub_category = get_first_sub_category(category)
     if sub_category:
         return redirect('articles.category', id=sub_category.id)
 
@@ -216,9 +221,7 @@ def preview(request, id: int):
 
 
 def increment_views(request, id: int):
-    article = get_article_by_id(id)
-    if not article:
-        return HttpResponse(status=404)
+    article = get_object_or_404(Article, pk=id)
 
     if article.user.pk != request.user.pk:
         increment_article_views(article)
@@ -275,9 +278,7 @@ def create_article_form(request):
 
 @login_required
 def edit_article_form(request, id: int):
-    article = get_article_by_id(id)
-    if not article:
-        return HttpResponse(status=404)
+    article = get_object_or_404(Article, id)
 
     form = EditArticleForm(request.POST, instance=article)
     if form.is_valid():

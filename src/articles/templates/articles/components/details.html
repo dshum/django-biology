@@ -27,14 +27,5 @@
         <span class="tag is-warning is-rounded">{% trans 'Not published' %}</span>
       </div>
     {% endif %}
-    {% if article.user.id == user.id %}
-      <div class="level-item">
-        <a href="{% url 'articles.edit' id=article.pk %}" class="is-size-6 has-text-danger" title="{% trans 'Delete' %}"
-           hx-get="{% url 'articles.articles.delete.confirm' id=article.pk %}"
-           hx-target="closest .articles" hx-swap="beforeend">
-          <span class="icon"><i class="fas fa-circle-xmark"></i></span>
-        </a>
-      </div>
-    {% endif %}
   </div>
 </div>

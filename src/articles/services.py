@@ -6,7 +6,7 @@ from .models import Category, Article, Image
 
 
 def get_main_categories():
-    return (Category.objects.filter(parent_category=None)
+    return (Category.objects.category(None)
             .prefetch_related('sub_categories')
             .prefetch_related('sub_categories__articles')
             .order_by('order'))
@@ -14,9 +14,9 @@ def get_main_categories():
 
 def get_grouped_categories():
     categories = []
-    main_categories = Category.objects.filter(parent_category=None) \
-        .prefetch_related('sub_categories') \
-        .order_by('order')
+    main_categories = (Category.objects.category(None)
+                       .prefetch_related('sub_categories')
+                       .order_by('order'))
     for main_category in main_categories:
         if main_category.sub_categories.count():
             sub_categories = [(sub_category.id, sub_category.title) for sub_category in
@@ -26,7 +26,7 @@ def get_grouped_categories():
 
 
 def get_category_by_id(id: int):
-    return Category.objects.get(pk=id)
+    return Category.objects.get_object_or_none(id)
 
 
 def get_category_breadcrumbs(category: Category):
@@ -38,20 +38,20 @@ def get_category_breadcrumbs(category: Category):
     return categories[::-1]
 
 
-def get_first_article_in_category(category_id: int):
-    return Article.objects.filter(category_id=category_id, publish=True).first()
+def get_first_article_in_category(category: Category):
+    return Article.objects.category(category).published().first()
 
 
-def get_first_sub_category(category_id: int):
-    return Category.objects.filter(parent_category_id=category_id).first()
+def get_first_sub_category(category: Category):
+    return Category.objects.category(category).first()
 
 
 def get_article_by_slug(slug: str):
-    return Article.objects.filter(slug=slug, publish=True).first()
+    return Article.objects.slug(slug).published().first()
 
 
 def get_article_by_id(id: int):
-    return Article.objects.get(pk=id)
+    return Article.objects.get_object_or_none(id)
 
 
 def get_article_breadcrumbs(article: Article):
@@ -64,31 +64,25 @@ def get_article_breadcrumbs(article: Article):
 
 
 def get_user_articles_paginator(user: User, search: str = None, page_number: int = 1, page_size: int = 10):
-    articles = Article.objects.filter(user_id=user.pk).order_by('-created_at')
-    if search:
-        articles = articles.filter(Q(title__icontains=search) | Q(content__icontains=search))
+    articles = Article.objects.user(user).search(search).order_by('-created_at')
     paginator = Paginator(articles, page_size)
     return paginator.get_page(page_number)
 
 
 def get_user_images_paginator(user: User, search: str = None, page_number: int = 1, page_size: int = 8):
-    images = Image.objects.filter(user_id=user.pk).order_by('-created_at')
-    if search:
-        images = images.filter(Q(title__icontains=search) | Q(image__icontains=search))
+    images = Image.objects.user(user).search(search).order_by('-created_at')
     paginator = Paginator(images, page_size)
     return paginator.get_page(page_number)
 
 
 def get_sidebar_images_paginator(search: str = None, page_number: int = 1, page_size: int = 4):
-    images = Image.objects.order_by('-created_at')
-    if search:
-        images = images.filter(title__icontains=search)
+    images = Image.objects.search(search).order_by('-created_at')
     paginator = Paginator(images, page_size)
     return paginator.get_page(page_number)
 
 
 def get_image_by_id(id: int):
-    return Image.objects.get(pk=id)
+    return Image.objects.get_object_or_none(id)
 
 
 def increment_article_views(article: Article):
