@@ -13,6 +13,6 @@
 
   <div class="articles has-htmx-pagination"
        hx-get="{% url 'articles.profile.articles.list' %}"
-       hx-trigger="load">
+       hx-trigger="load, articleRemoved from:body">
   </div>
 {% endblock %}

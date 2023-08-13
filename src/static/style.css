@@ -151,29 +151,6 @@ figure.has-background-image {
   margin: auto;
 }
 
-.fade-in-and-out {
-  -webkit-animation: fadeinout 1.5s linear forwards;
-  animation: fadeinout 1.5s linear forwards;
-}
-
-@-webkit-keyframes fadeinout {
-  0%, 100% {
-    opacity: 0;
-  }
-  33% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeinout {
-  0%, 100% {
-    opacity: 0;
-  }
-  33% {
-    opacity: 1;
-  }
-}
-
 /* Sidebar */
 
 .sidebar {

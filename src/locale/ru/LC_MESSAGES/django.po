@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-11 23:33+0000\n"
+"POT-Creation-Date: 2023-08-13 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Страница не найдена"
 msgid "Go to main page"
 msgstr "На главную страницу"
 
-#: templates/components/form.html:85
+#: templates/components/form.html:88
 msgid "Cancel"
 msgstr "Отмена"
 

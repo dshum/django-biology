@@ -23,6 +23,6 @@
 
   <div class="images has-htmx-pagination"
        hx-get="{% url 'articles.profile.images.list' %}"
-       hx-trigger="load, newImage from:body">
+       hx-trigger="load, imageAdded from:body">
   </div>
 {% endblock %}

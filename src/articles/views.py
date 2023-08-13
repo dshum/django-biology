@@ -65,6 +65,24 @@ def articles_list(request):
 
 
 @login_required
+def confirm_delete_article(request, id: int):
+    article = get_article_by_id(id)
+    if not article:
+        return HttpResponse(status=404)
+
+    context = {
+        'article': article,
+    }
+    return render(request, 'articles/htmx/confirm_delete_article.html', context)
+
+
+@login_required
+def delete_article(request, id: int):
+    request.user.articles.filter(pk=id).delete()
+    return articles_list(request)
+
+
+@login_required
 def upload_image_form(request):
     if request.method == 'POST':
         form = UploadImageForm(request.POST, request.FILES)
@@ -77,7 +95,7 @@ def upload_image_form(request):
 
             form = UploadImageForm()
             response = render(request, 'articles/htmx/upload_image_form.html', {'form': form})
-            response.headers['HX-Trigger'] = 'newImage'
+            response.headers['HX-Trigger'] = 'imageAdded'
             return response
     else:
         form = UploadImageForm()

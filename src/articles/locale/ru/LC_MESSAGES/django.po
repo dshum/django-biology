@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-11 23:33+0000\n"
+"POT-Creation-Date: 2023-08-13 19:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,8 +120,10 @@ msgstr "просмотр,просмотра,просмотров"
 msgid "Not published"
 msgstr "Не опубликовано"
 
+#: articles/templates/articles/components/details.html:32
 #: articles/templates/articles/components/image_card.html:6
-#: articles/templates/articles/htmx/confirm_delete_image.html:13
+#: articles/templates/articles/htmx/confirm_delete_article.html:17
+#: articles/templates/articles/htmx/confirm_delete_image.html:19
 msgid "Delete"
 msgstr "Удалить"
 
@@ -129,15 +131,15 @@ msgstr "Удалить"
 msgid "Click to copy image URL"
 msgstr "Нажмите, чтобы скопировать URL изображения"
 
-#: articles/templates/articles/components/image_card.html:13
+#: articles/templates/articles/components/image_card.html:22
 msgid "URL copied"
 msgstr "URL cкопирован"
 
-#: articles/templates/articles/components/image_card.html:23
+#: articles/templates/articles/components/image_card.html:32
 msgid "Kb"
 msgstr "Кб"
 
-#: articles/templates/articles/components/image_card.html:24
+#: articles/templates/articles/components/image_card.html:33
 msgid "uploaded at"
 msgstr "загружено"
 
@@ -153,14 +155,19 @@ msgstr "Редактирование статьи"
 msgid "No articles found."
 msgstr "Статей не найдено."
 
-#: articles/templates/articles/htmx/confirm_delete_image.html:8
-msgid "Are you sure want to delete this image?"
-msgstr "Вы точно хотите удалить это изображение?"
+#: articles/templates/articles/htmx/confirm_delete_article.html:9
+msgid "Are you sure want to delete this article?"
+msgstr "Вы точно хотите удалить эту статью?"
 
-#: articles/templates/articles/htmx/confirm_delete_image.html:16
+#: articles/templates/articles/htmx/confirm_delete_article.html:22
+#: articles/templates/articles/htmx/confirm_delete_image.html:24
 #: articles/templates/articles/htmx/upload_image_form.html:51
 msgid "Cancel"
 msgstr "Отмена"
+
+#: articles/templates/articles/htmx/confirm_delete_image.html:9
+msgid "Are you sure want to delete this image?"
+msgstr "Вы точно хотите удалить это изображение?"
 
 #: articles/templates/articles/htmx/create_article_form.html:13
 #: articles/templates/articles/htmx/edit_article_form.html:20
@@ -218,10 +225,10 @@ msgstr "Изображения для статей"
 msgid "Your profile has been updated!"
 msgstr "Ваш профиль был обновлен!"
 
-#: articles/views.py:76
+#: articles/views.py:94
 msgid "New image has been uploaded!"
 msgstr "Новое изображение загружено!"
 
-#: articles/views.py:252
+#: articles/views.py:270
 msgid "New article has been created!"
 msgstr "Новая статья создана!"

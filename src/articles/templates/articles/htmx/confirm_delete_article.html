@@ -6,16 +6,14 @@
   <div class="modal-background" _="on click trigger closeModal"></div>
   <div class="modal-content">
     <div class="box is-size-5">
-      <div class="mb-4">{% trans 'Are you sure want to delete this image?' %}</div>
-      <figure class="image is-2by1 has-background-light has-background-image"
-              style="background: url('{{ image.image.url }}');">
-      </figure>
+      <div class="mb-4">{% trans 'Are you sure want to delete this article?' %}</div>
+      <h2 class="title is-3">{{ article.title }}</h2>
       <hr>
       <div class="field is-grouped">
         <div class="control">
           <button class="button is-danger"
-                  hx-delete="{% url delete_url id=image.pk %}"
-                  hx-target="closest .images">
+                  hx-delete="{% url 'articles.articles.delete' id=article.pk %}"
+                  hx-target="closest .articles">
             {% trans 'Delete' %}
           </button>
         </div>

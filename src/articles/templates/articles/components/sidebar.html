@@ -14,7 +14,7 @@
     {% include 'articles/components/sidebar_images_search.html' %}
 
     <div class="images columns is-multiline"
-         hx-get="{% url 'articles.sidebar.images.list' %}" hx-trigger="load, newImage from:body">
+         hx-get="{% url 'articles.sidebar.images.list' %}" hx-trigger="load, imageAdded from:body">
     </div>
   </div>
 </div>
