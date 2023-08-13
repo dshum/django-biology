@@ -278,7 +278,7 @@ def create_article_form(request):
 
 @login_required
 def edit_article_form(request, id: int):
-    article = get_object_or_404(Article, id)
+    article = get_object_or_404(Article, pk=id)
 
     form = EditArticleForm(request.POST, instance=article)
     if form.is_valid():
