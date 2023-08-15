@@ -7,8 +7,8 @@
   <div class="modal-content">
     <div class="box is-size-5">
       <div class="mb-4">{% trans 'Are you sure want to delete this image?' %}</div>
-      <figure class="image is-2by1 has-background-light has-background-image"
-              style="background: url('{{ image.image.url }}');">
+      <figure class="image is-2by1 has-background-light">
+        <img src="{{ image.image.url }}" alt="">
       </figure>
       <hr>
       <div class="field is-grouped">
