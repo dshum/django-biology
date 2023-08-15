@@ -38,7 +38,6 @@ ENABLE_DEBUG_TOOLBAR = literal_eval(os.getenv('ENABLE_DEBUG_TOOLBAR', 'False'))
 ALLOWED_HOSTS = [
     'localhost',
     'learnbio.ru',
-    '185.154.193.136',
 ]
 
 # Debug toolbar
@@ -120,9 +119,6 @@ TEMPLATES = [
         },
     },
 ]
-
-# CRISPY_ALLOWED_TEMPLATE_PACKS = ('bulma',)
-# CRISPY_TEMPLATE_PACK = 'bulma'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
