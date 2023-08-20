@@ -63,18 +63,6 @@ def get_article_breadcrumbs(article: Article):
     return categories[::-1]
 
 
-def get_user_articles_paginator(user: User, search: str = None, page_number: int = 1, page_size: int = 10):
-    articles = Article.objects.user(user).search(search).order_by('-created_at')
-    paginator = Paginator(articles, page_size)
-    return paginator.get_page(page_number)
-
-
-def get_user_images_paginator(user: User, search: str = None, page_number: int = 1, page_size: int = 8):
-    images = Image.objects.user(user).search(search).order_by('-created_at')
-    paginator = Paginator(images, page_size)
-    return paginator.get_page(page_number)
-
-
 def get_sidebar_images_paginator(search: str = None, page_number: int = 1, page_size: int = 4):
     images = Image.objects.search(search).order_by('-created_at')
     paginator = Paginator(images, page_size)

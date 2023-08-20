@@ -31,7 +31,7 @@ urlpatterns = [
     #      auth_views.PasswordResetView.as_view(html_email_template_name='registration/password_reset_email.html'),
     #      name="password_reset"),
     path('', include('django.contrib.auth.urls')),
-    path('', include('articles.urls')),
+    path('', include(('articles.urls', 'articles'), namespace='articles')),
     path('feedback/', include('feedback.urls')),
     path('deutsch/', include('deutsch.urls')),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),

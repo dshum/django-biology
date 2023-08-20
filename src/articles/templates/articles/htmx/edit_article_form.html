@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <form novalidate
-      hx-trigger="submit" hx-post="{% url 'articles.form' id=article.pk %}"
+      hx-trigger="submit" hx-post="{% url 'articles:form' id=article.pk %}"
       hx-target="this" hx-swap="outerHTML">
   {% csrf_token %}
 
@@ -10,7 +10,7 @@
       <div class="level-item">
         <span class="icon-text">
           <span class="icon has-text-grey-light"><i class="fa-solid fa-circle-check"></i></span>
-          <a href="{% url 'articles.view.preview' id=article.pk %}">{% trans 'Article preview' %}</a>
+          <a href="{% url 'articles:preview' pk=article.pk %}">{% trans 'Article preview' %}</a>
         </span>
       </div>
     </div>

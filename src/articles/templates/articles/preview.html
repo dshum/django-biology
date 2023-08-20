@@ -20,9 +20,9 @@
     <div class="column">
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
-          <li><a href="{% url 'articles.profile.articles' %}">{% trans 'Your articles' %}</a></li>
+          <li><a href="{% url 'articles:profile.articles' %}">{% trans 'Your articles' %}</a></li>
           {% for breadcrumb in breadcrumbs %}
-            <li><a href="{% url 'articles.category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+            <li><a href="{% url 'articles:category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
           {% endfor %}
         </ul>
       </nav>
@@ -38,7 +38,7 @@
 
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
-          <a href="{% url 'articles.edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
+          <a href="{% url 'articles:edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
             <span class="icon"><i class="fas fa-pencil"></i></span>
           </a>
         {% endif %}

@@ -22,7 +22,7 @@
   <nav class="navbar is-light">
     <div class="container">
       <div class="navbar-brand">
-        <a href="{% url 'articles.index' %}" class="navbar-item is-size-4 is-unselectable">
+        <a href="{% url 'articles:index' %}" class="navbar-item is-size-4 is-unselectable">
           learnbio.ru
         </a>
         <div class="navbar-burger" data-target="navbar-menu">
@@ -35,7 +35,7 @@
         <div class="navbar-end">
           {% if user.is_authenticated %}
             <div class="navbar-item">
-              <a href="{% url 'articles.create' %}" class="button is-rounded is-primary icon-text">
+              <a href="{% url 'articles:create' %}" class="button is-rounded is-primary icon-text">
                 <span class="icon"><i class="fas fa-plus"></i></span>
                 <span>{% trans 'New article' %}</span>
               </a>
@@ -46,13 +46,13 @@
                 {{ user.first_name }}
               </span>
               <div class="navbar-dropdown is-boxed is-right">
-                <a class="navbar-item" href="{% url 'articles.profile.articles' %}">
+                <a class="navbar-item" href="{% url 'articles:profile.articles' %}">
                   {% trans 'Articles' %}
                 </a>
-                <a class="navbar-item" href="{% url 'articles.profile.images' %}">
+                <a class="navbar-item" href="{% url 'articles:profile.images' %}">
                   {% trans 'Images' %}
                 </a>
-                <a class="navbar-item" href="{% url 'articles.profile' %}">
+                <a class="navbar-item" href="{% url 'articles:profile' %}">
                   {% trans 'Profile' %}
                 </a>
                 <hr class="navbar-divider">

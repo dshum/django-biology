@@ -33,7 +33,7 @@
         <div class="navbar-end">
           {% if user.is_authenticated %}
             <div class="navbar-item">
-              <a href="{% url 'articles.create' %}" class="button is-rounded is-primary">
+              <a href="{% url 'articles:create' %}" class="button is-rounded is-primary">
                 <span class="icon"><i class="fas fa-plus"></i></span>
                 <span>{% trans 'New article' %}</span>
               </a>
@@ -44,13 +44,13 @@
                 {{ user.first_name }}
               </a>
               <div class="navbar-dropdown is-boxed is-right">
-                <a class="navbar-item" href="{% url 'articles.profile.articles' %}">
+                <a class="navbar-item" href="{% url 'articles:profile.articles' %}">
                   {% trans 'Articles' %}
                 </a>
-                <a class="navbar-item" href="{% url 'articles.profile.images' %}">
+                <a class="navbar-item" href="{% url 'articles:profile.images' %}">
                   {% trans 'Images' %}
                 </a>
-                <a class="navbar-item" href="{% url 'articles.profile' %}">
+                <a class="navbar-item" href="{% url 'articles:profile' %}">
                   {% trans 'Profile' %}
                 </a>
                 <hr class="navbar-divider">

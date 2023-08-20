@@ -1,24 +1,102 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaulttags import url
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic.base import ContextMixin
 
 from .forms import UploadImageForm, EditArticleForm, EditProfileForm
 from .services import *
 
 
-def index(request):
-    context = {
-        'main_categories': get_main_categories(),
-    }
-    return render(request, 'articles/index.html', context)
+class NotFoundView(TemplateView):
+    template_name = '404.html'
 
 
-def not_found(request):
-    return render(request, '404.html')
+class IndexView(ListView):
+    model = Category
+    template_name = 'articles/index.html'
+    ordering = 'order'
+
+    def get_queryset(self):
+        return (super().get_queryset()
+                .category(None)
+                .prefetch_related('sub_categories')
+                .prefetch_related('sub_categories__articles'))
+
+
+class UserArticlesView(LoginRequiredMixin, TemplateView):
+    template_name = 'articles/profile/articles.html'
+
+
+class UserArticleListView(LoginRequiredMixin, ListView):
+    model = Article
+    template_name = 'articles/htmx/article_list.html'
+    ordering = '-created_at'
+    paginate_by = 10
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        return (super().get_queryset()
+                .user(self.request.user)
+                .search(search))
+
+
+class UserImagesView(LoginRequiredMixin, TemplateView):
+    template_name = 'articles/profile/images.html'
+
+
+class UserImageListView(LoginRequiredMixin, ListView):
+    model = Image
+    template_name = 'articles/htmx/image_list.html'
+    ordering = '-created_at'
+    paginate_by = 10
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        return (super().get_queryset()
+                .user(self.request.user)
+                .search(search))
+
+
+class SidebarImageListView(LoginRequiredMixin, ListView):
+    model = Image
+    template_name = 'articles/htmx/sidebar_image_list.html'
+    ordering = '-created_at'
+    paginate_by = 4
+
+    def get_queryset(self):
+        search = self.request.GET.get('search')
+        return super().get_queryset().search(search)
+
+
+class ArticleDetailMixin(ContextMixin):
+    model = Article
+
+    def get_context_data(self, object: Article, **kwargs):
+        context = super(ArticleDetailMixin, self).get_context_data(**kwargs)
+        breadcrumbs = get_article_breadcrumbs(object)
+        context.update({
+            'main_categories': get_main_categories(),
+            'breadcrumbs': breadcrumbs,
+            'current_main_category': breadcrumbs[0],
+        })
+        return context
+
+
+class ArticleDetailView(ArticleDetailMixin, DetailView):
+    template_name = 'articles/view.html'
+
+    def get_queryset(self):
+        return super().get_queryset().published()
+
+
+class ArticlePreviewDetailView(ArticleDetailMixin, DetailView):
+    template_name = 'articles/preview.html'
 
 
 @login_required
@@ -41,27 +119,6 @@ def edit_profile_form(request):
         'form': form,
     }
     return render(request, 'articles/htmx/edit_profile_form.html', context)
-
-
-@login_required
-def user_articles(request):
-    return render(request, 'articles/profile/articles.html')
-
-
-@login_required
-def user_images(request):
-    return render(request, 'articles/profile/images.html')
-
-
-@login_required
-def articles_list(request):
-    search = request.GET.get('search')
-    page_number = request.GET.get('page')
-    articles_page_obj = get_user_articles_paginator(request.user, search, page_number)
-    context = {
-        'articles_page_obj': articles_page_obj,
-    }
-    return render(request, 'articles/htmx/articles_list.html', context)
 
 
 @login_required
@@ -111,22 +168,11 @@ def upload_image_form(request):
 
 
 @login_required
-def images_list(request):
-    search = request.GET.get('search')
-    page_number = request.GET.get('page')
-    images_page_obj = get_user_images_paginator(request.user, search, page_number)
-    context = {
-        'images_page_obj': images_page_obj,
-    }
-    return render(request, 'articles/htmx/images_list.html', context)
-
-
-@login_required
 def confirm_delete_image(request, id: int):
     image = get_object_or_404(Image, pk=id)
 
     mode = request.GET.get('mode')
-    delete_url = 'articles.sidebar.images.delete' if mode == 'sidebar' else 'articles.images.delete'
+    delete_url = 'articles:sidebar.images.delete' if mode == 'sidebar' else 'articles:images.delete'
     context = {
         'image': image,
         'delete_url': delete_url,
@@ -138,17 +184,6 @@ def confirm_delete_image(request, id: int):
 def delete_image(request, id: int):
     request.user.images.filter(pk=id).delete()
     return images_list(request)
-
-
-@login_required
-def sidebar_images_list(request):
-    search = request.GET.get('search')
-    page_number = request.GET.get('page')
-    images_page_obj = get_sidebar_images_paginator(search, page_number)
-    context = {
-        'images_page_obj': images_page_obj,
-    }
-    return render(request, 'articles/htmx/sidebar_images_list.html', context)
 
 
 @login_required
@@ -164,11 +199,11 @@ def category(request, id: int):
 
     article = get_first_article_in_category(category)
     if article:
-        return redirect('articles.view', slug=article.slug)
+        return redirect('articles:view', slug=article.slug)
 
     sub_category = get_first_sub_category(category)
     if sub_category:
-        return redirect('articles.category', id=sub_category.id)
+        return redirect('articles:category', id=sub_category.id)
 
     main_categories = get_main_categories()
     breadcrumbs = get_category_breadcrumbs(category)
@@ -181,43 +216,6 @@ def category(request, id: int):
         'current_main_category': current_main_category,
     }
     return render(request, 'articles/category.html', context)
-
-
-def view(request, slug: str):
-    article = get_article_by_slug(slug)
-    if not article or not article.publish:
-        return render(request, 'articles/404.html')
-
-    main_categories = get_main_categories()
-    breadcrumbs = get_article_breadcrumbs(article)
-    current_main_category = breadcrumbs[0]
-
-    context = {
-        'article': article,
-        'breadcrumbs': breadcrumbs,
-        'main_categories': main_categories,
-        'current_main_category': current_main_category,
-    }
-    return render(request, 'articles/view.html', context)
-
-
-@login_required
-def preview(request, id: int):
-    article = get_article_by_id(id)
-    if not article or (not article.publish and article.user != request.user):
-        return render(request, 'articles/404.html')
-
-    main_categories = get_main_categories()
-    breadcrumbs = get_article_breadcrumbs(article)
-    current_main_category = breadcrumbs[0]
-
-    context = {
-        'article': article,
-        'breadcrumbs': breadcrumbs,
-        'main_categories': main_categories,
-        'current_main_category': current_main_category,
-    }
-    return render(request, 'articles/preview.html', context)
 
 
 def increment_views(request, id: int):
@@ -271,7 +269,7 @@ def create_article_form(request):
         article.save()
 
         messages.add_message(request, messages.SUCCESS, _('New article has been created!'))
-        response.headers['HX-Redirect'] = reverse('articles.view.preview', kwargs={'id': article.pk})
+        response.headers['HX-Redirect'] = reverse('articles:preview', kwargs={'pk': article.pk})
 
     return response
 

@@ -10,7 +10,7 @@
 
 <form method="POST" enctype="multipart/form-data" novalidate
       hx-trigger="submit" hx-encoding="multipart/form-data"
-      hx-post="{% url 'articles.profile.images.form' %}"
+      hx-post="{% url 'articles:profile.images.form' %}"
       hx-target="this" hx-swap="outerHTML">
   {% csrf_token %}
   <div class="field">

@@ -1,11 +1,11 @@
 {% load cache %}
 {% load i18n %}
 
-{% if articles_page_obj %}
-  {% for article in articles_page_obj %}
+{% if page_obj %}
+  {% for article in page_obj %}
     <div class="my-4">
       <h2 class="is-size-5">
-        <a href="{% url 'articles.view.preview' id=article.pk %}">{{ article.title }}</a>
+        <a href="{% url 'articles:preview' pk=article.pk %}">{{ article.title }}</a>
       </h2>
 
       <div class="my-2">
@@ -16,21 +16,21 @@
 
       <div class="my-2 field is-grouped">
         <div class="control">
-          <a href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-warning">
+          <a href="{% url 'articles:edit' id=article.pk %}" class="button is-small is-rounded is-warning">
             {% trans 'Edit' %}
           </a>
         </div>
 
         <div class="control">
           {% if not article.publish %}
-            <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-info"
-                    hx-post="{% url 'articles.articles.publish' id=article.pk %}?publish=1"
+            <button href="{% url 'articles:edit' id=article.pk %}" class="button is-small is-rounded is-info"
+                    hx-post="{% url 'articles:publish' id=article.pk %}?publish=1"
                     hx-target="closest .articles">
               {% trans 'Publish' %}
             </button>
           {% else %}
-            <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-info"
-                    hx-post="{% url 'articles.articles.publish' id=article.pk %}?publish=0"
+            <button href="{% url 'articles:edit' id=article.pk %}" class="button is-small is-rounded is-info"
+                    hx-post="{% url 'articles:publish' id=article.pk %}?publish=0"
                     hx-target="closest .articles">
               {% trans 'Hide' %}
             </button>
@@ -38,8 +38,8 @@
         </div>
 
         <div class="control">
-          <button href="{% url 'articles.edit' id=article.pk %}" class="button is-small is-rounded is-danger"
-                  hx-get="{% url 'articles.articles.delete.confirm' id=article.pk %}"
+          <button href="{% url 'articles:edit' id=article.pk %}" class="button is-small is-rounded is-danger"
+                  hx-get="{% url 'articles:delete.confirm' id=article.pk %}"
                   hx-target="closest .articles" hx-swap="beforeend">
             {% trans 'Delete' %}
           </button>
@@ -48,8 +48,8 @@
     </div>
   {% endfor %}
 
-  <div class="my-4">
-    {% include 'components/htmx_pagination.html' with page_obj=articles_page_obj url='articles.profile.articles.list' %}
+  <div class="my-5">
+    {% include 'components/htmx_pagination.html' with page_obj=page_obj url='articles:profile.articles.list' %}
   </div>
 {% else %}
   <p>{% trans 'No articles found.' %}</p>

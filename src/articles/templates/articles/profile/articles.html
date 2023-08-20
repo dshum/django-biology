@@ -12,7 +12,7 @@
   {% include 'articles/components/articles_search.html' %}
 
   <div class="articles has-htmx-pagination"
-       hx-get="{% url 'articles.profile.articles.list' %}"
+       hx-get="{% url 'articles:profile.articles.list' %}"
        hx-trigger="load, articleRemoved from:body">
   </div>
 {% endblock %}

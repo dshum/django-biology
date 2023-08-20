@@ -1,13 +1,13 @@
 {% load article_extras %}
 {% load i18n %}
 
-{% for image in images_page_obj %}
+{% for image in page_obj %}
   <div class="column is-half">
     {% include 'articles/components/image_card.html' with image=image mode='sidebar' %}
   </div>
 {% endfor %}
 
-{% if images_page_obj.has_next %}
-  <div class="load-more-images" hx-get="{% url 'articles.sidebar.images.list' %}{% page_link images_page_obj.next_page_number %}"
+{% if page_obj.has_next %}
+  <div class="load-more-images" hx-get="{% url 'articles:sidebar.images.list' %}{% page_link page_obj.next_page_number %}"
        hx-trigger="intersect" hx-swap="outerHTML">{% trans 'Loading...' %}</div>
 {% endif %}

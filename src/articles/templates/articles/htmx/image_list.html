@@ -1,15 +1,15 @@
 {% load i18n %}
 
-{% if images_page_obj %}
+{% if page_obj %}
   <div class="columns is-multiline">
-    {% for image in images_page_obj %}
+    {% for image in page_obj %}
       <div class="column is-one-quarter">
         {% include 'articles/components/image_card.html' with image=image %}
       </div>
     {% endfor %}
   </div>
 
-  {% include 'components/htmx_pagination.html' with page_obj=images_page_obj url='articles.profile.images.list' %}
+  {% include 'components/htmx_pagination.html' with page_obj=page_obj url='articles:profile.images.list' %}
 {% else %}
   <p>{% trans 'No images found.' %}</p>
 {% endif %}
