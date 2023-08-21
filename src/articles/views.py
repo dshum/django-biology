@@ -76,9 +76,7 @@ class CategoryMixin(ContextMixin):
         return context
 
 
-class ArticleMixin(ContextMixin):
-    model = Article
-
+class ArticleContextMixin(ContextMixin):
     def get_context_data(self, object: Article, **kwargs):
         context = super().get_context_data(**kwargs)
         breadcrumbs = get_article_breadcrumbs(object)
@@ -90,6 +88,18 @@ class ArticleMixin(ContextMixin):
         return context
 
 
+class ArticleDetailViewMixin(DetailView):
+    model = Article
+
+    def get(self, request, **kwargs):
+        try:
+            article = self.get_object()
+        except Http404:
+            return render(request, 'articles/404.html')
+
+        return super().get(request, **kwargs)
+
+
 class Category(CategoryMixin, DetailView):
     template_name = 'articles/category.html'
 
@@ -97,7 +107,7 @@ class Category(CategoryMixin, DetailView):
         try:
             category = self.get_object()
         except Http404:
-            return render('articles/404.html')
+            return render(request, '404.html')
 
         article = get_first_article_in_category(category)
         if article:
@@ -110,14 +120,14 @@ class Category(CategoryMixin, DetailView):
         return super().get(request, **kwargs)
 
 
-class ArticleView(ArticleMixin, DetailView):
+class ArticleView(ArticleContextMixin, ArticleDetailViewMixin):
     template_name = 'articles/view.html'
 
     def get_queryset(self):
         return super().get_queryset().published()
 
 
-class ArticlePreview(LoginRequiredMixin, ArticleMixin, DetailView):
+class ArticlePreview(LoginRequiredMixin, ArticleContextMixin, ArticleDetailViewMixin):
     template_name = 'articles/preview.html'
 
 
