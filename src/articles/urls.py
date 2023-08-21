@@ -5,7 +5,7 @@ from .views import (Index, NotFound, Category, Profile, ProfileUpdate,
                     UserArticles, UserArticleList, ArticleView, ArticlePreview,
                     ArticleConfirmDelete, ArticleDelete, ArticlePublish,
                     ArticleCreateView, ArticleCreate, ArticleEditView, ArticleEdit,
-                    UserImages, UserImageList, SidebarImageList, ImageCreate,
+                    UserImages, UserImageList, SidebarImageList, ImageUpload,
                     ImageConfirmDelete, ImageDelete, SidebarImageDelete,
                     IncrementViews)
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path('profile/images', UserImages.as_view(), name='profile.images'),
     path('profile/images/list', UserImageList.as_view(), name='profile.images.list'),
     path('sidebar/images/list', SidebarImageList.as_view(), name='sidebar.images.list'),
-    path('profile/images/form', ImageCreate.as_view(), name='profile.images.form'),
+    path('profile/images/form', ImageUpload.as_view(), name='profile.images.form'),
     path('images/<int:pk>/delete/confirm', ImageConfirmDelete.as_view(), name='images.delete.confirm'),
     path('images/<int:pk>/delete', ImageDelete.as_view(), name='images.delete'),
     path('sidebar/<int:pk>/delete', SidebarImageDelete.as_view(), name='sidebar.images.delete'),

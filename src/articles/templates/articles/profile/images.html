@@ -21,8 +21,10 @@
 
   {% include 'articles/components/images_search.html' %}
 
-  <div class="images has-htmx-pagination"
+  <div class="images has-htmx-pagination opacity-0"
+       _="on load transition my opacity to 1 over 400ms
+          on imageAdded from body transition my opacity to 0 over 100ms then trigger reloadImages then transition my opacity to 1 over 300ms"
        hx-get="{% url 'articles:profile.images.list' %}"
-       hx-trigger="load, imageAdded from:body">
+       hx-trigger="load, reloadImages">
   </div>
 {% endblock %}

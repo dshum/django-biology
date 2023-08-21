@@ -162,16 +162,8 @@ class ArticleEdit(LoginRequiredMixin, UpdateView):
     form_class = EditArticleForm
     template_name = 'articles/htmx/edit_article_form.html'
 
-    def form_valid(self, form):
-        article = form.save(commit=False)
-        article.user = self.request.user
-        article.reading_time_minutes = 0
-        article.save()
-
-        messages.success(self.request, _('New article has been created!'))
-        response = HttpResponse()
-        response.headers['HX-Redirect'] = reverse_lazy('articles:preview', args=(article.pk,))
-        return response
+    def get_success_url(self):
+        return reverse_lazy('articles:edit.form', kwargs=({'pk': self.object.pk}))
 
 
 class ArticlePublish(LoginRequiredMixin, UpdateView):
@@ -224,7 +216,7 @@ class SidebarImageList(LoginRequiredMixin, ListView):
         return super().get_queryset().search(search)
 
 
-class ImageCreate(LoginRequiredMixin, CreateView):
+class ImageUpload(LoginRequiredMixin, CreateView):
     model = Image
     form_class = UploadImageForm
     template_name = 'articles/htmx/upload_image_form.html'
@@ -234,9 +226,11 @@ class ImageCreate(LoginRequiredMixin, CreateView):
         image = form.save(commit=False)
         image.user = self.request.user
         image.save()
-        response = self.render_to_response({'form': form})
-        response['HX-Trigger'] = 'imageAdded'
-        return response
+        if self.request.htmx:
+            response = self.render_to_response({'form': UploadImageForm()})
+            response['HX-Trigger'] = 'imageAdded'
+            return response
+        return super().form_valid(form)
 
 
 class ImageConfirmDelete(LoginRequiredMixin, DetailView):
