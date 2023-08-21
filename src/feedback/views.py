@@ -29,7 +29,7 @@ def form(request):
             message.user = request.user
         message.save()
         message_received.send(sender='feedback_views_create', message=message)
-        messages.add_message(request, messages.SUCCESS, _('Your message has been sent!'))
+        messages.success(request, _('Your message has been sent!'))
 
         if request.user.is_authenticated:
             form = CreateMessageForm(initial={

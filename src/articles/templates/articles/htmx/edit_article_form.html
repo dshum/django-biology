@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <form novalidate
-      hx-trigger="submit" hx-post="{% url 'articles:form' id=article.pk %}"
+      hx-trigger="submit" hx-post="{% url 'articles:edit.form' pk=article.pk %}"
       hx-target="this" hx-swap="outerHTML">
   {% csrf_token %}
 

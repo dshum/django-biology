@@ -7,14 +7,14 @@
   <div class="modal-content">
     <div class="box is-size-5">
       <div class="mb-4">{% trans 'Are you sure want to delete this image?' %}</div>
-      <figure class="image is-2by1 has-background-light">
+      <figure class="image has-background-light">
         <img src="{{ image.image.url }}" alt="">
       </figure>
       <hr>
       <div class="field is-grouped">
         <div class="control">
           <button class="button is-danger"
-                  hx-delete="{% url delete_url id=image.pk %}"
+                  hx-post="{% url delete_url pk=image.pk %}"
                   hx-target="closest .images">
             {% trans 'Delete' %}
           </button>

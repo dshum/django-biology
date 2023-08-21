@@ -13,7 +13,7 @@
       <ul class="menu-list ml-4 {% if main_category.id != current_main_category.id %}is-hidden{% endif %}" id="category{{ main_category.id }}">
         {% for sub_category in main_category.sub_categories.all %}
           <li>
-            <a href="{% url 'articles:category' id=sub_category.id %}">{{ sub_category.title }}</a>
+            <a href="{% url 'articles:category' pk=sub_category.id %}">{{ sub_category.title }}</a>
 
             {% if sub_category.articles.published.count %}
               <ul>

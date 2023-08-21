@@ -21,14 +21,14 @@
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
           {% for breadcrumb in breadcrumbs %}
-            <li><a href="{% url 'articles:category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+            <li><a href="{% url 'articles:category' pk=breadcrumb.pk %}">{{ breadcrumb.title }}</a></li>
           {% endfor %}
         </ul>
       </nav>
 
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
-          <a href="{% url 'articles:edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
+          <a href="{% url 'articles:edit' pk=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
             <span class="icon"><i class="fas fa-pencil"></i></span>
           </a>
         {% endif %}
@@ -50,7 +50,7 @@
         {{ article.content_html|safe }}
       </div>
 
-      <div class="is-hidden" hx-get="{% url 'articles:increment_views' id=article.pk %}" hx-trigger="load delay:1s"></div>
+      <div class="is-hidden" hx-get="{% url 'articles:increment_views' pk=article.pk %}" hx-trigger="load delay:1s"></div>
     </div>
   </div>
 

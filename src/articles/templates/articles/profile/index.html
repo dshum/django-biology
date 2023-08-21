@@ -12,6 +12,8 @@
   <h1 class="title is-2">{% trans 'Profile' %}</h1>
 
   <div class="columns">
-    {% include 'articles/htmx/edit_profile_form.html' %}
+    <div class="column is-half-desktop"
+         hx-get="{% url 'articles:profile.form' %}"
+         hx-trigger="load"></div>
   </div>
 {% endblock %}

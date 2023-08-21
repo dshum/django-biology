@@ -22,14 +22,17 @@
         <ul>
           <li><a href="{% url 'articles:profile.articles' %}">{% trans 'Your articles' %}</a></li>
           {% for breadcrumb in breadcrumbs %}
-            <li><a href="{% url 'articles:category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+            <li><a href="{% url 'articles:category' pk=breadcrumb.pk %}">{{ breadcrumb.title }}</a></li>
           {% endfor %}
         </ul>
       </nav>
 
       {% if messages %}
-        <div class="notification is-success">
-          <div class="delete"></div>
+        <div class="notification is-success"
+             _="on load wait 3s then transition my opacity to 0 over 200ms then remove me
+                on closeMessage transition my opacity to 0 over 200ms then remove me">
+          <div class="delete"
+               _="on click trigger closeMessage"></div>
           {% for message in messages %}
             <div>{{ message }}</div>
           {% endfor %}
@@ -38,7 +41,7 @@
 
       <h1 class="title is-2">
         {% if article.user.id == user.id %}
-          <a href="{% url 'articles:edit' id=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
+          <a href="{% url 'articles:edit' pk=article.pk %}" class="mr-4 is-size-3 has-text-warning-dark">
             <span class="icon"><i class="fas fa-pencil"></i></span>
           </a>
         {% endif %}

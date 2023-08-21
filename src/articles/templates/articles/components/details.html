@@ -5,7 +5,7 @@
   <div class="level-left">
     {% if article.user.id == user.id and show_category %}
       <div class="level-item">
-        <a href="{% url 'articles:category' id=article.category.pk %}" class="tag is-light">{{ article.category.title }}</a>
+        <a href="{% url 'articles:category' pk=article.category.pk %}" class="tag is-light">{{ article.category.title }}</a>
       </div>
     {% endif %}
     <div class="level-item">

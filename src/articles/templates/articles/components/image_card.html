@@ -4,7 +4,7 @@
 <div class="card is-fullheight">
   {% if image.user.pk == user.pk %}
     <button class="delete" title="{% trans 'Delete' %}"
-            hx-get="{% url 'articles:images.delete.confirm' id=image.pk %}?mode={{ mode }}"
+            hx-get="{% url 'articles:images.delete.confirm' pk=image.pk %}?mode={{ mode }}"
             hx-target="closest .images" hx-swap="beforeend"></button>
   {% endif %}
   <div class="card-image is-clickable" title="{% trans 'Click to copy image URL' %}"

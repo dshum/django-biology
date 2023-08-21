@@ -27,7 +27,7 @@
               {% for sub_category in main_category.sub_categories.all %}
                 <li>
                   <a {% if sub_category.id == category.id %}class="is-active"{% endif %}
-                     href="{% url 'articles:category' id=sub_category.id %}">
+                     href="{% url 'articles:category' pk=sub_category.id %}">
                     {{ sub_category.title }}
                   </a>
 
@@ -62,7 +62,7 @@
       <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
           {% for breadcrumb in breadcrumbs %}
-            <li><a href="{% url 'articles:category' id=breadcrumb.id %}">{{ breadcrumb.title }}</a></li>
+            <li><a href="{% url 'articles:category' pk=breadcrumb.pk %}">{{ breadcrumb.title }}</a></li>
           {% endfor %}
         </ul>
       </nav>
