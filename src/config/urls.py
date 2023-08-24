@@ -32,7 +32,7 @@ urlpatterns = [
     #      name="password_reset"),
     path('', include('django.contrib.auth.urls')),
     path('', include(('articles.urls', 'articles'), namespace='articles')),
-    path('feedback/', include('feedback.urls')),
+    path('feedback/', include(('feedback.urls', 'feedback'), namespace='feedback')),
     path('deutsch/', include('deutsch.urls')),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ]

@@ -10,6 +10,7 @@
   <h1 class="title is-2">{% trans 'Feedback' %}</h1>
 
   <div class="columns">
-    {% include 'feedback/form.html' with form=form %}
+    <div class="column is-half-desktop" hx-get="{% url 'feedback:form' %}" hx-trigger="load">
+    </div>
   </div>
 {% endblock %}

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from . import views
+from .views import MessageCreateView, MessageCreate
 
 urlpatterns = [
-    path('', views.create, name='feedback.create'),
-    path('form', views.form, name='feedback.form'),
+    path('', MessageCreateView.as_view(), name='create'),
+    path('form', MessageCreate.as_view(), name='form'),
 ]

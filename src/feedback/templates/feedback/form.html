@@ -1,7 +1,7 @@
 {% load i18n %}
 
-<form class="column is-half-desktop" novalidate
-      hx-trigger="submit" hx-post="{% url 'feedback.form' %}"
+<form novalidate
+      hx-trigger="submit" hx-post="{% url 'feedback:form' %}"
       hx-target="this" hx-swap="outerHTML">
   {% csrf_token %}
   {% trans 'Send' as send %}
