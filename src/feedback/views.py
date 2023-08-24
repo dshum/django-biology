@@ -26,7 +26,8 @@ class MessageCreate(CreateView):
 
     def form_valid(self, form):
         message = form.save(commit=False)
-        message.user = self.request.user
+        if self.request.user.is_authenticated:
+            message.user = self.request.user
         message.save()
         message_received.send(sender='feedback_views_create', message=message)
         messages.success(self.request, _('Your message has been sent!'))
