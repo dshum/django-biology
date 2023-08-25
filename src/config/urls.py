@@ -24,7 +24,6 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
-    path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
     # path("password_reset/",
@@ -34,6 +33,7 @@ urlpatterns = [
     path('', include(('articles.urls', 'articles'), namespace='articles')),
     path('feedback/', include(('feedback.urls', 'feedback'), namespace='feedback')),
     path('deutsch/', include('deutsch.urls')),
+    path('api/', include(('api.urls', 'api'), namespace='api')),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 ]
 

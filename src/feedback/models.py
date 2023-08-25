@@ -2,11 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-class MessageManager(models.Manager):
-    def recent(self, take: int = 10):
-        return self.order_by('-created_at')[:take]
-
-
 class Message(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField(blank=True)
@@ -22,7 +17,7 @@ class Message(models.Model):
         related_name='messages'
     )
 
+    objects = models.Manager()
+
     def __str__(self) -> str:
         return f'#{self.pk} {self.message}'
-
-    objects = MessageManager()

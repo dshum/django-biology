@@ -71,18 +71,17 @@ DEBUG_TOOLBAR_PANELS = [
 # Application definition
 
 INSTALLED_APPS = [
-    # Styling for django admin. Should go before admin app.
-    # https://django-grappelli.readthedocs.io/en/latest/index.html
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'cachalot',
     'debug_toolbar',
     'widget_tweaks',
+    'api',
     'articles',
     'feedback',
     'deutsch',
@@ -243,6 +242,14 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Rest framework
+# https://www.django-rest-framework.org/api-guide/pagination/
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 # Email settings
 # https://docs.djangoproject.com/en/4.2/ref/settings/#email-backend
