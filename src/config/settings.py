@@ -22,6 +22,10 @@ from pathlib import Path
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+SILENCED_SYSTEM_CHECKS = [
+    'cachalot.W001',  # https://github.com/noripyt/django-cachalot/issues/222
+]
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -126,10 +130,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'sqlite3': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME'),

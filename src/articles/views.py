@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaulttags import url
+from django.template.response import TemplateResponse
 from django.urls import reverse, reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import TemplateView, DetailView, ListView, FormView, UpdateView, CreateView, DeleteView
@@ -13,7 +14,12 @@ from .forms import UploadImageForm, EditArticleForm, EditProfileForm
 from .services import *
 
 
+class TemplateResponseNotFound(TemplateResponse):
+    status_code = 404
+
+
 class NotFound(TemplateView):
+    response_class = TemplateResponseNotFound
     template_name = '404.html'
 
 
@@ -95,7 +101,7 @@ class ArticleDetailViewMixin(DetailView):
         try:
             article = self.get_object()
         except Http404:
-            return render(request, 'articles/404.html')
+            return render(request, 'articles/404.html', status=404)
 
         return super().get(request, **kwargs)
 
@@ -107,7 +113,7 @@ class Category(CategoryMixin, DetailView):
         try:
             category = self.get_object()
         except Http404:
-            return render(request, '404.html')
+            return render(request, '404.html', status=404)
 
         article = get_first_article_in_category(category)
         if article:
