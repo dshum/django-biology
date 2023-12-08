@@ -1,0 +1,106 @@
+<html>
+<head>
+  <title>Quest</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="resource.js"></script>
+  <style>
+    [x-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <div x-data="data()">
+      <h1 class="title" x-text="currentQuestion.title"></h1>
+
+      <div class="is-size-5" x-html="currentQuestion.question"></div>
+
+      <div class="block my-4" x-cloak x-show="currentQuestion.answer">
+        <form x-cloak x-show="showForm" @submit.prevent="submitForm">
+          <div class="field">
+            <div class="control">
+              <label>
+                <input class="input" type="text" x-model="answer">
+              </label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button class="button is-info" type="submit">Ответить</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="notification is-warning" x-cloak x-show="showEmptyMessage">Введите ответ!</div>
+
+        <div class="notification is-success is-light" x-cloak x-show="showCorrectMessage">
+          <h4 class="title">Правильно!</h4>
+          <button class="button is-success is-outlined" @click.prevent="nextQuestion()"
+                  x-text="! currentQuestion.final ? 'Далее' : 'Посмотреть результат'"></button>
+        </div>
+
+        <div class="notification is-danger is-light" x-cloak x-show="showIncorrectMessage">
+          <h4 class="title">Неправильно!</h4>
+          <div class="block" x-show="currentQuestion.hint">
+            <button class="button is-small is-danger is-inverted" @click.prevent="showHint = !showHint">Посмотреть подсказку</button>
+            <div x-show="showHint" x-html="currentQuestion.hint"></div>
+          </div>
+          <button class="button is-danger is-outlined" @click.prevent="nextQuestion()"
+                  x-text="! currentQuestion.final ? 'Далее' : 'Посмотреть результат'"></button>
+        </div>
+      </div>
+
+      <div class="block my-4" x-show="! currentQuestion.answer">
+        Верных ответов: <b x-text="correctAnswers"></b>
+      </div>
+    </div>
+
+    <script>
+      function data() {
+        return {
+          async init() {
+            this.questions = questions
+            this.currentQuestion = this.questions.find(q => q.id === this.currentQuestionId);
+          },
+          submitForm() {
+            this.showCorrectMessage = this.showIncorrectMessage = this.showEmptyMessage = false
+
+            if (!this.answer) {
+              this.showEmptyMessage = true
+            } else if (this.answer === this.currentQuestion.answer) {
+              this.showCorrectMessage = true
+              this.showForm = false
+              this.currentQuestionId = this.currentQuestion.correct
+              this.correctAnswers += 1
+            } else {
+              this.showIncorrectMessage = true
+              this.showForm = false
+              this.currentQuestionId = this.currentQuestion.incorrect
+            }
+          },
+          nextQuestion() {
+            this.showCorrectMessage = this.showIncorrectMessage = this.showEmptyMessage = false
+            this.showForm = true
+            this.currentQuestion = this.questions.find(q => q.id === this.currentQuestionId);
+            this.answer = ""
+          },
+          questions: [],
+          currentQuestion: null,
+          currentQuestionId: "1.1",
+          answer: "",
+          showHint: "",
+          showForm: true,
+          showEmptyMessage: false,
+          showCorrectMessage: false,
+          showIncorrectMessage: false,
+          correctAnswers: 0
+        }
+      }
+    </script>
+  </div>
+</section>
+</body>
+</html>
