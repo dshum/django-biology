@@ -22,7 +22,7 @@
       <div class="is-size-5" x-html="currentQuestion.question"></div>
 
       <div class="block my-4" x-cloak x-show="currentQuestion.answer">
-        <form class="block" x-cloak x-show="showForm" @submit.prevent="submitForm">
+        <form x-cloak x-show="showForm" @submit.prevent="submitForm">
           <div class="field">
             <div class="control">
               <label>
@@ -37,7 +37,9 @@
           </div>
         </form>
 
-        <div class="notification is-warning" x-cloak x-show="showEmptyMessage">Введите ответ!</div>
+        <div class="notification is-warning" x-cloak x-show="showEmptyMessage">
+          Введите ответ!
+        </div>
 
         <div class="notification is-success is-light" x-cloak x-show="showCorrectMessage">
           <h4 class="title">Правильно!</h4>
@@ -48,8 +50,8 @@
         <div class="notification is-danger is-light" x-cloak x-show="showIncorrectMessage">
           <h4 class="title">Неправильно!</h4>
           <div class="block" x-show="currentQuestion.hint">
-            <button class="button is-small is-danger is-inverted" @click.prevent="showHint = !showHint">Посмотреть
-              подсказку
+            <button class="button is-small is-danger is-inverted" @click.prevent="showHint = !showHint">
+              Посмотреть подсказку
             </button>
             <div x-show="showHint" x-html="currentQuestion.hint"></div>
           </div>
