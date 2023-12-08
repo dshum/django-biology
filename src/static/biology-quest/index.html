@@ -1,6 +1,9 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Quest</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Квест</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="resource.js"></script>
@@ -45,7 +48,9 @@
         <div class="notification is-danger is-light" x-cloak x-show="showIncorrectMessage">
           <h4 class="title">Неправильно!</h4>
           <div class="block" x-show="currentQuestion.hint">
-            <button class="button is-small is-danger is-inverted" @click.prevent="showHint = !showHint">Посмотреть подсказку</button>
+            <button class="button is-small is-danger is-inverted" @click.prevent="showHint = !showHint">Посмотреть
+              подсказку
+            </button>
             <div x-show="showHint" x-html="currentQuestion.hint"></div>
           </div>
           <button class="button is-danger is-outlined" @click.prevent="nextQuestion()"
