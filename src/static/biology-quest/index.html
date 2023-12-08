@@ -35,11 +35,14 @@
               <button class="button is-info" type="submit">Ответить</button>
             </div>
           </div>
+          <div class="field">
+            <div class="control">
+              <div class="notification is-warning" x-cloak x-show="showEmptyMessage">
+                Введите ответ!
+              </div>
+            </div>
+          </div>
         </form>
-
-        <div class="notification is-warning my-2" x-cloak x-show="showEmptyMessage">
-          Введите ответ!
-        </div>
 
         <div class="notification is-success is-light" x-cloak x-show="showCorrectMessage">
           <h4 class="title">Правильно!</h4>
