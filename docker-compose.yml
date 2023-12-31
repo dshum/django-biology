@@ -1,15 +1,15 @@
-version: '3.8'
+version: '3.9'
 
 services:
   web:
-    container_name: django_biology
+    container_name: biology
     env_file: .env
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "while !</dev/tcp/db/${DB_INTERNAL_PORT:-5432}; do sleep 1; done; python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./src:/app
+      - ./src:/app/src
     ports:
       - "${WEB_EXTERNAL_PORT:-8000}:8000"
     depends_on:
@@ -19,7 +19,7 @@ services:
     tty: true
 
   redis:
-    container_name: django_biology_redis
+    container_name: biology-redis
     image: redis:latest
     ports:
       - "${REDIS_EXTERNAL_PORT:-6379}:6379"
@@ -27,7 +27,7 @@ services:
     tty: true
 
   db:
-    container_name: django_biology_db
+    container_name: biology-db
     image: postgres:15-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/

@@ -16,7 +16,6 @@ import warnings
 from ast import literal_eval
 
 from django.urls import resolve
-from dotenv import load_dotenv
 from pathlib import Path
 
 import sentry_sdk
@@ -69,7 +68,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.signals.SignalsPanel',
     # 'debug_toolbar.panels.redirects.RedirectsPanel',
     # 'debug_toolbar.panels.profiling.ProfilingPanel',
-    'cachalot.panels.CachalotPanel',
+    # 'cachalot.panels.CachalotPanel',
 ]
 
 # Application definition
@@ -82,7 +81,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'cachalot',
+    # 'cachalot',
     'debug_toolbar',
     'widget_tweaks',
     'api',
