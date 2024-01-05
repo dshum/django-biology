@@ -26,6 +26,7 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     # path("password_reset/",
     #      auth_views.PasswordResetView.as_view(html_email_template_name='registration/password_reset_email.html'),
     #      name="password_reset"),

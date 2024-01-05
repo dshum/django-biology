@@ -13,7 +13,9 @@
   <link href="{% static 'fontawesome-free-6.3.0-web/css/all.css' %}" rel="stylesheet">
   <link href="{% static 'style.css' %}" rel="stylesheet">
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}">
-  <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.4"
+          integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV"
+          crossorigin="anonymous"></script>
   <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
 </head>
 
@@ -56,9 +58,12 @@
                   {% trans 'Profile' %}
                 </a>
                 <hr class="navbar-divider">
-                <a class="navbar-item" href="{% url 'logout' %}">
-                  {% trans 'Logout' %}
-                </a>
+                <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <a id="logout-link" class="navbar-item" href="{% url 'logout' %}">
+                    {% trans 'Logout' %}
+                  </a>
+                </form>
               </div>
             </div>
           {% else %}
@@ -101,6 +106,14 @@
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
       });
+    });
+
+    const logoutForm = document.getElementById('logout-form');
+    const logoutLink = document.getElementById('logout-link');
+
+    logoutLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      logoutForm.submit();
     });
   });
 </script>

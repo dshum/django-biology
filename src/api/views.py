@@ -10,9 +10,15 @@ from .serializers import (UserSerializer, GroupSerializer,
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        if pk == 'me':
+            return self.request.user
+        return super().get_object()
 
 
 class GroupViewSet(viewsets.ModelViewSet):
