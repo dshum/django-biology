@@ -9,7 +9,6 @@ import Password from "../components/Password.vue";
 import guest from "./middleware/guest.js";
 import auth from "./middleware/auth.js";
 import admin from "./middleware/admin.js";
-import store from "../store.js";
 import middlewarePipeline from "./middlewarePipeline.js";
 
 const routes = [
